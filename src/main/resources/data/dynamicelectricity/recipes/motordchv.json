@@ -1,0 +1,29 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"slt",
+		"art",
+		"slt"
+	],
+	"key": {
+		"s": {
+			"tag": "forge:plates/steel"
+		},
+		"a": {
+			"item": "dynamicelectricity:stator"
+		},
+		"l": {
+			"item": "dynamicelectricity:gellubricant"
+		},
+		"r": {
+			"item": "dynamicelectricity:shaftsteel"
+		},
+		"t": {
+			"item": "dynamicelectricity:alternator"
+		}
+	},
+	"result": {
+		"item": "dynamicelectricity:motordchv",
+		"count": 1
+	}
+}

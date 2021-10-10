@@ -1,0 +1,48 @@
+{
+	"block.dynamicelectricity.motorachv":"480V AC Motor",
+	"block.dynamicelectricity.motoracmv":"240V AC Motor",
+	"block.dynamicelectricity.motoraclv":"120V AC Motor",
+	"block.dynamicelectricity.motordchv":"480V DC Motor",
+	"block.dynamicelectricity.motordcmv":"240V DC Motor",
+	"block.dynamicelectricity.motordclv":"120V DC Motor",
+	
+	"item.dynamicelectricity.gellubricant":"Industrial Lubricant Gel",
+	"item.dynamicelectricity.stator":"Industrial Stator",
+	"item.dynamicelectricity.commutator":"Commutator",
+	"item.dynamicelectricity.alternator":"Alternator",
+	"item.dynamicelectricity.shaftsteel":"Steel Rotor Shaft",
+	"item.dynamicelectricity.shaftstainlesssteel":"Stainless Rotor Shaft",
+	"item.dynamicelectricity.shafthslasteel":"HSLA Rotor Shaft",
+	"item.dynamicelectricity.ringiron":"Iron Ring",
+	"item.dynamicelectricity.ringsteel":"Steel Ring",
+	"item.dynamicelectricity.oxidetitaniumchloride":"Titanium Tetrachloride",
+	"item.dynamicelectricity.conductorbrush":"Conductor Brush",
+	
+	"container.motorachv":"480V AC Motor",
+	"container.motoracmv":"240V AC Motor",
+	"container.motoraclv":"120V AC Motor",
+	"container.motordchv":"480V DC Motor",
+	"container.motordcmv":"240V DC Motor",
+	"container.motordclv":"120V DC Motor",
+	
+	"fluid.dynamicelectricity.lubricant":"Industrial Lubricant",
+	
+	"tooltip.motorachv.conversion":"100 kJ @ 480V -> 90 kFE/t",
+	"tooltip.motoracmv.conversion":"10 kJ @ 240V -> 9 kFE/t",
+	"tooltip.motoraclv.conversion":"1 kJ @ 120V-> 900 FE/t",
+	"tooltip.motordchv.conversion":"100 kFE/t -> 85 kJ @ 480V",
+	"tooltip.motordcmv.conversion":"10 kFE/t -> 8.5 kJ @ 240V",
+	"tooltip.motordclv.conversion":"1 kFE/t -> 850 J @ 120V",
+	
+	"gui.motor.usage":"Usage: %s",
+	"gui.motor.voltage":"Voltage: %s",
+	
+	"gui.motor.lubricant":"Lubricant:",
+	"gui.motor.generating":"Generating",
+	
+	"itemGroup.itemgroupdynamicelectricity":"Dynamic Electricity",
+	
+	"info.jei.item.motorac":"The AC Motor is capable of converting Joules into FE. The motor needs to be lubricated to run. This can be accomplished by placing Gel Lubricant in it's inventory. The efficiency of the motor is 90%.",
+	"info.jei.item.motordc":"The DC Motor is capable of converting FE into Joules. The motor needs to be lubricated to along with a Conductor Brush to run. The lubricant and brush are added in the inventory. The requirement of a brush makes it less efficiant than it's AC counterpart, with an efficiency of 85%."
+	
+}

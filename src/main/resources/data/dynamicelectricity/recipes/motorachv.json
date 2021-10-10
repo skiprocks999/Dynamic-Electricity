@@ -1,0 +1,29 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"slc",
+		"arc",
+		"slc"
+	],
+	"key": {
+		"s": {
+			"tag": "forge:plates/hslasteel"
+		},
+		"a": {
+			"item": "dynamicelectricity:stator"
+		},
+		"l": {
+			"item": "dynamicelectricity:gellubricant"
+		},
+		"r": {
+			"item": "dynamicelectricity:shafthslasteel"
+		},
+		"c": {
+			"item": "dynamicelectricity:commutator"
+		}
+	},
+	"result": {
+		"item": "dynamicelectricity:motorachv",
+		"count": 1
+	}
+}

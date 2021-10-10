@@ -1,0 +1,23 @@
+modLoader="javafml" #mandatory
+loaderVersion="[36,)" #mandatory 
+license="All rights reserved"
+[[mods]] #mandatory
+modId="dynamicelectricity" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="Dynamic Electricity" #mandatory
+logoFile="dynamicelectricity.png" #optional
+credits="Thanks to all contributors" #optional
+authors="skip999, aurilisdev" #optional
+description='''
+This is a simple mod that allows for you to convert between FE and Electrodynamcis Energy.
+
+It may or may not be incorperated into the base mod in the future
+
+Thanks to Aurilis for putting in the groundwork that this mod takes advantage of!
+'''
+[[dependencies.dynamicelectricity]]
+    modId="electrodynamics"
+    mandatory=true
+    versionRange="[1.1,)"
+    ordering="NONE"
+    side="BOTH"

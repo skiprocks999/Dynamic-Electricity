@@ -1,0 +1,15 @@
+{
+	"type": "electrodynamics:chemical_mixer_recipe",
+	"item_input": {
+		"tag": "forge:oxide/titaniumchloride",
+		"count": 4
+	},
+	"fluid_input": {
+		"fluid": "electrodynamics:fluidethanol",
+		"amount": 1000
+	},
+	"fluid_output": {
+		"fluid": "dynamicelectricity:fluidlubricant",
+		"amount": 1000
+	}
+}
