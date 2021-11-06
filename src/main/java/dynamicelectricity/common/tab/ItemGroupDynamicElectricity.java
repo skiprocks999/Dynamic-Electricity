@@ -1,17 +1,17 @@
 package dynamicelectricity.common.tab;
 
 import dynamicelectricity.DeferredRegisters;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 
-public class ItemGroupDynamicElectricity extends ItemGroup{
+public class ItemGroupDynamicElectricity extends CreativeModeTab {
 
 	public ItemGroupDynamicElectricity(String label) {
 		super(label);
 	}
 
 	@Override
-	public ItemStack createIcon() {
+	public ItemStack makeIcon() {
 		return new ItemStack(DeferredRegisters.blockMotorAcHv);
 	}
 

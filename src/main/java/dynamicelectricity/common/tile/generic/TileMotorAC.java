@@ -14,14 +14,14 @@ import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -45,14 +45,14 @@ public class TileMotorAC extends GenericTileTicking implements IEnergyStorage{
 	
 	public long clientRunningTicks = 0;
 	
-	public TileMotorAC(TileEntityType<?> tileEntityTypeIn, int voltage, double joulesConsumed, String name) {
-		super(tileEntityTypeIn);
+	public TileMotorAC(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state, int voltage, double joulesConsumed, String name) {
+		super(tileEntityTypeIn, pos, state);
 		FE_PRODUCED = (int) (joulesConsumed * CONVERSION_EFFICIENCY);
 		JOULES_CONSUMED = joulesConsumed;
 		addComponent(new ComponentDirection());
 		addComponent(new ComponentTickable().tickCommon(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler().customPacketReader(this::readPacket).customPacketWriter(this::createPacket)
-			.guiPacketReader(this::readPacket).guiPacketWriter(this::write));
+			.guiPacketReader(this::readPacket).guiPacketWriter(this::createPacket));
 		addComponent(new ComponentElectrodynamic(this).relativeInput(Direction.NORTH).maxJoules(joulesConsumed * 10).voltage(voltage));
 		addComponent(new ComponentInventory(this).size(1).valid((slot, stack) -> true));
 		addComponent(new ComponentContainerProvider("container.motorac" + name)
@@ -66,7 +66,7 @@ public class TileMotorAC extends GenericTileTicking implements IEnergyStorage{
 		
 		boolean canRun = false;
 		
-		ItemStack lubricant = inventory.getStackInSlot(0);
+		ItemStack lubricant = inventory.getItem(0);
 		
 		if(electro.getJoulesStored() >= JOULES_CONSUMED) {
 			if(LUBRICANT_REMAINING > 0) {
@@ -74,7 +74,7 @@ public class TileMotorAC extends GenericTileTicking implements IEnergyStorage{
 				canRun = true;
 			} else if(!lubricant.isEmpty() && LUBRICANT_REMAINING == 0) {
 				lubricant.shrink(1);
-				inventory.setInventorySlotContents(0, lubricant);
+				inventory.setItem(0, lubricant);
 				LUBRICANT_REMAINING = LUBRICANT_PER_ITEM;
 			}
 		}
@@ -89,10 +89,10 @@ public class TileMotorAC extends GenericTileTicking implements IEnergyStorage{
 			electro.joules(electro.getJoulesStored() - JOULES_CONSUMED);
 			FE_STORED = FE_PRODUCED;
 			
-			BlockPos pos = this.pos.offset(facing);
-			BlockState state = world.getBlockState(pos);
-			if(state.hasTileEntity()) {
-				TileEntity tile = world.getTileEntity(pos);
+			BlockPos pos = this.getBlockPos().relative(facing);
+			BlockState state = level.getBlockState(pos);
+			if(state.hasBlockEntity()) {
+				BlockEntity tile = level.getBlockEntity(pos);
 				if(tile.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).map(m -> {return true;}).orElse(false)){
 					
 					int amtAccepted = tile.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).map(m -> {
@@ -115,35 +115,35 @@ public class TileMotorAC extends GenericTileTicking implements IEnergyStorage{
 		double progress = Math.sin(0.05 * Math.PI * (clientRunningTicks % 20));
 		if(CLIENT_ISPOWERED && progress == 1.0) {
 			
-			SoundAPI.playSound(SoundRegister.SOUND_MOTORRUNNING.get(), SoundCategory.BLOCKS, 5, .75f, pos);
+			SoundAPI.playSound(SoundRegister.SOUND_MOTORRUNNING.get(), SoundSource.BLOCKS, 5, .75f, this.getBlockPos());
 			clientRunningTicks = 0;
 		}
 		clientRunningTicks ++;
 	}
 	
-	protected void createPacket(CompoundNBT nbt) {
+	protected void createPacket(CompoundTag nbt) {
 		nbt.putInt("lubricant", LUBRICANT_REMAINING);
 		nbt.putBoolean("powered", RUNNING_UPDATE);
 	}
 	
-	protected void readPacket(CompoundNBT nbt) {
+	protected void readPacket(CompoundTag nbt) {
 		CLIENT_LUBRICANT = nbt.getInt("lubricant");
 		CLIENT_ISPOWERED = nbt.getBoolean("powered");
 	}
 	
 	@Override
-	public void read(BlockState arg0, CompoundNBT nbt) {
-		
+	public void deserializeNBT(CompoundTag nbt) {
 		this.LUBRICANT_REMAINING = nbt.getInt("lubricant");
 		nbt.getBoolean("powered");
-		super.read(arg0, nbt);
+		super.deserializeNBT(nbt);
 	}
 	
 	@Override
-	public CompoundNBT write(CompoundNBT nbt) {
+	public CompoundTag serializeNBT() {
+		CompoundTag nbt = super.serializeNBT();
 		nbt.putInt("lubricant", LUBRICANT_REMAINING);
 		nbt.putBoolean("powered", RUNNING_UPDATE);
-		return super.write(nbt);
+		return nbt;
 	}
 
 	@Override
@@ -188,5 +188,4 @@ public class TileMotorAC extends GenericTileTicking implements IEnergyStorage{
 	public boolean canReceive() {
 		return false;
 	}
-	
 }

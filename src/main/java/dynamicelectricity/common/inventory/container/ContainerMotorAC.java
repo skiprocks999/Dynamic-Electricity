@@ -4,29 +4,29 @@ import dynamicelectricity.DeferredRegisters;
 import dynamicelectricity.common.tile.generic.TileMotorAC;
 import electrodynamics.prefab.inventory.container.GenericContainer;
 import electrodynamics.prefab.inventory.container.slot.SlotRestricted;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.SimpleContainerData;
 
 public class ContainerMotorAC extends GenericContainer<TileMotorAC>{
 	
-	public ContainerMotorAC(int id, PlayerInventory playerinv) {
-		this(id, playerinv, new Inventory(5), new IntArray(3));
+	public ContainerMotorAC(int id, Inventory playerinv) {
+		this(id, playerinv, new SimpleContainer(5), new SimpleContainerData(3));
     }
 	
-	public ContainerMotorAC(int id, PlayerInventory playerinv, IInventory inventory, IIntArray inventorydata) {
+	public ContainerMotorAC(int id, Inventory playerinv, Container inventory, ContainerData inventorydata) {
 		super(DeferredRegisters.CONTAINER_MOTORAC.get(), id, playerinv, inventory, inventorydata);
 	}
 	
-	public ContainerMotorAC(ContainerType<?> type, int id, PlayerInventory playerinv, IInventory inventory, IIntArray inventorydata) {
+	public ContainerMotorAC(MenuType<?> type, int id, Inventory playerinv, Container inventory, ContainerData inventorydata) {
 		super(type, id, playerinv, inventory, inventorydata);
     }
 
 	@Override
-	public void addInventorySlots(IInventory inv, PlayerInventory playerInv) {
+	public void addInventorySlots(Container inv, Inventory playerInv) {
 		addSlot(new SlotRestricted(inv, nextIndex(), 109, 33, DeferredRegisters.ITEM_GELLUBRICANT.get()));
 	}
 

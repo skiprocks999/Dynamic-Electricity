@@ -14,9 +14,11 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dynamicelectricity.client.ClientRegister;
 
-@Mod(dynamicelectricity.References.ID)
-@EventBusSubscriber(modid = dynamicelectricity.References.ID, bus = Bus.MOD)
+
+@Mod(References.ID)
+@EventBusSubscriber(modid = References.ID, bus = Bus.MOD)
 public class DynamicElectricity
 {
     public static final Logger LOGGER = LogManager.getLogger();
@@ -24,18 +26,18 @@ public class DynamicElectricity
     public DynamicElectricity() {
     	IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
     	
-    	dynamicelectricity.DeferredRegisters.BLOCKS.register(bus);
-    	dynamicelectricity.DeferredRegisters.ITEMS.register(bus);
-    	dynamicelectricity.DeferredRegisters.TILES.register(bus);
-    	dynamicelectricity.DeferredRegisters.CONTAINERS.register(bus);
-    	dynamicelectricity.DeferredRegisters.FLUIDS.register(bus);
-    	dynamicelectricity.SoundRegister.SOUNDS.register(bus);
+    	DeferredRegisters.BLOCKS.register(bus);
+    	DeferredRegisters.ITEMS.register(bus);
+    	DeferredRegisters.TILES.register(bus);
+    	DeferredRegisters.CONTAINERS.register(bus);
+    	DeferredRegisters.FLUIDS.register(bus);
+    	SoundRegister.SOUNDS.register(bus);
     }
     
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public static void onClientSetup(FMLClientSetupEvent event) {
-    	dynamicelectricity.client.ClientRegister.setup();
+    	ClientRegister.setup();
     }
     
     @SubscribeEvent

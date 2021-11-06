@@ -5,9 +5,9 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 @JeiPlugin
 public class DynamicElectricityJEIPlugin implements IModPlugin {
@@ -22,18 +22,18 @@ public class DynamicElectricityJEIPlugin implements IModPlugin {
 		electrodynamics.Electrodynamics.LOGGER.info("registered recipes");
 		
 		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorAcHv), VanillaTypes.ITEM,
-			new TranslationTextComponent("info.jei.item.motorac"));
+			new TranslatableComponent("info.jei.item.motorac"));
 		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorAcMv), VanillaTypes.ITEM,
-			new TranslationTextComponent("info.jei.item.motorac"));
+			new TranslatableComponent("info.jei.item.motorac"));
 		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorAcLv), VanillaTypes.ITEM,
-			new TranslationTextComponent("info.jei.item.motorac"));
+			new TranslatableComponent("info.jei.item.motorac"));
 		
 		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorDcHv), VanillaTypes.ITEM,
-			new TranslationTextComponent("info.jei.item.motordc"));
+			new TranslatableComponent("info.jei.item.motordc"));
 		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorDcMv), VanillaTypes.ITEM,
-			new TranslationTextComponent("info.jei.item.motordc"));
+			new TranslatableComponent("info.jei.item.motordc"));
 		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorDcLv), VanillaTypes.ITEM,
-			new TranslationTextComponent("info.jei.item.motordc"));
+			new TranslatableComponent("info.jei.item.motordc"));
 	}
 
 }

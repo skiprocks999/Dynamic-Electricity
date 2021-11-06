@@ -1,6 +1,8 @@
 package dynamicelectricity.client.render.tile;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Quaternion;
+import com.mojang.math.Vector3f;
 
 import dynamicelectricity.client.ClientRegister;
 import dynamicelectricity.common.tile.TileMotorDcHv;
@@ -11,25 +13,21 @@ import electrodynamics.prefab.tile.components.ComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentDirection;
 import electrodynamics.prefab.utilities.UtilitiesRendering;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.vector.Quaternion;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.Direction;
 
-public class RenderMotorDC extends TileEntityRenderer<TileMotorDC>{
+public class RenderMotorDC implements BlockEntityRenderer<TileMotorDC>{
 
-	public RenderMotorDC(TileEntityRendererDispatcher rendererDispatcherIn) {
-		super(rendererDispatcherIn);
-	}
+	public RenderMotorDC(BlockEntityRendererProvider.Context context) {}
 
 	@Override
-	public void render(TileMotorDC tile, float partialTicks, MatrixStack matrix,
-			IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-		matrix.push();
+	public void render(TileMotorDC tile, float partialTicks, PoseStack matrix,
+			MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
+		matrix.pushPose();
 		
 		Direction facing = tile.<ComponentDirection>getComponent(ComponentType.Direction).getDirection();
 		
@@ -41,7 +39,7 @@ public class RenderMotorDC extends TileEntityRenderer<TileMotorDC>{
 		    progressDegrees = 360.0f * (float) progress;
 		}
 		
-		IBakedModel shaft = null;
+		BakedModel shaft = null;
 		
 		if(tile instanceof TileMotorDcLv) {
 			
@@ -50,21 +48,21 @@ public class RenderMotorDC extends TileEntityRenderer<TileMotorDC>{
 			switch(facing) {
 				case EAST:
 					matrix.translate(0.938, 0.5, 0.5);
-					matrix.rotate(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				case WEST:
 					matrix.translate(0.5, 0.5, 0.5);
-					matrix.rotate(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				case SOUTH:
 					matrix.translate(0.5, 0.5, 0.5);
-					matrix.rotate(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
-					matrix.rotate(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
+					matrix.mulPose(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				case NORTH:
 					matrix.translate(0.5, 0.5, 0.062);
-					matrix.rotate(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
-					matrix.rotate(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
+					matrix.mulPose(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				default:
 			}
@@ -75,21 +73,21 @@ public class RenderMotorDC extends TileEntityRenderer<TileMotorDC>{
 			switch(facing) {
 				case EAST:
 					matrix.translate(0.938, 0.5, 0.5);
-					matrix.rotate(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				case WEST:
 					matrix.translate(0.5, 0.5, 0.5);
-					matrix.rotate(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				case SOUTH:
 					matrix.translate(0.5, 0.5, 0.5);
-					matrix.rotate(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
-					matrix.rotate(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
+					matrix.mulPose(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				case NORTH:
 					matrix.translate(0.5, 0.5, 0.062);
-					matrix.rotate(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
-					matrix.rotate(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
+					matrix.mulPose(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				default:
 			}
@@ -101,29 +99,29 @@ public class RenderMotorDC extends TileEntityRenderer<TileMotorDC>{
 			switch(facing) {
 				case EAST:
 					matrix.translate(0.938, 0.5, 0.5);
-					matrix.rotate(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				case WEST:
 					matrix.translate(0.5, 0.5, 0.5);
-					matrix.rotate(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				case SOUTH:
 					matrix.translate(0.5, 0.5, 0.5);
-					matrix.rotate(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
-					matrix.rotate(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
+					matrix.mulPose(new Quaternion(new Vector3f(1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				case NORTH:
 					matrix.translate(0.5, 0.5, 0.062);
-					matrix.rotate(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
-					matrix.rotate(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
+					matrix.mulPose(new Quaternion(new Vector3f(0, 1F, 0), 90, true));
+					matrix.mulPose(new Quaternion(new Vector3f(-1.0F, 0.0F, 0.0F), progressDegrees, true));
 					break;
 				default:
 			}
 		}
 		
-		UtilitiesRendering.renderModel(shaft, tile, RenderType.getSolid(), matrix, bufferIn, combinedLightIn, combinedOverlayIn);
+		UtilitiesRendering.renderModel(shaft, tile, RenderType.solid(), matrix, bufferIn, combinedLightIn, combinedOverlayIn);
 		
-		matrix.pop();
+		matrix.popPose();
 	}
 
 }

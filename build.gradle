@@ -5,37 +5,49 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.ajoberstar:gradle-git:0.6.1'
     }
+}
+import org.ajoberstar.gradle.git.tasks.GitTag
+import org.ajoberstar.gradle.git.tasks.GitPush
+
+plugins {
+    id "com.matthewprenger.cursegradle" version '1.4.0'
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
 libsDirName = "../output"
 distsDirName = "../output"
 
-def	version_minor="1"
+def	version_minor="0"
 def	version_revision='0'
-def	minecraft_version='1.16.5'
+def	minecraft_version='1.17.1'
 def	version_build='0'
 def	version_major='0'
 
 version = minecraft_version+'-'+version_major+'.'+version_minor+'.'+version_revision+'-'+version_build
-group = 'com.skip999.dynamicelectricity' 
+group = 'dynamicelectricity' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'Dynamic Electricity'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'snapshot', version: '20201028-1.16.3'
+    mappings channel: 'official', version: '1.17.1' 
+    
     runs {
         client {
             workingDirectory project.file('run')
+
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
             property 'forge.logging.console.level', 'debug'
+
             mods {
                 dynamicelectricity {
                     source sourceSets.main
@@ -45,8 +57,13 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
+
             mods {
                 dynamicelectricity {
                     source sourceSets.main
@@ -56,9 +73,15 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'electrodynamics', '--all', '--output', file('src/generated/resources/')
+
+            args '--mod', 'dynamicelectricity', '--all', '--output', file('src/generated/resources/')
+
             mods {
                 dynamicelectricity {
                     source sourceSets.main
@@ -69,12 +92,15 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.5-36.2.2'
-	compileOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.0.101:api")
-  	runtimeOnly fg.deobf("mezz.jei:jei-1.16.5:7.7.0.101")
-  	compile fileTree("C:/AmpzLibz")
+    implementation fileTree("C:/AmpzLibz")
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.103'
+    compileOnly fg.deobf("mezz.jei:jei-1.17.1:8.1.0.26:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.17.1:8.1.0.26")
+
 }
 
+
+// Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
         attributes([
@@ -104,19 +130,6 @@ artifacts {
 	archives sourcesJar
 	archives deobfJar
 }
-
-repositories{
-	mavenCentral()
-  	maven {
-   	    name = "Progwml6 maven"
-   	    url = "https://dvs1.progwml6.com/files/maven/"
-  	}
-    maven {
-       name = "ModMaven"
-       url = "https://modmaven.k-4u.nl"
-    }
-}
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -128,4 +141,31 @@ publishing {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
     }
+}
+
+/*
+This needs to stay. It's the Maven repository for JEI along with a fallback!
+*/
+repositories{
+    mavenCentral()
+    maven {
+	name = "Progwml6 maven"
+	url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+	name = "ModMaven"
+	url = "https://modmaven.k-4u.nl"
+    }
+}
+
+ext.gittagnew = 'v'+project.version
+
+task createTag(type: GitTag) {
+   repoPath = rootDir
+   tagName = gittagnew
+   message = "tag ${project.version.toString()}"
+}
+
+task pushTag(type: GitPush, dependsOn: createTag) {
+   namesOrSpecs = [gittagnew]
 }
