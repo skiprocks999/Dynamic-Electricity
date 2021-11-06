@@ -85,7 +85,7 @@ public class TileMotorDC extends GenericTileTicking implements IEnergyStorage{
 			ItemStack brush = inventory.getStackInSlot(0);
 			ItemStack lubricant = inventory.getStackInSlot(1);
 			
-			if(!brush.isEmpty()) {
+			if(!brush.isEmpty() && isPowered()) {
 				brush.setDamage(brush.getDamage() + 1);
 				if(brush.getDamage() >= brush.getMaxDamage()) {
 					brush.shrink(1);
