@@ -2,7 +2,7 @@
 	"type" : "electrodynamics:chemical_crystallizer_recipe",
 	
 	"fluid_input":{
-		"fluid":"dynamicelectricity:fluidlubricant",
+		"tag":"forge:lubricant",
 		"amount": 250
 	},
 	"item_output":{

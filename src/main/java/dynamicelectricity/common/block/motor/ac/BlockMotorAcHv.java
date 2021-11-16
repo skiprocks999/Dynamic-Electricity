@@ -1,16 +1,12 @@
 package dynamicelectricity.common.block.motor.ac;
 
 import dynamicelectricity.common.tile.TileMotorAcHv;
-import electrodynamics.common.block.BlockGenericMachine;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
+import electrodynamics.prefab.block.GenericMachineBlock;
 
-public class BlockMotorAcHv extends BlockGenericMachine{
+public class BlockMotorAcHv extends GenericMachineBlock {
 
-	@Override
-	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new TileMotorAcHv(pos, state);
+	public BlockMotorAcHv() {
+		super(TileMotorAcHv::new);
 	}
 
 }

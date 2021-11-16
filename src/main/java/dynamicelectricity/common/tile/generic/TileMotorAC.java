@@ -6,7 +6,7 @@ package dynamicelectricity.common.tile.generic;
 import dynamicelectricity.SoundRegister;
 import dynamicelectricity.common.inventory.container.ContainerMotorAC;
 import electrodynamics.api.sound.SoundAPI;
-import electrodynamics.prefab.tile.GenericTileTicking;
+import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.ComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentDirection;
@@ -27,7 +27,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
-public class TileMotorAC extends GenericTileTicking implements IEnergyStorage{
+public class TileMotorAC extends GenericTile implements IEnergyStorage{
 	
 	public static double CONVERSION_EFFICIENCY = 0.9;
 	
