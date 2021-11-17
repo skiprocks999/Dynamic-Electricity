@@ -8,11 +8,14 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import dynamicelectricity.common.tags.DynamicElectricityTags;
 
 
 @Mod(dynamicelectricity.References.ID)
@@ -30,6 +33,11 @@ public class DynamicElectricity
     	dynamicelectricity.DeferredRegisters.CONTAINERS.register(bus);
     	dynamicelectricity.DeferredRegisters.FLUIDS.register(bus);
     	dynamicelectricity.SoundRegister.SOUNDS.register(bus);
+    }
+    
+    @SubscribeEvent
+    public static void onCommonSetup(FMLCommonSetupEvent event) {
+    	DynamicElectricityTags.init();
     }
     
     @SubscribeEvent
