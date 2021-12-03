@@ -1,9 +1,12 @@
 {
     "type":"electrodynamics:lathe_recipe",
 
-    "input":{
-        "tag":"forge:plates/iron",
-        "count":1
+    "iteminputs":{
+    	"count" : 1,
+    	"0" : {
+    		"tag":"forge:plates/iron",
+        	"count":1
+    	}
     },
     "output":{
         "item":"dynamicelectricity:ringiron",

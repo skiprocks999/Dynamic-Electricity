@@ -1,9 +1,12 @@
 {
     "type":"electrodynamics:lathe_recipe",
 
-    "input":{
-        "tag":"forge:storage_blocks/steel",
-        "count":1
+    "iteminputs":{
+    	"count" : 1,
+    	"0" : {
+    		"tag":"forge:storage_blocks/steel",
+        	"count":1
+    	}
     },
     "output":{
         "item":"dynamicelectricity:shaftsteel",
