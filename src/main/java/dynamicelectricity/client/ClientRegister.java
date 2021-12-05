@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.ForgeModelBakery;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -27,9 +27,9 @@ public class ClientRegister {
 	
 	@SubscribeEvent
     public static void onModelEvent(ModelRegistryEvent event) {
-		ModelLoader.addSpecialModel(MODEL_MOTORAC_HVSHAFT);
-		ModelLoader.addSpecialModel(MODEL_MOTORAC_MVSHAFT);
-		ModelLoader.addSpecialModel(MODEL_MOTORAC_LVSHAFT);
+		ForgeModelBakery.addSpecialModel(MODEL_MOTORAC_HVSHAFT);
+		ForgeModelBakery.addSpecialModel(MODEL_MOTORAC_MVSHAFT);
+		ForgeModelBakery.addSpecialModel(MODEL_MOTORAC_LVSHAFT);
 	}
 	
 	public static final ResourceLocation MODEL_MOTORAC_HV = new ResourceLocation(BLOCK_LOC + "motorachv");
