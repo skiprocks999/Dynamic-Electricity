@@ -51,9 +51,11 @@ public class ScreenMotorAC extends GenericScreen<ContainerMotorAC>{
 		
 		TileMotorAC motor = menu.getHostFromIntArray();
 		
-		list.add(new TranslatableComponent("gui.motor.lubricant").withStyle(ChatFormatting.BLACK));
-		list.add(new TextComponent("" + motor.CLIENT_LUBRICANT).withStyle(ChatFormatting.DARK_GRAY));
-		list.add(new TranslatableComponent("gui.motor.generating").withStyle(motor.CLIENT_ISPOWERED ? ChatFormatting.GREEN : ChatFormatting.RED));
+		if(motor != null) {
+			list.add(new TranslatableComponent("gui.motor.lubricant").withStyle(ChatFormatting.BLACK));
+			list.add(new TextComponent("" + motor.CLIENT_LUBRICANT).withStyle(ChatFormatting.DARK_GRAY));
+			list.add(new TranslatableComponent("gui.motor.generating").withStyle(motor.CLIENT_ISPOWERED ? ChatFormatting.GREEN : ChatFormatting.RED));
+		}
 		
 		return list;
 	}
