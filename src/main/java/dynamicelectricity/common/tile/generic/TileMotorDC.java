@@ -61,7 +61,7 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage{
 		addComponent(new ComponentPacketHandler().customPacketReader(this::readPacket).customPacketWriter(this::createPacket)
 			.guiPacketReader(this::readPacket).guiPacketWriter(this::createPacket));
 		addComponent(new ComponentElectrodynamic(this).relativeOutput(Direction.SOUTH).voltage(voltage));
-		addComponent(new ComponentInventory(this).size(2).valid((slot, stack) -> true));
+		addComponent(new ComponentInventory(this).size(2).inputs(2).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider("container.motordc" + name)
 			.createMenu((id, player) -> new ContainerMotorDC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
 	}

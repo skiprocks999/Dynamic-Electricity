@@ -54,7 +54,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage{
 		addComponent(new ComponentPacketHandler().customPacketReader(this::readPacket).customPacketWriter(this::createPacket)
 			.guiPacketReader(this::readPacket).guiPacketWriter(this::createPacket));
 		addComponent(new ComponentElectrodynamic(this).relativeInput(Direction.NORTH).maxJoules(joulesConsumed * 10).voltage(voltage));
-		addComponent(new ComponentInventory(this).size(1).valid((slot, stack) -> true));
+		addComponent(new ComponentInventory(this).size(1).inputs(1).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider("container.motorac" + name)
 			.createMenu((id, player) -> new ContainerMotorAC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
 	}
