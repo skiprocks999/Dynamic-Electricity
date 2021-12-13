@@ -93,7 +93,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage{
 			BlockState state = level.getBlockState(pos);
 			if(state.hasBlockEntity()) {
 				BlockEntity tile = level.getBlockEntity(pos);
-				if(tile.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).map(m -> {return true;}).orElse(false)){
+				if(tile != null && tile.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).map(m -> {return true;}).orElse(false)){
 					
 					int amtAccepted = tile.getCapability(CapabilityEnergy.ENERGY, facing.getOpposite()).map(m -> {
 						return m.receiveEnergy(FE_STORED, true);
