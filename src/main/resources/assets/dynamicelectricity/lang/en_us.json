@@ -27,15 +27,16 @@
 	
 	"fluid.dynamicelectricity.lubricant":"Industrial Lubricant",
 	
-	"tooltip.motorachv.conversion":"100 kJ @ 480V -> 90 kFE/t",
-	"tooltip.motoracmv.conversion":"10 kJ @ 240V -> 9 kFE/t",
-	"tooltip.motoraclv.conversion":"1 kJ @ 120V-> 900 FE/t",
-	"tooltip.motordchv.conversion":"100 kFE/t -> 85 kJ @ 480V",
-	"tooltip.motordcmv.conversion":"10 kFE/t -> 8.5 kJ @ 240V",
-	"tooltip.motordclv.conversion":"1 kFE/t -> 850 J @ 120V",
+	"tooltip.motorachv.conversion":"100 kJ @ 480V -> 90 kFE",
+	"tooltip.motoracmv.conversion":"10 kJ @ 240V -> 9 kFE",
+	"tooltip.motoraclv.conversion":"1 kJ @ 120V -> 900 FE",
+	"tooltip.motordchv.conversion":"100 kFE -> 85 kJ @ 480V",
+	"tooltip.motordcmv.conversion":"10 kFE -> 8.5 kJ @ 240V",
+	"tooltip.motordclv.conversion":"1 kFE -> 850 J @ 120V",
 	
 	"gui.motor.usage":"Usage: %s",
 	"gui.motor.voltage":"Voltage: %s",
+	"gui.motor.output":"Output: %s",
 	
 	"gui.motor.lubricant":"Lubricant:",
 	"gui.motor.generating":"Generating",

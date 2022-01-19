@@ -1,25 +1,59 @@
-# eclipse
-bin
-*.launch
-.settings
-.metadata
-.classpath
-.project
-
-# idea
-out
+/bin
+/out
+/run
+/classes
+*.classpath
+*.project
+.settings/
+build/
+config/
+mods/
+logs/
+resourcepacks/
+saves/
+crash-reports/
+eclipse/
+.gradle/
+output/
+.cache
+*.iml
 *.ipr
 *.iws
-*.iml
-.idea
+*.idea/
+logs/
+html/downloads/
+downloads/
+banned-ips.json
+banned-players.json
+ops.json
+whitelist.json
+Colored-Pots.txt
+libs.ink
+options.txt
+usernamecache.json
+screenshots/
+*.log
+asm/
+\.ReAuth\.cfg
+shaderpacks/
+Working Directory/
+lib/
+libs/
+outputSplitOnly/
 
-# gradle
-build
-.gradle
+releaseJarsOnly/
 
-# other
-eclipse
-run
+Physica_Client.launch
 
-# Files from Forge MDK
-forge*changelog.txt
+Physica_Server.launch
+runClient.launch
+
+runData.launch
+
+runServer.launch
+*.launch
+gradlewmac
+
+.DS_Store
+
+Icon

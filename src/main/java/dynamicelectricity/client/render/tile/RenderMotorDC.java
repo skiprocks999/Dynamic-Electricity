@@ -11,7 +11,7 @@ import dynamicelectricity.common.tile.TileMotorDcMv;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
 import electrodynamics.prefab.tile.components.ComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentDirection;
-import electrodynamics.prefab.utilities.UtilitiesRendering;
+import electrodynamics.prefab.utilities.RenderingUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -119,7 +119,7 @@ public class RenderMotorDC implements BlockEntityRenderer<TileMotorDC>{
 			}
 		}
 		
-		UtilitiesRendering.renderModel(shaft, tile, RenderType.solid(), matrix, bufferIn, combinedLightIn, combinedOverlayIn);
+		RenderingUtils.renderModel(shaft, tile, RenderType.solid(), matrix, bufferIn, combinedLightIn, combinedOverlayIn);
 		
 		matrix.popPose();
 	}

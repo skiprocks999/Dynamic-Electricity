@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class TileMotorAcHv extends TileMotorAC{
 
-	public static int JOULES_CONSUMED = 50000;
+	public static int JOULES_CONSUMED = 100000;
 	public static int VOLTAGE = 480;
 	public static String NAME = "hv";
 	

@@ -9,7 +9,7 @@ import dynamicelectricity.client.screen.components.ScreenComponentMotor;
 import dynamicelectricity.common.inventory.container.ContainerMotorAC;
 import dynamicelectricity.common.tile.generic.TileMotorAC;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
-import electrodynamics.api.electricity.formatting.ElectricUnit;
+import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.ScreenComponentInfo;
@@ -66,11 +66,14 @@ public class ScreenMotorAC extends GenericScreen<ContainerMotorAC>{
 		if (box != null) {
 			ComponentElectrodynamic electro = box.getComponent(ComponentType.Electrodynamic);
 		    list.add(new TranslatableComponent("gui.motor.usage",
-			    new TextComponent(ChatFormatter.getElectricDisplayShort(electro.getMaxJoulesStored() * 20, ElectricUnit.WATT))
+			    new TextComponent(ChatFormatter.getChatDisplayShort(electro.getMaxJoulesStored() * 20, DisplayUnit.WATT))
 				    .withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 		    list.add(new TranslatableComponent("gui.motor.voltage",
-			    new TextComponent(ChatFormatter.getElectricDisplayShort(electro.getVoltage(), ElectricUnit.VOLTAGE))
+			    new TextComponent(ChatFormatter.getChatDisplayShort(electro.getVoltage(), DisplayUnit.VOLTAGE))
 				    .withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+		    list.add(new TranslatableComponent("gui.motor.output", 
+		    		new TextComponent(box.getMaxEnergyStored() * 20 / 1000 + " kFE/s").withStyle(ChatFormatting.GRAY))
+		    		.withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 		}
 		
 		return list;
