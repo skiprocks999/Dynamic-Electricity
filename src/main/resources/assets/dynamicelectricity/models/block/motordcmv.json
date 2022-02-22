@@ -1,7 +1,10 @@
 {
 	"credit": "skip999",
 	"parent": "block/cube_all",
-	"texture_size": [128,128],
+	"texture_size": [
+		128,
+		128
+	],
 	"textures": {
 		"0": "dynamicelectricity:model/motordcmv",
 		"particle": "dynamicelectricity:model/motordcmv"
@@ -1502,11 +1505,147 @@
 					"texture": "#0"
 				}
 			}
+		},
+		{
+			"from": [
+				9,
+				2,
+				6
+			],
+			"to": [
+				13,
+				3,
+				10
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0.5,
+						8.375,
+						1,
+						8.5
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						0,
+						8.375,
+						0.5,
+						8.5
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						1.5,
+						8.375,
+						2,
+						8.5
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						1,
+						8.375,
+						1.5,
+						8.5
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						1,
+						8.375,
+						0.5,
+						7.875
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						1.5,
+						7.875,
+						1,
+						8.375
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"from": [
+				5,
+				1,
+				6
+			],
+			"to": [
+				13,
+				2,
+				10
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0.5,
+						8.375,
+						1.5,
+						8.5
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						0,
+						8.375,
+						0.5,
+						8.5
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						2,
+						8.375,
+						3,
+						8.5
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						1.5,
+						8.375,
+						2,
+						8.5
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						1.5,
+						8.375,
+						0.5,
+						7.875
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						2.5,
+						7.875,
+						1.5,
+						8.375
+					],
+					"texture": "#0"
+				}
+			}
 		}
 	],
 	"groups": [
 		{
-			"name": "motordcmv",
+			"name": "motorachv",
 			"origin": [
 				8,
 				8,
@@ -1601,7 +1740,9 @@
 							]
 						}
 					]
-				}
+				},
+				22,
+				23
 			]
 		}
 	]

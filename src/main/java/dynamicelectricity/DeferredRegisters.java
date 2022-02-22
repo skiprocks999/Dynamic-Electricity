@@ -19,6 +19,7 @@ import dynamicelectricity.common.tile.TileMotorDcHv;
 import dynamicelectricity.common.tile.TileMotorDcLv;
 import dynamicelectricity.common.tile.TileMotorDcMv;
 import electrodynamics.common.blockitem.BlockItemDescriptable;
+import electrodynamics.common.item.ItemDescriptable;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -56,6 +57,8 @@ public class DeferredRegisters {
     	BLOCKS.register("motordcmv", supplier(blockMotorDcMv = new BlockMvDcMotor()));
     	BLOCKS.register("motordclv", supplier(blockMotorDcLv = new BlockLvDcMotor()));
     	
+    	ITEMS.register("gellubricant", supplier(new ItemDescriptable(new Item.Properties().stacksTo(64).tab(References.DYELECTAB), "tooltip.info.depricated")));
+    	
     	BlockItemDescriptable.addDescription(blockMotorAcHv, "|translate|tooltip.motorachv.conversion");
     	BlockItemDescriptable.addDescription(blockMotorAcMv, "|translate|tooltip.motoracmv.conversion");
     	BlockItemDescriptable.addDescription(blockMotorAcLv, "|translate|tooltip.motoraclv.conversion");
@@ -79,8 +82,8 @@ public class DeferredRegisters {
     	FLUIDS.register("fluidlubricant", supplier(fluidLubricant = new FluidLubricant()));
     }
     
-    public static final RegistryObject<Item> ITEM_GELLUBRICANT = ITEMS.register("gellubricant",
-    	supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
+    //public static final RegistryObject<Item> ITEM_GELLUBRICANT = ITEMS.register("gellubricant",
+    //	supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
     public static final RegistryObject<Item> ITEM_STATOR = ITEMS.register("stator",
         supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
     public static final RegistryObject<Item> ITEM_COMMUTATOR = ITEMS.register("commutator",

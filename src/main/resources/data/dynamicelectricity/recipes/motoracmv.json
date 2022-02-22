@@ -1,9 +1,9 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
-		"slc",
+		"ssc",
 		"ari",
-		"slc"
+		"stc"
 	],
 	"key": {
 		"s": {
@@ -12,8 +12,8 @@
 		"a": {
 			"item": "dynamicelectricity:stator"
 		},
-		"l": {
-			"item": "dynamicelectricity:gellubricant"
+		"t": {
+			"item": "electrodynamics:tanksteel"
 		},
 		"r": {
 			"item": "dynamicelectricity:shaftstainlesssteel"

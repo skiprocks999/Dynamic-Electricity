@@ -3,19 +3,19 @@
 	"iteminputs": {
 		"count" : 1,
 		"0" : {
-			"tag": "forge:oxide/titaniumchloride",
+			"item": "dynamicelectricity:gellubricant",
 			"count": 1
 		}
 	},
-	"fluidinputs": {
+	"fluidinputs":{
 		"count" : 1,
-		"0" : {
-			"tag":"forge:ethanol",
-			"amount": 1000
+		"0": {
+			"fluid":"minecraft:water",
+			"amount": 250
 		}
 	},
 	"output": {
 		"fluid": "dynamicelectricity:fluidlubricant",
-		"amount": 1000
+		"amount": 250
 	}
 }

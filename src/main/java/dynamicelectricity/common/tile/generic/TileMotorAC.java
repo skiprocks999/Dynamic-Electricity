@@ -5,12 +5,15 @@ package dynamicelectricity.common.tile.generic;
 
 import dynamicelectricity.SoundRegister;
 import dynamicelectricity.common.inventory.container.ContainerMotorAC;
+import dynamicelectricity.common.tags.DynamicElectricityTags;
 import electrodynamics.api.sound.SoundAPI;
+import electrodynamics.common.network.FluidUtilities;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.ComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
 import electrodynamics.prefab.tile.components.type.ComponentDirection;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
+import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerMulti;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
@@ -18,7 +21,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,12 +28,14 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
+import net.minecraftforge.fluids.capability.templates.FluidTank;
 
 public class TileMotorAC extends GenericTile implements IEnergyStorage{
 	
-	public static double CONVERSION_EFFICIENCY = 0.9;
+	public static double CONVERSION_EFFICIENCY = 1;
 	
-	public static final int LUBRICANT_PER_ITEM = 200000;
+	public static final int LUBRICANT_PER_MB = 20000;
 	
 	private int FE_PRODUCED;
 	private int FE_STORED;
@@ -42,6 +46,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage{
 	
 	public int CLIENT_LUBRICANT;
 	public boolean CLIENT_ISPOWERED;
+	public int CLIENT_FEPRODUCED;
 	
 	public long clientRunningTicks = 0;
 	
@@ -53,10 +58,11 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage{
 		addComponent(new ComponentTickable().tickCommon(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler().customPacketReader(this::readPacket).customPacketWriter(this::createPacket)
 			.guiPacketReader(this::readPacket).guiPacketWriter(this::createPacket));
-		addComponent(new ComponentElectrodynamic(this).relativeInput(Direction.NORTH).maxJoules(joulesConsumed * 10).voltage(voltage));
-		addComponent(new ComponentInventory(this).size(1).inputs(1).valid(machineValidator()));
+		addComponent(new ComponentElectrodynamic(this).relativeInput(Direction.NORTH).maxJoules(joulesConsumed * 20).voltage(voltage));
+		addComponent(new ComponentInventory(this).size(1).bucketInputs(1).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider("container.motorac" + name)
 			.createMenu((id, player) -> new ContainerMotorAC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
+		addComponent(new ComponentFluidHandlerMulti(this).setManualFluidTags(1, true, 1000, DynamicElectricityTags.Fluids.LUBRICANT).relativeInput(Direction.DOWN));
 	}
 	
 	public void tickServer(ComponentTickable tickable) {
@@ -66,20 +72,23 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage{
 		
 		boolean canRun = false;
 		
-		ItemStack lubricant = inventory.getItem(0);
-		
+		ComponentFluidHandlerMulti multi = getComponent(ComponentType.FluidHandler);
+		FluidTank tank = multi.getInputTanks().length > 0 ? multi.getInputTanks()[0] : new FluidTank(0);
 		if(electro.getJoulesStored() >= JOULES_CONSUMED) {
 			if(LUBRICANT_REMAINING > 0) {
 				LUBRICANT_REMAINING--;
 				canRun = true;
-			} else if(!lubricant.isEmpty() && LUBRICANT_REMAINING == 0) {
-				lubricant.shrink(1);
-				inventory.setItem(0, lubricant);
-				LUBRICANT_REMAINING = LUBRICANT_PER_ITEM;
+			} else if(tank.getFluidAmount() > 0 && LUBRICANT_REMAINING == 0) {
+				tank.drain(1, FluidAction.EXECUTE);
+				LUBRICANT_REMAINING = LUBRICANT_PER_MB;
 			}
 		}
 		
-		if(tickable.getTicks() % 20 == 0) {
+		if(inventory.getItems().size() > 0) {
+			FluidUtilities.drainItem(this);
+		}
+		
+		if(tickable.getTicks() % 5 == 0) {
 			RUNNING_UPDATE = canRun;
 			this.<ComponentPacketHandler>getComponent(ComponentType.PacketHandler).sendGuiPacketToTracking();
 		}
@@ -124,11 +133,13 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage{
 	protected void createPacket(CompoundTag nbt) {
 		nbt.putInt("lubricant", LUBRICANT_REMAINING);
 		nbt.putBoolean("powered", RUNNING_UPDATE);
+		nbt.putInt("feproduced", FE_PRODUCED);
 	}
 	
 	protected void readPacket(CompoundTag nbt) {
 		CLIENT_LUBRICANT = nbt.getInt("lubricant");
 		CLIENT_ISPOWERED = nbt.getBoolean("powered");
+		CLIENT_FEPRODUCED = nbt.getInt("feproduced");
 	}
 	
 	@Override
