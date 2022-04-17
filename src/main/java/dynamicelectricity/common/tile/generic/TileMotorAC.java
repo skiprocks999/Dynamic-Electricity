@@ -62,7 +62,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage{
 		addComponent(new ComponentInventory(this).size(1).bucketInputs(1).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider("container.motorac" + name)
 			.createMenu((id, player) -> new ContainerMotorAC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
-		addComponent(new ComponentFluidHandlerMulti(this).setManualFluidTags(1, true, 1000, DynamicElectricityTags.Fluids.LUBRICANT).relativeInput(Direction.DOWN));
+		addComponent(new ComponentFluidHandlerMulti(this).setInputTags(1, 1000, DynamicElectricityTags.Fluids.LUBRICANT).relativeInput(Direction.DOWN));
 	}
 	
 	public void tickServer(ComponentTickable tickable) {

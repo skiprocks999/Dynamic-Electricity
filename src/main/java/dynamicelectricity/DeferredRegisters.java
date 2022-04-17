@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistryEntry;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryObject;
 
 public class DeferredRegisters {
@@ -50,58 +50,58 @@ public class DeferredRegisters {
     public static FluidLubricant fluidLubricant;
     
     static {
-    	BLOCKS.register("motorachv", supplier(blockMotorAcHv = new BlockMotorAcHv()));
-    	BLOCKS.register("motoracmv", supplier(blockMotorAcMv = new BlockMotorAcMv()));
-    	BLOCKS.register("motoraclv", supplier(blockMotorAcLv = new BlockMotorAcLv()));
-    	BLOCKS.register("motordchv", supplier(blockMotorDcHv = new BlockHvDcMotor()));
-    	BLOCKS.register("motordcmv", supplier(blockMotorDcMv = new BlockMvDcMotor()));
-    	BLOCKS.register("motordclv", supplier(blockMotorDcLv = new BlockLvDcMotor()));
+    	BLOCKS.register("motorachv", supplier(() -> blockMotorAcHv = new BlockMotorAcHv()));
+    	BLOCKS.register("motoracmv", supplier(() -> blockMotorAcMv = new BlockMotorAcMv()));
+    	BLOCKS.register("motoraclv", supplier(() -> blockMotorAcLv = new BlockMotorAcLv()));
+    	BLOCKS.register("motordchv", supplier(() -> blockMotorDcHv = new BlockHvDcMotor()));
+    	BLOCKS.register("motordcmv", supplier(() -> blockMotorDcMv = new BlockMvDcMotor()));
+    	BLOCKS.register("motordclv", supplier(() -> blockMotorDcLv = new BlockLvDcMotor()));
     	
-    	BlockItemDescriptable.addDescription(blockMotorAcHv, "|translate|tooltip.motorachv.conversion");
-    	BlockItemDescriptable.addDescription(blockMotorAcMv, "|translate|tooltip.motoracmv.conversion");
-    	BlockItemDescriptable.addDescription(blockMotorAcLv, "|translate|tooltip.motoraclv.conversion");
-    	BlockItemDescriptable.addDescription(blockMotorDcHv, "|translate|tooltip.motordchv.conversion");
-    	BlockItemDescriptable.addDescription(blockMotorDcMv, "|translate|tooltip.motordcmv.conversion");
-    	BlockItemDescriptable.addDescription(blockMotorDcLv, "|translate|tooltip.motordclv.conversion");
+    	BlockItemDescriptable.addDescription(() -> blockMotorAcHv, "|translate|tooltip.motorachv.conversion");
+    	BlockItemDescriptable.addDescription(() -> blockMotorAcMv, "|translate|tooltip.motoracmv.conversion");
+    	BlockItemDescriptable.addDescription(() -> blockMotorAcLv, "|translate|tooltip.motoraclv.conversion");
+    	BlockItemDescriptable.addDescription(() -> blockMotorDcHv, "|translate|tooltip.motordchv.conversion");
+    	BlockItemDescriptable.addDescription(() -> blockMotorDcMv, "|translate|tooltip.motordcmv.conversion");
+    	BlockItemDescriptable.addDescription(() -> blockMotorDcLv, "|translate|tooltip.motordclv.conversion");
     	
     	ITEMS.register("motorachv", 
-    		supplier(new BlockItemDescriptable(blockMotorAcHv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
+    		supplier(() -> new BlockItemDescriptable(() -> blockMotorAcHv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
     	ITEMS.register("motoracmv", 
-        	supplier(new BlockItemDescriptable(blockMotorAcMv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
+        	supplier(() -> new BlockItemDescriptable(() -> blockMotorAcMv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
     	ITEMS.register("motoraclv", 
-        	supplier(new BlockItemDescriptable(blockMotorAcLv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
+        	supplier(() -> new BlockItemDescriptable(() -> blockMotorAcLv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
     	ITEMS.register("motordchv", 
-        	supplier(new BlockItemDescriptable(blockMotorDcHv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
+        	supplier(() -> new BlockItemDescriptable(() -> blockMotorDcHv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
     	ITEMS.register("motordcmv", 
-        	supplier(new BlockItemDescriptable(blockMotorDcMv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
+        	supplier(() -> new BlockItemDescriptable(() -> blockMotorDcMv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
     	ITEMS.register("motordclv", 
-        	supplier(new BlockItemDescriptable(blockMotorDcLv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
+        	supplier(() -> new BlockItemDescriptable(() -> blockMotorDcLv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
     
-    	ITEMS.register("gellubricant", supplier(new ItemDescriptable(new Item.Properties().stacksTo(64).tab(References.DYELECTAB), "tooltip.info.depricated")));
+    	ITEMS.register("gellubricant", supplier(() -> new ItemDescriptable(new Item.Properties().stacksTo(64).tab(References.DYELECTAB), "tooltip.info.depricated")));
     	
-    	FLUIDS.register("fluidlubricant", supplier(fluidLubricant = new FluidLubricant()));
+    	FLUIDS.register("fluidlubricant", supplier(() -> fluidLubricant = new FluidLubricant()));
     }
     
     public static final RegistryObject<Item> ITEM_STATOR = ITEMS.register("stator",
-        supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
+        supplier(() -> new Item(new Item.Properties().tab(References.DYELECTAB))));
     public static final RegistryObject<Item> ITEM_COMMUTATOR = ITEMS.register("commutator",
-        supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
+        supplier(() -> new Item(new Item.Properties().tab(References.DYELECTAB))));
     public static final RegistryObject<Item> ITEM_ALTERNATOR = ITEMS.register("alternator",
-        supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
+        supplier(() -> new Item(new Item.Properties().tab(References.DYELECTAB))));
     public static final RegistryObject<Item> ITEM_SHAFTSTEEL = ITEMS.register("shaftsteel",
-        supplier(new Item(new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
+        supplier(() -> new Item(new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
     public static final RegistryObject<Item> ITEM_SHAFTSTAINLESSSTEEL = ITEMS.register("shaftstainlesssteel",
-        supplier(new Item(new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
+        supplier(() -> new Item(new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
     public static final RegistryObject<Item> ITEM_SHAFTHSLASTEEL = ITEMS.register("shafthslasteel",
-        supplier(new Item(new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
+        supplier(() -> new Item(new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
     public static final RegistryObject<Item> ITEM_RINGIRON = ITEMS.register("ringiron",
-        supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
+        supplier(() -> new Item(new Item.Properties().tab(References.DYELECTAB))));
     public static final RegistryObject<Item> ITEM_RINGSTEEL = ITEMS.register("ringsteel",
-        supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
+        supplier(() -> new Item(new Item.Properties().tab(References.DYELECTAB))));
     public static final RegistryObject<Item> ITEM_OXIDE_TITANIUMCHLORIDE = ITEMS.register("oxidetitaniumchloride",
-        supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
+        supplier(() -> new Item(new Item.Properties().tab(References.DYELECTAB))));
     public static final RegistryObject<Item> ITEM_CONDUCTORBRUSH = ITEMS.register("conductorbrush",
-    	supplier(new Item(new Item.Properties().tab(References.DYELECTAB).durability(BRUSH_DURABILITY))));
+    	supplier(() -> new Item(new Item.Properties().tab(References.DYELECTAB).durability(BRUSH_DURABILITY))));
     
     public static final RegistryObject<BlockEntityType<TileMotorAcHv>> TILE_MOTORAC_HV = TILES.register("motorachv",
     	() -> new BlockEntityType<>(TileMotorAcHv::new ,Sets.newHashSet(blockMotorAcHv),null));
@@ -121,7 +121,8 @@ public class DeferredRegisters {
     public static final RegistryObject<MenuType<ContainerMotorDC>> CONTAINER_MOTORDC = CONTAINERS.register
     	("motordc", () -> new MenuType<>(ContainerMotorDC::new));
     
-    private static <T extends IForgeRegistryEntry<T>> Supplier<? extends T> supplier(T entry) {
-    	return () -> entry;
-    }
+    private static <T extends ForgeRegistryEntry<T>> Supplier<? extends T> supplier(Supplier<? extends T> entry) {
+		return entry;
+	}
+    
 }

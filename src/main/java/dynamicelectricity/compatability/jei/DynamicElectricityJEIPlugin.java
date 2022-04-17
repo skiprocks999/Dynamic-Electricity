@@ -20,18 +20,18 @@ public class DynamicElectricityJEIPlugin implements IModPlugin {
 	
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorAcHv), VanillaTypes.ITEM,
+		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorAcHv), VanillaTypes.ITEM_STACK,
 			new TranslatableComponent("info.jei.item.motorac"));
-		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorAcMv), VanillaTypes.ITEM,
+		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorAcMv), VanillaTypes.ITEM_STACK,
 			new TranslatableComponent("info.jei.item.motorac"));
-		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorAcLv), VanillaTypes.ITEM,
+		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorAcLv), VanillaTypes.ITEM_STACK,
 			new TranslatableComponent("info.jei.item.motorac"));
 		
-		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorDcHv), VanillaTypes.ITEM,
+		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorDcHv), VanillaTypes.ITEM_STACK,
 			new TranslatableComponent("info.jei.item.motordc"));
-		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorDcMv), VanillaTypes.ITEM,
+		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorDcMv), VanillaTypes.ITEM_STACK,
 			new TranslatableComponent("info.jei.item.motordc"));
-		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorDcLv), VanillaTypes.ITEM,
+		registration.addIngredientInfo(new ItemStack(DeferredRegisters.blockMotorDcLv), VanillaTypes.ITEM_STACK,
 			new TranslatableComponent("info.jei.item.motordc"));
 	}
 

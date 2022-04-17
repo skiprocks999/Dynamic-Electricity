@@ -72,7 +72,7 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage{
 				.relativeFaceSlots(Direction.WEST, 0).relativeFaceSlots(Direction.UP, 0));
 		addComponent(new ComponentContainerProvider("container.motordc" + name)
 			.createMenu((id, player) -> new ContainerMotorDC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
-		addComponent(new ComponentFluidHandlerMulti(this).setManualFluidTags(1, true, 1000, DynamicElectricityTags.Fluids.LUBRICANT).relativeInput(Direction.DOWN));
+		addComponent(new ComponentFluidHandlerMulti(this).setInputTags(1, 1000, DynamicElectricityTags.Fluids.LUBRICANT).relativeInput(Direction.DOWN));
 	}
 	
 	public void tickServer(ComponentTickable tickable) {
@@ -85,7 +85,7 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage{
 		}
 		
 		if (tickable.getTicks() % 20 == 0) {
-		    output.update();
+		    output.update(worldPosition.relative(facing.getOpposite()));
 		}
 		
 		boolean canRun = false;

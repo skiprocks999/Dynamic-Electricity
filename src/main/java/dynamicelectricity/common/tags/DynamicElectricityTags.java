@@ -7,12 +7,12 @@ import dynamicelectricity.common.fluid.FluidLubricant;
 import electrodynamics.common.item.gear.tools.ItemCanister;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.Tags;
 
 public class DynamicElectricityTags {
 
-	public static List<Tags.IOptionalNamedTag<Fluid>> FLUID_TAGS = new ArrayList<>();
+	public static List<TagKey<Fluid>> FLUID_TAGS = new ArrayList<>();
 	
 	public static void init() {
 		Fluids.init();
@@ -21,7 +21,7 @@ public class DynamicElectricityTags {
 	
 	public static class Fluids {
 		
-		public static final Tags.IOptionalNamedTag<Fluid> LUBRICANT = forgeTag(FluidLubricant.FORGE_TAG);
+		public static final TagKey<Fluid> LUBRICANT = forgeTag(FluidLubricant.FORGE_TAG);
 		
 		private static void init() {
 			FLUID_TAGS.add(LUBRICANT);
@@ -29,8 +29,8 @@ public class DynamicElectricityTags {
 			ItemCanister.addTag(LUBRICANT);
 		}
 		
-		private static Tags.IOptionalNamedTag<Fluid> forgeTag(String name){
-			return FluidTags.createOptional(new ResourceLocation("forge", name));
+		private static TagKey<Fluid> forgeTag(String name){
+			return FluidTags.create(new ResourceLocation("forge", name));
 		}
 	}
 	
