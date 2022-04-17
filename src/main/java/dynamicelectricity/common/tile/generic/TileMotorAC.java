@@ -84,7 +84,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage{
 			}
 		}
 		
-		if(inventory.getItems().size() > 0) {
+		if(inventory.bucketInputs() > 0) {
 			FluidUtilities.drainItem(this);
 		}
 		

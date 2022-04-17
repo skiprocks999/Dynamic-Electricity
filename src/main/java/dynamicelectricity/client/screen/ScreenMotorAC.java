@@ -52,9 +52,8 @@ public class ScreenMotorAC extends GenericScreen<ContainerMotorAC>{
 		if (screenOverlays.size() > 0) {
 		    font.draw(PoseStack, screenOverlays.get(0), inventoryLabelX, 33f, 0);
 		    font.draw(PoseStack, screenOverlays.get(1), inventoryLabelX, 43f, 0);
-		} else {
-		    onClose();
 		}
+		
 	}
 	
 	private List<? extends Component> getMotorInfo() {

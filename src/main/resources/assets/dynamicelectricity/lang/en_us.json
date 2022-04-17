@@ -46,7 +46,7 @@
 	
 	"itemGroup.itemgroupdynamicelectricity":"Dynamic Electricity",
 	
-	"info.jei.item.motorac":"The AC Motor is capable of converting Joules into FE. The motor needs to be lubricated to run. This can be accomplished by placing Gel Lubricant in it's inventory. The efficiency of the motor is 100%.",
-	"info.jei.item.motordc":"The DC Motor is capable of converting FE into Joules. The motor needs to be lubricated to along with a Conductor Brush to run. The lubricant and brush are added in the inventory. The requirement of a brush makes it less efficiant than it's AC counterpart, with an efficiency of 95%."
+	"info.jei.item.motorac":"The AC Motor is capable of converting Joules into FE. The motor needs to be lubricated to run. This can be accomplished by piping lubricant into the bottom of the motor. The efficiency of the motor is 100%.",
+	"info.jei.item.motordc":"The DC Motor is capable of converting FE into Joules. The motor needs to be lubricated to along with a Conductor Brush to run. The brush is added to it's inventory while the lubricant is piped into the bottom. The requirement of a brush makes it less efficiant than it's AC counterpart, with an efficiency of 95%."
 	
 }

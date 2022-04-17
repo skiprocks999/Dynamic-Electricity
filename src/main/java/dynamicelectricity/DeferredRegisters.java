@@ -57,8 +57,6 @@ public class DeferredRegisters {
     	BLOCKS.register("motordcmv", supplier(blockMotorDcMv = new BlockMvDcMotor()));
     	BLOCKS.register("motordclv", supplier(blockMotorDcLv = new BlockLvDcMotor()));
     	
-    	ITEMS.register("gellubricant", supplier(new ItemDescriptable(new Item.Properties().stacksTo(64).tab(References.DYELECTAB), "tooltip.info.depricated")));
-    	
     	BlockItemDescriptable.addDescription(blockMotorAcHv, "|translate|tooltip.motorachv.conversion");
     	BlockItemDescriptable.addDescription(blockMotorAcMv, "|translate|tooltip.motoracmv.conversion");
     	BlockItemDescriptable.addDescription(blockMotorAcLv, "|translate|tooltip.motoraclv.conversion");
@@ -79,11 +77,11 @@ public class DeferredRegisters {
     	ITEMS.register("motordclv", 
         	supplier(new BlockItemDescriptable(blockMotorDcLv, new Item.Properties().tab(References.DYELECTAB).stacksTo(1))));
     
+    	ITEMS.register("gellubricant", supplier(new ItemDescriptable(new Item.Properties().stacksTo(64).tab(References.DYELECTAB), "tooltip.info.depricated")));
+    	
     	FLUIDS.register("fluidlubricant", supplier(fluidLubricant = new FluidLubricant()));
     }
     
-    //public static final RegistryObject<Item> ITEM_GELLUBRICANT = ITEMS.register("gellubricant",
-    //	supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
     public static final RegistryObject<Item> ITEM_STATOR = ITEMS.register("stator",
         supplier(new Item(new Item.Properties().tab(References.DYELECTAB))));
     public static final RegistryObject<Item> ITEM_COMMUTATOR = ITEMS.register("commutator",
