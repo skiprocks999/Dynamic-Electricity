@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "dynamicelectricity:alternator"
+    },
+    "I": {
+      "item": "electrodynamics:insulation"
+    },
+    "P": {
+      "tag": "forge:plates/steel"
+    },
+    "R": {
+      "item": "dynamicelectricity:shaftsteel"
+    },
+    "S": {
+      "item": "dynamicelectricity:stator"
+    },
+    "T": {
+      "item": "electrodynamics:tanksteel"
+    }
+  },
+  "pattern": [
+    "PPI",
+    "SRA",
+    "PTI"
+  ],
+  "result": {
+    "item": "dynamicelectricity:motordclv"
+  }
+}

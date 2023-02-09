@@ -35,7 +35,7 @@ public class RenderMotorDC implements BlockEntityRenderer<TileMotorDC>{
 		
 		float progressDegrees = 0.0F;
 		
-		if (tile.CLIENT_ISPOWERED) {
+		if (tile.running.get()) {
 		    progressDegrees = 360.0f * (float) progress;
 		}
 		

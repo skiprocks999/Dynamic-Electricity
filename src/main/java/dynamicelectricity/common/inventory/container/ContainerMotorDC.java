@@ -1,7 +1,8 @@
 package dynamicelectricity.common.inventory.container;
 
-import dynamicelectricity.DeferredRegisters;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
+import dynamicelectricity.registry.DynamicElectricityContainers;
+import dynamicelectricity.registry.DynamicElectricityItems;
 import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotFluid;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
@@ -18,12 +19,12 @@ public class ContainerMotorDC extends GenericContainerBlockEntity<TileMotorDC>{
     }
 	
 	public ContainerMotorDC(int id, Inventory playerinv, Container inventory, ContainerData inventorydata) {
-		super(DeferredRegisters.CONTAINER_MOTORDC.get(), id, playerinv, inventory, inventorydata);
+		super(DynamicElectricityContainers.CONTAINER_MOTORDC.get(), id, playerinv, inventory, inventorydata);
 	}
 
 	@Override
 	public void addInventorySlots(Container inv, Inventory playerInv) {
-		addSlot(new SlotRestricted(inv, nextIndex(), 101, 33, DeferredRegisters.ITEM_CONDUCTORBRUSH.get()));
+		addSlot(new SlotRestricted(inv, nextIndex(), 101, 33).setRestriction(DynamicElectricityItems.ITEM_CONDUCTORBRUSH.get()));
 		addSlot(new SlotFluid(inv, nextIndex(), 129, 33));
 	}
 

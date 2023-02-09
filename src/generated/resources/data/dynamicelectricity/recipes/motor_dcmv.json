@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "A": {
+      "item": "dynamicelectricity:alternator"
+    },
+    "I": {
+      "item": "electrodynamics:insulation"
+    },
+    "P": {
+      "tag": "forge:plates/stainlesssteel"
+    },
+    "R": {
+      "item": "dynamicelectricity:shaftstainlesssteel"
+    },
+    "S": {
+      "item": "dynamicelectricity:stator"
+    },
+    "T": {
+      "item": "electrodynamics:tanksteel"
+    }
+  },
+  "pattern": [
+    "PPA",
+    "SRI",
+    "PTA"
+  ],
+  "result": {
+    "item": "dynamicelectricity:motordcmv"
+  }
+}

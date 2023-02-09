@@ -1,6 +1,0 @@
-"dynamicelectricity:motorachv",
-"dynamicelectricity:motoraclv",
-"dynamicelectricity:motoracmv",
-"dynamicelectricity:motordchv",
-"dynamicelectricity:motordclv",
-"dynamicelectricity:motordcmv"

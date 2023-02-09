@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "dynamicelectricity:commutator"
+    },
+    "I": {
+      "item": "electrodynamics:insulation"
+    },
+    "P": {
+      "tag": "forge:plates/steel"
+    },
+    "R": {
+      "item": "dynamicelectricity:shaftsteel"
+    },
+    "S": {
+      "item": "dynamicelectricity:stator"
+    },
+    "T": {
+      "item": "electrodynamics:tanksteel"
+    }
+  },
+  "pattern": [
+    "PPI",
+    "SRC",
+    "PTI"
+  ],
+  "result": {
+    "item": "dynamicelectricity:motoraclv"
+  }
+}

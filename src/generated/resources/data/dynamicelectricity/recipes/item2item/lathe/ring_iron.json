@@ -1,0 +1,17 @@
+{
+  "type": "electrodynamics:lathe_recipe",
+  "experience": 0.0,
+  "iteminputs": {
+    "0": {
+      "count": 1,
+      "tag": "forge:plates/iron"
+    },
+    "count": 1
+  },
+  "output": {
+    "count": 1,
+    "item": "dynamicelectricity:ringiron"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

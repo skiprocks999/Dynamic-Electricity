@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "item": "dynamicelectricity:commutator"
+    },
+    "P": {
+      "tag": "forge:plates/hslasteel"
+    },
+    "R": {
+      "item": "dynamicelectricity:shafthslasteel"
+    },
+    "S": {
+      "item": "dynamicelectricity:stator"
+    },
+    "T": {
+      "item": "electrodynamics:tanksteel"
+    }
+  },
+  "pattern": [
+    "PPC",
+    "SRC",
+    "PTC"
+  ],
+  "result": {
+    "item": "dynamicelectricity:motorachv"
+  }
+}

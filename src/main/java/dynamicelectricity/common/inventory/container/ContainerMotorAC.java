@@ -1,7 +1,7 @@
 package dynamicelectricity.common.inventory.container;
 
-import dynamicelectricity.DeferredRegisters;
 import dynamicelectricity.common.tile.generic.TileMotorAC;
+import dynamicelectricity.registry.DynamicElectricityContainers;
 import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotFluid;
 import net.minecraft.world.Container;
@@ -17,7 +17,7 @@ public class ContainerMotorAC extends GenericContainerBlockEntity<TileMotorAC>{
     }
 	
 	public ContainerMotorAC(int id, Inventory playerinv, Container inventory, ContainerData inventorydata) {
-		super(DeferredRegisters.CONTAINER_MOTORAC.get(), id, playerinv, inventory, inventorydata);
+		super(DynamicElectricityContainers.CONTAINER_MOTORAC.get(), id, playerinv, inventory, inventorydata);
 	}
 
 	@Override

@@ -1,0 +1,21 @@
+{
+  "type": "electrodynamics:oxidation_furnace_recipe",
+  "experience": 0.0,
+  "iteminputs": {
+    "0": {
+      "count": 1,
+      "tag": "forge:dusts/silica"
+    },
+    "1": {
+      "count": 1,
+      "tag": "forge:dusts/coal"
+    },
+    "count": 2
+  },
+  "output": {
+    "count": 2,
+    "item": "dynamicelectricity:dustpdsm"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}
