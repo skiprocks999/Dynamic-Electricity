@@ -10,7 +10,7 @@ import electrodynamics.common.network.FluidUtilities;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
-import electrodynamics.prefab.sound.utils.ITickableSoundTile;
+import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.prefab.tile.components.ComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
@@ -31,7 +31,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
 
-public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickableSoundTile {
+public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickableSound {
 
 	public static double CONVERSION_EFFICIENCY = 1;
 
