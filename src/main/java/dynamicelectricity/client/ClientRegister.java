@@ -1,6 +1,7 @@
 package dynamicelectricity.client;
 
 import dynamicelectricity.References;
+import dynamicelectricity.client.guidebook.ModuleDynamicElectricity;
 import dynamicelectricity.client.render.tile.RenderMotorAC;
 import dynamicelectricity.client.render.tile.RenderMotorDC;
 import dynamicelectricity.client.screen.ScreenMotorAC;
@@ -8,6 +9,7 @@ import dynamicelectricity.client.screen.ScreenMotorDC;
 import dynamicelectricity.registry.DynamicElectricityContainers;
 import dynamicelectricity.registry.DynamicElectricityTiles;
 import electrodynamics.api.screen.ITexture;
+import electrodynamics.client.guidebook.ScreenGuidebook;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -47,6 +49,8 @@ public class ClientRegister {
 	public static void setup() {
 		MenuScreens.register(DynamicElectricityContainers.CONTAINER_MOTORAC.get(), ScreenMotorAC::new);
 		MenuScreens.register(DynamicElectricityContainers.CONTAINER_MOTORDC.get(), ScreenMotorDC::new);
+		
+		ScreenGuidebook.addGuidebookModule(new ModuleDynamicElectricity());
 	}
 	
 	@SubscribeEvent

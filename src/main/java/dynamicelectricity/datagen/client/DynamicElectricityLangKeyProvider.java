@@ -38,9 +38,8 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addItem(DynamicElectricityItems.ITEM_SHAFTHSLASTEEL, "HSLA Rotor Shaft");
 			addItem(DynamicElectricityItems.ITEM_RINGIRON, "Iron Ring");
 			addItem(DynamicElectricityItems.ITEM_RINGSTEEL, "Steel Ring");
-			//addItem(DynamicElectricityItems.ITEM_OXIDE_TITANIUMCHLORIDE, "Titanium Tetrachloride");
 			addItem(DynamicElectricityItems.ITEM_CONDUCTORBRUSH, "Conductor Brush");
-			
+
 			addItem(DynamicElectricityItems.ITEM_DUSTCARBON, "Carbon Dust");
 			addItem(DynamicElectricityItems.ITEM_DUSTPDSM, "PDSM Dust");
 
@@ -59,10 +58,10 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addTooltip("motordchv.conversion", "100 kFE -> 95 kJ @ 480V");
 			addTooltip("motordcmv.conversion", "10 kFE -> 9.5 kJ @ 240V");
 			addTooltip("motordclv.conversion", "1 kFE -> 950 J @ 120V");
-			
+
 			addTooltip("dustpdsm", "Polydimethylsiloxane");
 			addTooltip("condudctorbrushdurability", "%1$s / %2$s");
-			
+
 			addSubtitle(DynamicElectricitySounds.SOUND_MOTORRUNNING, "Motor runs");
 
 			addGuiLabel("motor.usage", "Usage, %s");
@@ -71,10 +70,21 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addGuiLabel("motor.output", "Output, %s");
 			addGuiLabel("motor.lubricant", "Lubricant, ");
 			addGuiLabel("motor.generating", "Generating");
+			
+			addGuidebook(References.ID, "Dynamic Electricity");
 
-			addJei("info.item.motorac", "The AC Motor is capable of converting Joules into FE. The motor needs to be lubricated to run. This can be accomplished by piping lubricant into the bottom of the motor. The efficiency of the motor is 100%.");
-			addJei("info.item.motordc", "The DC Motor is capable of converting FE into Joules. The motor needs to be lubricated to along with a Conductor Brush to run. The brush is added to it's inventory while the lubricant is piped into the bottom. The requirement of a brush makes it less efficiant than it's AC counterpart); with an efficiency of 95%.");
+			addGuidebook("chapter.dynamicelectricity", "Dynamic Electricity");
+			addGuidebook("chapter.dynamicelectricity.l1",
+					"Dynamic Electricity is geared towards large-scale energy conversion. Electrodynamics Battery Boxes can naturally convert FE to Joules. They are also able to power FE machines, but assume that the FE machine is rated for only 120V. However, Battery Boxes have a limited input and output rate. "
+							+ "Dynamic Electricty offers tiers of motors that offer a much higher throughput value than the battery boxe is capable of. However, while they offer a higher throughput, a motor requires a bit more care to operate, including a supply of lubrication to keep it running. Lubricant is piped fortunately fairly "
+							+ "cheap to make and can easily be piped into the bottom of the motor. Motors will also continuously convert energy regaurdless of whether or not there is a use for it. Fortunately however, they can be turned off and on by a redstone signal, meaning you can turn them off and on when needed.");
 
+			addGuidebook("chapter.acmotors", "AC Motors");
+			addGuidebook("chapter.acmotors.l1", "The AC Motor is capable of converting Electrodynamics Joules (J) into Forge Energy Units (FE). It is able to accomplish this with 100% efficiency. Three tiers of motors exist offering different throughput rates to suit your requirements.");
+
+			addGuidebook("chapter.dcmotors", "DC Motors");
+			addGuidebook("chapter.dcmotors.l1", "The DC motor is capable of converting Forge Energy Units (FE) into Electrodynamics Joules (J). It accomplishes this with 95% efficiency. Unlike the AC Motor, the DC Motor requires an additional component to run called the Conductor Brush. The brush has a limited durability, but can be easily replenished "
+					+ "by hoppering more in from the top of the motor. Three tiers of motors exist offering different throughput rates to suit your requirements.");
 		}
 
 	}

@@ -34,7 +34,6 @@ public class DynamicElectricityItems {
 	public static final RegistryObject<Item> ITEM_SHAFTHSLASTEEL = ITEMS.register("shafthslasteel", () -> new Item(new Item.Properties().tab(References.DYELECTAB).stacksTo(1)));
 	public static final RegistryObject<Item> ITEM_RINGIRON = ITEMS.register("ringiron", () -> new Item(new Item.Properties().tab(References.DYELECTAB)));
 	public static final RegistryObject<Item> ITEM_RINGSTEEL = ITEMS.register("ringsteel", () -> new Item(new Item.Properties().tab(References.DYELECTAB)));
-	//public static final RegistryObject<Item> ITEM_OXIDE_TITANIUMCHLORIDE = ITEMS.register("oxidetitaniumchloride", () -> new Item(new Item.Properties().tab(References.DYELECTAB)));
 	public static final RegistryObject<Item> ITEM_CONDUCTORBRUSH = ITEMS.register("conductorbrush", () -> new ItemConductorBrush());
 	
 	public static final RegistryObject<Item> ITEM_DUSTCARBON = ITEMS.register("dustcarbon", () -> new Item(new Item.Properties().tab(References.DYELECTAB)));

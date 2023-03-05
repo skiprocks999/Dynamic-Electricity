@@ -20,6 +20,7 @@ import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerSimple;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
+import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
@@ -46,6 +47,8 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 
 	public final Property<Integer> lubricantRemaining;
 	public final Property<Boolean> running;
+	
+	public final Property<Boolean> hasRedstoneSignal;
 
 	protected CachedTileOutput output;
 
@@ -60,16 +63,24 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 		lubricantRemaining = property(new Property<>(PropertyType.Integer, "lubricantremaining", 0));
 		running = property(new Property<>(PropertyType.Boolean, "running", false));
 		
+		hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+		
 		addComponent(new ComponentDirection());
 		addComponent(new ComponentTickable().tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler());
 		addComponent(new ComponentElectrodynamic(this).relativeOutput(Direction.SOUTH).voltage(voltage));
-		addComponent(new ComponentInventory(this).size(2).inputs(1).bucketInputs(1).valid(machineValidator()).relativeFaceSlots(Direction.EAST, 0).relativeFaceSlots(Direction.WEST, 0).relativeFaceSlots(Direction.UP, 0));
+		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1).bucketInputs(1)).valid(machineValidator()).relativeFaceSlots(Direction.EAST, 0).relativeFaceSlots(Direction.WEST, 0).relativeFaceSlots(Direction.UP, 0));
 		addComponent(new ComponentContainerProvider("container.motordc" + name).createMenu((id, player) -> new ContainerMotorDC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
 		addComponent(new ComponentFluidHandlerSimple(1000, this, "lubricant").setValidFluidTags(DynamicElectricityTags.Fluids.LUBRICANT).setInputDirections(Direction.DOWN));
 	}
 
 	public void tickServer(ComponentTickable tickable) {
+		
+		if(hasRedstoneSignal.get()) {
+			running.set(false);
+			return;
+		}
+		
 		ComponentInventory inventory = getComponent(ComponentType.Inventory);
 		ComponentElectrodynamic electro = getComponent(ComponentType.Electrodynamic);
 		Direction facing = this.<ComponentDirection>getComponent(ComponentType.Direction).getDirection();
@@ -180,6 +191,11 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 	@Override
 	public boolean shouldPlaySound() {
 		return running.get();
+	}
+	
+	@Override
+	public void onNeightborChanged(BlockPos neighbor) {
+		hasRedstoneSignal.set(level.hasNeighborSignal(getBlockPos()));
 	}
 
 }
