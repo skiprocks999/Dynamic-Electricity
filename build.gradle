@@ -28,7 +28,7 @@ distsDirName = "../output"
 def	version_minor="0"
 def	version_revision='0'
 def	minecraft_version='1.19.2'
-def	version_build='2'
+def	version_build='3'
 def	version_major='1'
 
 version = minecraft_version+'-'+version_major+'.'+version_minor+'.'+version_revision+'-'+version_build
@@ -105,6 +105,7 @@ dependencies {
     compileOnly(fg.deobf("mezz.jei:jei-1.19.2-forge-api:11.3.0.271"))
     runtimeOnly(fg.deobf("mezz.jei:jei-1.19.2-forge:11.3.0.271"))
     runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}")
+    implementation fg.deobf("curse.maven:industrialreborn-358877:4076608")
 }
 
 
@@ -169,6 +170,12 @@ repositories{
         name = "Mekanism"
         url = "https://modmaven.dev/"
     }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+    	}
+	}
 }
 
 

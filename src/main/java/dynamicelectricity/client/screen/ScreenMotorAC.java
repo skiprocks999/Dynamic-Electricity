@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
+import dynamicelectricity.References;
 import dynamicelectricity.common.inventory.container.ContainerMotorAC;
 import dynamicelectricity.common.tile.generic.TileMotorAC;
+import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
 import dynamicelectricity.core.utils.UtilsText;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
@@ -20,10 +22,12 @@ import electrodynamics.prefab.tile.components.ComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerSimple;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.fml.ModList;
 
 public class ScreenMotorAC extends GenericScreen<ContainerMotorAC> {
 
@@ -79,6 +83,14 @@ public class ScreenMotorAC extends GenericScreen<ContainerMotorAC> {
 			} else {
 				list.add(UtilsText.gui("motor.output", Component.literal(box.feProduced.get() / 1000.0 + " kFE/t").withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 			}
+			
+			if(ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID) && Screen.hasShiftDown()) {
+				
+				IndustrialRebornHandler.addACConversionTooltip(box, list);
+				
+			}
+			
+			
 
 		}
 

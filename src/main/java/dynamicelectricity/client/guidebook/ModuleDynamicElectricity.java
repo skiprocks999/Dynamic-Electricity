@@ -4,11 +4,13 @@ import dynamicelectricity.References;
 import dynamicelectricity.client.guidebook.chapters.ChapterACMotors;
 import dynamicelectricity.client.guidebook.chapters.ChapterDCMotors;
 import dynamicelectricity.client.guidebook.chapters.ChapterDyanmicElectricity;
+import dynamicelectricity.client.guidebook.chapters.ChapterIndustrialReborn;
 import dynamicelectricity.core.utils.UtilsText;
 import electrodynamics.client.guidebook.utils.components.Module;
 import electrodynamics.client.guidebook.utils.pagedata.ImageWrapperObject;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fml.ModList;
 
 public class ModuleDynamicElectricity extends Module {
 
@@ -29,6 +31,9 @@ public class ModuleDynamicElectricity extends Module {
 		chapters.add(new ChapterDyanmicElectricity(this));
 		chapters.add(new ChapterACMotors(this));
 		chapters.add(new ChapterDCMotors(this));
+		if(ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID)) {
+			chapters.add(new ChapterIndustrialReborn(this));
+		}
 	}
 
 }

@@ -3,9 +3,12 @@
  */
 package dynamicelectricity.common.tile.generic;
 
+import dynamicelectricity.References;
 import dynamicelectricity.common.inventory.container.ContainerMotorDC;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
+import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
 import dynamicelectricity.registry.DynamicElectricitySounds;
+import electrodynamics.api.capability.ElectrodynamicsCapabilities;
 import electrodynamics.common.network.FluidUtilities;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyType;
@@ -34,6 +37,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
+import net.minecraftforge.fml.ModList;
 
 public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickableSound {
 
@@ -53,9 +57,14 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 	protected CachedTileOutput output;
 
 	private boolean isPlaying = false;
+	
+	public final int energyTier;
 
-	public TileMotorDC(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state, int feConsumed, int voltage, String name) {
+	public TileMotorDC(BlockEntityType<?> tileEntityTypeIn, BlockPos pos, BlockState state, int feConsumed, int energyTier, String name) {
 		super(tileEntityTypeIn, pos, state);
+		
+		this.energyTier = energyTier;
+		
 		maxFeConsumed = property(new Property<>(PropertyType.Integer, "feconsumed", feConsumed));
 		feStored = property(new Property<>(PropertyType.Integer, "festored", 0));
 		joulesProduced = property(new Property<>(PropertyType.Double, "joulesproduced", feConsumed * CONVERSION_EFFICIENCY));
@@ -68,7 +77,7 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 		addComponent(new ComponentDirection());
 		addComponent(new ComponentTickable().tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler());
-		addComponent(new ComponentElectrodynamic(this).relativeOutput(Direction.SOUTH).voltage(voltage));
+		addComponent(new ComponentElectrodynamic(this).relativeOutput(Direction.SOUTH).voltage(Math.pow(2, energyTier) * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1).bucketInputs(1)).valid(machineValidator()).relativeFaceSlots(Direction.EAST, 0).relativeFaceSlots(Direction.WEST, 0).relativeFaceSlots(Direction.UP, 0));
 		addComponent(new ComponentContainerProvider("container.motordc" + name).createMenu((id, player) -> new ContainerMotorDC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
 		addComponent(new ComponentFluidHandlerSimple(1000, this, "lubricant").setValidFluidTags(DynamicElectricityTags.Fluids.LUBRICANT).setInputDirections(Direction.DOWN));
@@ -144,6 +153,12 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 
 		if (capability == ForgeCapabilities.ENERGY && face == facing.getOpposite()) {
 			return (LazyOptional<T>) LazyOptional.of(() -> this);
+		} else if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID)) {
+			
+			if (IndustrialRebornHandler.isCapability(capability) && face == facing) {
+				return (LazyOptional<T>) IndustrialRebornHandler.getDCMotorCap(this, energyTier);
+			}
+			
 		}
 		return super.getCapability(capability, face);
 	}

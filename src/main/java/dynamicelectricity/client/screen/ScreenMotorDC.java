@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
+import dynamicelectricity.References;
 import dynamicelectricity.common.inventory.container.ContainerMotorDC;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
+import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
 import dynamicelectricity.core.utils.UtilsText;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
@@ -18,10 +20,12 @@ import electrodynamics.prefab.tile.components.ComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerSimple;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.minecraftforge.fml.ModList;
 
 public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 
@@ -73,9 +77,13 @@ public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 			} else {
 				list.add(UtilsText.gui("motor.usage", Component.literal(box.maxFeConsumed.get() / 1000.0 + " kFE/t").withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 			}
+			if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID) && Screen.hasShiftDown()) {
+				IndustrialRebornHandler.addDCConversionTooltip(box, list);
+			}
 			list.add(UtilsText.gui("motor.voltage", Component.literal(ChatFormatter.getChatDisplayShort(electro.getVoltage(), DisplayUnit.VOLTAGE)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 			list.add(UtilsText.gui("motor.output", Component.literal(ChatFormatter.getChatDisplayShort(box.joulesProduced.get(), DisplayUnit.JOULES) + "/t").withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 			list.add(UtilsText.gui("motor.wattage", Component.literal(ChatFormatter.getChatDisplayShort(box.joulesProduced.get() * 20, DisplayUnit.WATT)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+
 		}
 		return list;
 	}

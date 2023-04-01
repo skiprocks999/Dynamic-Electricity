@@ -34,6 +34,7 @@ public class DynamicElectricityBlocks {
 		BLOCKS.register("motordclv", () -> blockMotorDcLv = new BlockLvDcMotor());
 
 		BlockItemDescriptable.addDescription(() -> blockMotorAcHv, UtilsText.tooltip("motorachv.conversion"));
+		
 		BlockItemDescriptable.addDescription(() -> blockMotorAcMv, UtilsText.tooltip("motoracmv.conversion"));
 		BlockItemDescriptable.addDescription(() -> blockMotorAcLv, UtilsText.tooltip("motoraclv.conversion"));
 		BlockItemDescriptable.addDescription(() -> blockMotorDcHv, UtilsText.tooltip("motordchv.conversion"));
