@@ -9,7 +9,7 @@ import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
 import dynamicelectricity.registry.DynamicElectricitySounds;
 import electrodynamics.api.capability.ElectrodynamicsCapabilities;
-import electrodynamics.common.network.FluidUtilities;
+import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
@@ -69,12 +69,12 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 
 		hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
 
-		addComponent(new ComponentDirection());
-		addComponent(new ComponentTickable().tickServer(this::tickServer).tickClient(this::tickClient));
-		addComponent(new ComponentPacketHandler());
+		addComponent(new ComponentDirection(this));
+		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
+		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentElectrodynamic(this).relativeInput(Direction.NORTH).maxJoules(joulesCons * 20).voltage(Math.pow(2, energyTier) * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().bucketInputs(1)).valid(machineValidator()));
-		addComponent(new ComponentContainerProvider("container.motorac" + name).createMenu((id, player) -> new ContainerMotorAC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
+		addComponent(new ComponentContainerProvider("container.motorac" + name, this).createMenu((id, player) -> new ContainerMotorAC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
 		addComponent(new ComponentFluidHandlerSimple(1000, this, "lubricant").setInputDirections(Direction.DOWN).setValidFluidTags(DynamicElectricityTags.Fluids.LUBRICANT));
 	}
 
@@ -113,13 +113,12 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 		feStored.set(feProduced.get());
 
 		BlockPos pos = this.getBlockPos().relative(facing);
-		BlockState state = level.getBlockState(pos);
-
-		if (!state.hasBlockEntity()) {
-			return;
-		}
 
 		BlockEntity tile = level.getBlockEntity(pos);
+		
+		if(tile == null) {
+			return;
+		}
 
 		handleFe(tile, facing);
 		

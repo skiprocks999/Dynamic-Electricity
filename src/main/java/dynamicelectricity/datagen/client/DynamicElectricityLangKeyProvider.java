@@ -68,13 +68,17 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 
 			addSubtitle(DynamicElectricitySounds.SOUND_MOTORRUNNING, "Motor runs");
 
-			addGuiLabel("motor.usage", "Usage, %s");
-			addGuiLabel("motor.wattage", "Wattage, %s");
-			addGuiLabel("motor.voltage", "Voltage, %s");
-			addGuiLabel("motor.output", "Output, %s");
-			addGuiLabel("motor.lubricant", "Lubricant, ");
+			addGuiLabel("motor.usage", "Usage: %s");
+			addGuiLabel("motor.wattage", "Wattage: %s");
+			addGuiLabel("motor.voltage", "Voltage: %s");
+			addGuiLabel("motor.output", "Output: %s");
+			addGuiLabel("motor.lubricant", "Lubricant: ");
 			addGuiLabel("motor.generating", "Generating");
 			addGuiLabel("motor.tier", "Tier: %s");
+			
+			addGuiLabel("displayunit.industrialenergyunit.name", "Industrial Energy Unit");
+			addGuiLabel("displayunit.industrialenergyunit.nameplural", "Industrial Energy Units");
+			addGuiLabel("displayunit.industrialenergyunit.symbol", "IE");
 			
 			addGuidebook(References.ID, "Dynamic Electricity");
 

@@ -7,7 +7,7 @@ import dynamicelectricity.client.guidebook.chapters.ChapterDyanmicElectricity;
 import dynamicelectricity.client.guidebook.chapters.ChapterIndustrialReborn;
 import dynamicelectricity.core.utils.UtilsText;
 import electrodynamics.client.guidebook.utils.components.Module;
-import electrodynamics.client.guidebook.utils.pagedata.ImageWrapperObject;
+import electrodynamics.client.guidebook.utils.pagedata.graphics.ImageWrapperObject;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.ModList;

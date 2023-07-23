@@ -4,13 +4,13 @@ import dynamicelectricity.core.utils.UtilsText;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import electrodynamics.client.guidebook.utils.components.Chapter;
 import electrodynamics.client.guidebook.utils.components.Module;
-import electrodynamics.client.guidebook.utils.pagedata.ItemWrapperObject;
-import electrodynamics.client.guidebook.utils.pagedata.TextWrapperObject;
+import electrodynamics.client.guidebook.utils.pagedata.graphics.ItemWrapperObject;
+import electrodynamics.client.guidebook.utils.pagedata.text.TextWrapperObject;
 import net.minecraft.network.chat.MutableComponent;
 
 public class ChapterACMotors extends Chapter {
 
-	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 2.0F, 32, 32, DynamicElectricityBlocks.blockMotorAcHv.asItem());
+	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, DynamicElectricityBlocks.blockMotorAcHv.asItem());
 	
 	public ChapterACMotors(Module module) {
 		super(module);

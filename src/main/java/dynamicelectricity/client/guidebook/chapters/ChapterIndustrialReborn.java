@@ -1,17 +1,17 @@
 package dynamicelectricity.client.guidebook.chapters;
 
-import com.maciej916.indreb.common.registries.ModItems;
+import com.maciej916.indreb.common.item.ModItems;
 
 import dynamicelectricity.core.utils.UtilsText;
 import electrodynamics.client.guidebook.utils.components.Chapter;
 import electrodynamics.client.guidebook.utils.components.Module;
-import electrodynamics.client.guidebook.utils.pagedata.ItemWrapperObject;
-import electrodynamics.client.guidebook.utils.pagedata.TextWrapperObject;
+import electrodynamics.client.guidebook.utils.pagedata.graphics.ItemWrapperObject;
+import electrodynamics.client.guidebook.utils.pagedata.text.TextWrapperObject;
 import net.minecraft.network.chat.MutableComponent;
 
 public class ChapterIndustrialReborn extends Chapter {
 
-	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 2.0F, 32, 32, ModItems.ALLOY_SMELTER.get());
+	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, ModItems.ALLOY_SMELTER.get());
 	
 	public ChapterIndustrialReborn(Module module) {
 		super(module);

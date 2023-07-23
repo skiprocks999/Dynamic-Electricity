@@ -1,8 +1,8 @@
 package dynamicelectricity.compatability.industrialreborn;
 
-import com.maciej916.indreb.common.energy.interfaces.IEnergy;
-import com.maciej916.indreb.common.enums.EnergyTier;
-import com.maciej916.indreb.common.enums.EnergyType;
+import com.maciej916.indreb.common.api.energy.interfaces.IEnergyStorage;
+import com.maciej916.indreb.common.api.enums.EnergyTier;
+import com.maciej916.indreb.common.api.enums.EnergyType;
 
 import dynamicelectricity.common.tile.generic.TileMotorDC;
 import electrodynamics.prefab.tile.components.ComponentType;
@@ -10,7 +10,7 @@ import electrodynamics.prefab.tile.components.type.ComponentDirection;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 
-public class InputCap implements IEnergy {
+public class InputCap implements IEnergyStorage {
 
 	private final TileMotorDC motor;
 	private final EnergyTier tier;
@@ -74,6 +74,12 @@ public class InputCap implements IEnergy {
 	@Override
 	public void setMaxEnergy(int arg0) {
 		// never used
+	}
+
+	@Override
+	public void setEnergyType(EnergyType arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

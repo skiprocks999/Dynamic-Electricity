@@ -9,7 +9,7 @@ import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
 import dynamicelectricity.registry.DynamicElectricitySounds;
 import electrodynamics.api.capability.ElectrodynamicsCapabilities;
-import electrodynamics.common.network.FluidUtilities;
+import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
@@ -74,12 +74,12 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 		
 		hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
 		
-		addComponent(new ComponentDirection());
-		addComponent(new ComponentTickable().tickServer(this::tickServer).tickClient(this::tickClient));
-		addComponent(new ComponentPacketHandler());
+		addComponent(new ComponentDirection(this));
+		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
+		addComponent(new ComponentPacketHandler(this));
 		addComponent(new ComponentElectrodynamic(this).relativeOutput(Direction.SOUTH).voltage(Math.pow(2, energyTier) * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1).bucketInputs(1)).valid(machineValidator()).relativeFaceSlots(Direction.EAST, 0).relativeFaceSlots(Direction.WEST, 0).relativeFaceSlots(Direction.UP, 0));
-		addComponent(new ComponentContainerProvider("container.motordc" + name).createMenu((id, player) -> new ContainerMotorDC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
+		addComponent(new ComponentContainerProvider("container.motordc" + name, this).createMenu((id, player) -> new ContainerMotorDC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
 		addComponent(new ComponentFluidHandlerSimple(1000, this, "lubricant").setValidFluidTags(DynamicElectricityTags.Fluids.LUBRICANT).setInputDirections(Direction.DOWN));
 	}
 
