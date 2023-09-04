@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "A": {
       "item": "dynamicelectricity:alternator"
@@ -27,5 +28,6 @@
   ],
   "result": {
     "item": "dynamicelectricity:motordcmv"
-  }
+  },
+  "show_notification": false
 }

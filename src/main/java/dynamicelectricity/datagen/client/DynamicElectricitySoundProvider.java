@@ -2,7 +2,7 @@ package dynamicelectricity.datagen.client;
 
 import dynamicelectricity.References;
 import dynamicelectricity.registry.DynamicElectricitySounds;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.SoundDefinition;
@@ -13,8 +13,8 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class DynamicElectricitySoundProvider extends SoundDefinitionsProvider {
 
-	public DynamicElectricitySoundProvider(DataGenerator generator, ExistingFileHelper helper) {
-		super(generator, References.ID, helper);
+	public DynamicElectricitySoundProvider(PackOutput output, ExistingFileHelper helper) {
+		super(output, References.ID, helper);
 	}
 
 	@Override

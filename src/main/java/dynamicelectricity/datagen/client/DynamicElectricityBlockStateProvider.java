@@ -3,13 +3,13 @@ package dynamicelectricity.datagen.client;
 import dynamicelectricity.References;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import electrodynamics.datagen.client.ElectrodynamicsBlockStateProvider;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class DynamicElectricityBlockStateProvider extends ElectrodynamicsBlockStateProvider {
 
-	public DynamicElectricityBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-		super(gen, exFileHelper, References.ID);
+	public DynamicElectricityBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+		super(output, exFileHelper, References.ID);
 	}
 
 	@Override

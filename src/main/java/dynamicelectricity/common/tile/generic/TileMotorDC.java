@@ -156,7 +156,7 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 		} else if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID)) {
 			
 			if (IndustrialRebornHandler.isCapability(capability) && face == facing) {
-				return (LazyOptional<T>) IndustrialRebornHandler.getDCMotorCap(this, energyTier);
+				//return (LazyOptional<T>) IndustrialRebornHandler.getDCMotorCap(this, energyTier);
 			}
 			
 		}

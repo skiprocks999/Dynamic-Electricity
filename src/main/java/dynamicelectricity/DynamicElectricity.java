@@ -19,6 +19,7 @@ import dynamicelectricity.client.ClientRegister;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import dynamicelectricity.registry.DynamicElectricityContainers;
+import dynamicelectricity.registry.DynamicElectricityCreativeTabs;
 import dynamicelectricity.registry.DynamicElectricityFluids;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import dynamicelectricity.registry.DynamicElectricitySounds;
@@ -40,6 +41,7 @@ public class DynamicElectricity
     	DynamicElectricityItems.ITEMS.register(bus);
     	DynamicElectricityTiles.TILES.register(bus);
     	DynamicElectricitySounds.SOUNDS.register(bus);
+    	DynamicElectricityCreativeTabs.CREATIVE_TABS.register(bus);
     }
     
     @SubscribeEvent

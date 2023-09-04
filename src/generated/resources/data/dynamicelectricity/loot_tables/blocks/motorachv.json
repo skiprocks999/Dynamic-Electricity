@@ -54,5 +54,6 @@
       "name": "motorachv",
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "dynamicelectricity:blocks/motorachv"
 }

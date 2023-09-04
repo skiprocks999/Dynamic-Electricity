@@ -11,7 +11,7 @@ import net.minecraft.network.chat.MutableComponent;
 public class ChapterACMotors extends Chapter {
 
 	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, DynamicElectricityBlocks.blockMotorAcHv.asItem());
-	
+
 	public ChapterACMotors(Module module) {
 		super(module);
 	}
@@ -25,7 +25,7 @@ public class ChapterACMotors extends Chapter {
 	public MutableComponent getTitle() {
 		return UtilsText.guidebook("chapter.acmotors");
 	}
-	
+
 	@Override
 	public void addData() {
 		pageData.add(new TextWrapperObject(UtilsText.guidebook("chapter.acmotors.l1")).setIndentions(1));

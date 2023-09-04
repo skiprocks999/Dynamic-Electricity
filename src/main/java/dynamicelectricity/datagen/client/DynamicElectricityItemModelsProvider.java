@@ -4,14 +4,14 @@ import dynamicelectricity.References;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import electrodynamics.datagen.client.ElectrodynamicsItemModelsProvider;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class DynamicElectricityItemModelsProvider extends ElectrodynamicsItemModelsProvider {
 
 
-	public DynamicElectricityItemModelsProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, existingFileHelper, References.ID);
+	public DynamicElectricityItemModelsProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+		super(output, existingFileHelper, References.ID);
 	}
 
 	@Override

@@ -25,13 +25,13 @@ public class ModuleDynamicElectricity extends Module {
 	public MutableComponent getTitle() {
 		return UtilsText.guidebook(References.ID);
 	}
-	
+
 	@Override
 	public void addChapters() {
 		chapters.add(new ChapterDyanmicElectricity(this));
 		chapters.add(new ChapterACMotors(this));
 		chapters.add(new ChapterDCMotors(this));
-		if(ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID)) {
+		if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID)) {
 			chapters.add(new ChapterIndustrialReborn(this));
 		}
 	}

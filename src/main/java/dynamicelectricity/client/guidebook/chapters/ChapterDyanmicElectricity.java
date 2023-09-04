@@ -11,7 +11,7 @@ import net.minecraft.network.chat.MutableComponent;
 public class ChapterDyanmicElectricity extends Chapter {
 
 	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, DynamicElectricityItems.ITEM_STATOR.get());
-	
+
 	public ChapterDyanmicElectricity(Module module) {
 		super(module);
 	}
@@ -25,7 +25,6 @@ public class ChapterDyanmicElectricity extends Chapter {
 	public MutableComponent getTitle() {
 		return UtilsText.guidebook("chapter.dynamicelectricity");
 	}
-	
 
 	@Override
 	public void addData() {

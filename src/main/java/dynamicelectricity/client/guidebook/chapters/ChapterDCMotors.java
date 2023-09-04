@@ -10,8 +10,8 @@ import net.minecraft.network.chat.MutableComponent;
 
 public class ChapterDCMotors extends Chapter {
 
-private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, DynamicElectricityBlocks.blockMotorDcHv.asItem());
-	
+	private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 32, 32, 2.0F, DynamicElectricityBlocks.blockMotorDcHv.asItem());
+
 	public ChapterDCMotors(Module module) {
 		super(module);
 	}
@@ -25,7 +25,7 @@ private static final ItemWrapperObject LOGO = new ItemWrapperObject(7, 10, 32, 3
 	public MutableComponent getTitle() {
 		return UtilsText.guidebook("chapter.dcmotors");
 	}
-	
+
 	@Override
 	public void addData() {
 		pageData.add(new TextWrapperObject(UtilsText.guidebook("chapter.dcmotors.l1")).setIndentions(1));

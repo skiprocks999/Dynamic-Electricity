@@ -40,17 +40,17 @@ public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 			}
 			return new FluidTank(1000);
 		}, 150, 18));
-		addComponent(new ScreenComponentMultiLabel(0, 0, stack -> {
+		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
 			TileMotorDC motor = menu.getHostFromIntArray();
-			
-			if(motor == null) {
+
+			if (motor == null) {
 				return;
 			}
-			
-			font.draw(stack, UtilsText.gui("motor.lubricant").withStyle(ChatFormatting.BLACK).append(Component.literal("" + motor.lubricantRemaining.get()).withStyle(ChatFormatting.DARK_GRAY)), inventoryLabelX, 33f, 0);
-			font.draw(stack, UtilsText.gui("motor.generating").withStyle(motor.running.get() ? ChatFormatting.GREEN : ChatFormatting.RED), inventoryLabelX, 43f, 0);
+
+			graphics.drawString(font, UtilsText.gui("motor.lubricant").withStyle(ChatFormatting.BLACK).append(Component.literal("" + motor.lubricantRemaining.get()).withStyle(ChatFormatting.DARK_GRAY)), inventoryLabelX, 33, 0, false);
+			graphics.drawString(font, UtilsText.gui("motor.generating").withStyle(motor.running.get() ? ChatFormatting.GREEN : ChatFormatting.RED), inventoryLabelX, 43, 0, false);
 		}));
-		
+
 	}
 
 	private List<? extends FormattedCharSequence> getEnergyInformation() {
@@ -58,9 +58,9 @@ public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 		TileMotorDC box = menu.getHostFromIntArray();
 		if (box != null) {
 			ComponentElectrodynamic electro = box.getComponent(ComponentType.Electrodynamic);
-			
+
 			list.add(UtilsText.gui("motor.usage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.maxFeConsumed.get(), DisplayUnit.FORGE_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
-			
+
 			if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID) && Screen.hasShiftDown()) {
 				IndustrialRebornHandler.addDCConversionTooltip(box, list);
 			}

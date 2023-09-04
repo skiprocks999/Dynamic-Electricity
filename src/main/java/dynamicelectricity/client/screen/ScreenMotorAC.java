@@ -41,15 +41,15 @@ public class ScreenMotorAC extends GenericMaterialScreen<ContainerMotorAC> {
 				return motor.<ComponentFluidHandlerSimple>getComponent(ComponentType.FluidHandler);
 			}
 			return new FluidTank(1000);
-		},  150, 18));
-		
-		addComponent(new ScreenComponentMultiLabel(0, 0, stack -> {
+		}, 150, 18));
+
+		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
 			TileMotorAC motor = menu.getHostFromIntArray();
-			if(motor == null) {
+			if (motor == null) {
 				return;
 			}
-			font.draw(stack, UtilsText.gui("motor.lubricant").withStyle(ChatFormatting.BLACK).append(Component.literal("" + motor.lubricantRemaining.get()).withStyle(ChatFormatting.DARK_GRAY)), inventoryLabelX, 33f, 0);
-			font.draw(stack, UtilsText.gui("motor.generating").withStyle(motor.running.get() ? ChatFormatting.GREEN : ChatFormatting.RED), inventoryLabelX, 43f, 0);
+			graphics.drawString(font, UtilsText.gui("motor.lubricant").withStyle(ChatFormatting.BLACK).append(Component.literal("" + motor.lubricantRemaining.get()).withStyle(ChatFormatting.DARK_GRAY)), inventoryLabelX, 33, 0, false);
+			graphics.drawString(font, UtilsText.gui("motor.generating").withStyle(motor.running.get() ? ChatFormatting.GREEN : ChatFormatting.RED), inventoryLabelX, 43, 0, false);
 		}));
 	}
 
@@ -58,20 +58,18 @@ public class ScreenMotorAC extends GenericMaterialScreen<ContainerMotorAC> {
 		TileMotorAC box = menu.getHostFromIntArray();
 		if (box != null) {
 			ComponentElectrodynamic electro = box.getComponent(ComponentType.Electrodynamic);
-			
+
 			list.add(UtilsText.gui("motor.usage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(electro.getMaxJoulesStored() / 20.0, DisplayUnit.JOULES), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 			list.add(UtilsText.gui("motor.wattage", ChatFormatter.getChatDisplayShort(electro.getMaxJoulesStored(), DisplayUnit.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 			list.add(UtilsText.gui("motor.voltage", ChatFormatter.getChatDisplayShort(electro.getVoltage(), DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
-			
+
 			list.add(UtilsText.gui("motor.output", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.feProduced.get(), DisplayUnit.FORGE_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
-			
-			if(ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID) && Screen.hasShiftDown()) {
-				
+
+			if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID) && Screen.hasShiftDown()) {
+
 				IndustrialRebornHandler.addACConversionTooltip(box, list);
-				
+
 			}
-			
-			
 
 		}
 

@@ -40,6 +40,10 @@ public class UtilsText {
 		return translated(ElectroTextUtils.BLOCK_BASE, key, additional);
 	}
 
+	public static MutableComponent creativeTab(String key, Object... additional) {
+		return translated(ElectroTextUtils.CREATIVE_TAB, key, additional);
+	}
+
 	public static MutableComponent translated(String base, String key, Object... additional) {
 		return Component.translatable(base + "." + References.ID + "." + key, additional);
 	}
@@ -55,5 +59,5 @@ public class UtilsText {
 	public static boolean translationExists(String base, String key) {
 		return I18n.exists(base + "." + References.ID + "." + key);
 	}
-	
+
 }

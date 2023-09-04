@@ -2,9 +2,9 @@ package dynamicelectricity.compatability.industrialreborn;
 
 import java.util.List;
 
-import com.maciej916.indreb.common.api.energy.interfaces.IEnergyStorage;
-import com.maciej916.indreb.common.api.enums.EnergyTier;
-import com.maciej916.indreb.common.capability.ModCapabilities;
+//import com.maciej916.indreb.common.api.energy.interfaces.IEnergyStorage;
+//import com.maciej916.indreb.common.api.enums.EnergyTier;
+//import com.maciej916.indreb.common.capability.ModCapabilities;
 
 import dynamicelectricity.common.tile.generic.TileMotorAC;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
@@ -27,67 +27,69 @@ public class IndustrialRebornHandler {
 	public static final int ENERGY_PER_JOULE = 4;
 
 	public static boolean isCapability(Capability<?> cap) {
-		return cap == ModCapabilities.ENERGY;
+		return false;//cap == ModCapabilities.ENERGY;
 	}
 
-	// Extract energy only
-	public static LazyOptional<IEnergyStorage> getACMotorCap(TileMotorAC motor, int tier) {
-		return LazyOptional.of(() -> new OutputCap(motor, getTier(tier)));
-	}
-
-	// Receive energy only
-	public static LazyOptional<IEnergyStorage> getDCMotorCap(TileMotorDC motor, int tier) {
-		return LazyOptional.of(() -> new InputCap(motor, getTier(tier)));
-	}
-
+	
+//	// Extract energy only
+//	public static LazyOptional<IEnergyStorage> getACMotorCap(TileMotorAC motor, int tier) {
+//		return LazyOptional.of(() -> new OutputCap(motor, getTier(tier)));
+//	}
+//
+//	// Receive energy only
+//	public static LazyOptional<IEnergyStorage> getDCMotorCap(TileMotorDC motor, int tier) {
+//		return LazyOptional.of(() -> new InputCap(motor, getTier(tier)));
+//	}
+	
 	public static void handleEnergyOutput(TileMotorAC motor, BlockEntity tile, Direction motorFacing) {
 
 		if (tile == null) {
 			return;
 		}
 
-		LazyOptional<IEnergyStorage> lazy = tile.getCapability(ModCapabilities.ENERGY);
-
-		if (!lazy.isPresent()) {
-			return;
-		}
-
-		int amtAccepted = tile.getCapability(ModCapabilities.ENERGY, motorFacing.getOpposite()).map(m -> {
-			return m.receiveEnergy(motor.feStored.get(), true);
-		}).orElse(0);
-
-		if (amtAccepted > 0) {
-			tile.getCapability(ModCapabilities.ENERGY, motorFacing.getOpposite()).ifPresent(h -> {
-				h.receiveEnergy(amtAccepted, false);
-			});
-			motor.feStored.set(motor.feStored.get() - amtAccepted);
-		}
+//		LazyOptional<IEnergyStorage> lazy = tile.getCapability(ModCapabilities.ENERGY);
+//
+//		if (!lazy.isPresent()) {
+//			return;
+//		}
+//
+//		int amtAccepted = tile.getCapability(ModCapabilities.ENERGY, motorFacing.getOpposite()).map(m -> {
+//			return m.receiveEnergy(motor.feStored.get(), true);
+//		}).orElse(0);
+//
+//		if (amtAccepted > 0) {
+//			tile.getCapability(ModCapabilities.ENERGY, motorFacing.getOpposite()).ifPresent(h -> {
+//				h.receiveEnergy(amtAccepted, false);
+//			});
+//			motor.feStored.set(motor.feStored.get() - amtAccepted);
+//		}
 
 	}
 
-	// Standard starts at 2 so
-	private static EnergyTier getTier(int tier) {
-		return switch (tier) {
-		case 2 -> EnergyTier.SUPER;
-		case 1 -> EnergyTier.ADVANCED;
-		default -> EnergyTier.STANDARD;
-		};
-	}
-
+//	// Standard starts at 2 so
+//	private static EnergyTier getTier(int tier) {
+//		return switch (tier) {
+//		case 2 -> EnergyTier.SUPER;
+//		case 1 -> EnergyTier.ADVANCED;
+//		default -> EnergyTier.STANDARD;
+//		};
+//	}
+//	
 	public static void addACConversionTooltip(TileMotorAC motor, List<FormattedCharSequence> list) {
 
 		list.add(UtilsText.gui("motor.output", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(motor.feProduced.get() / ENERGY_PER_JOULE, DynamicDisplayUnits.INDUSTRIAL_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
-		list.add(UtilsText.gui("motor.tier", getTranslatedTier(getTier(motor.energyTier)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+		//list.add(UtilsText.gui("motor.tier", getTranslatedTier(getTier(motor.energyTier)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 
 	}
 
 	public static void addDCConversionTooltip(TileMotorDC motor, List<FormattedCharSequence> list) {
 
 		list.add(UtilsText.gui("motor.usage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(motor.maxFeConsumed.get() / ENERGY_PER_JOULE, DynamicDisplayUnits.INDUSTRIAL_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
-		list.add(UtilsText.gui("motor.tier", getTranslatedTier(getTier(motor.energyTier)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+		//list.add(UtilsText.gui("motor.tier", getTranslatedTier(getTier(motor.energyTier)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 
 	}
 	
+	/*
 	private static MutableComponent getTranslatedTier(EnergyTier tier) {
 		return switch(tier) {
 		case SUPER -> UtilsText.tooltip("indrebsuper");
@@ -95,5 +97,5 @@ public class IndustrialRebornHandler {
 		default -> UtilsText.tooltip("indrebstandard");
 		};
 	}
-
+	*/
 }

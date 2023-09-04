@@ -6,12 +6,12 @@ import dynamicelectricity.registry.DynamicElectricityFluids;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import dynamicelectricity.registry.DynamicElectricitySounds;
 import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 
 public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyProvider {
 
-	public DynamicElectricityLangKeyProvider(DataGenerator gen, Locale locale) {
-		super(gen, locale, References.ID);
+	public DynamicElectricityLangKeyProvider(PackOutput output, Locale locale) {
+		super(output, locale, References.ID);
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 		case EN_US:
 		default:
 
-			add("itemGroup.itemgroupdynamicelectricity", "Dynamic Electricity");
+			addCreativeTab("main", "Dynamic Electricity");
 
 			addBlock(DynamicElectricityBlocks.blockMotorAcHv, "480V AC Motor");
 			addBlock(DynamicElectricityBlocks.blockMotorAcMv, "240V AC Motor");

@@ -10,7 +10,7 @@ import dynamicelectricity.datagen.server.recipe.custom.item2item.DynamicElectric
 import dynamicelectricity.datagen.server.recipe.custom.item2item.DynamicElectricityOxidationFurnaceRecipes;
 import dynamicelectricity.datagen.server.recipe.vanilla.DynamicElectricityCraftingTableRecipes;
 import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 
@@ -19,8 +19,8 @@ public class DynamicElectricityRecipeProvider extends RecipeProvider {
 	public final List<AbstractRecipeGenerator> GENERATORS = new ArrayList<>();
 	
 	
-	public DynamicElectricityRecipeProvider(DataGenerator gen) {
-		super(gen);
+	public DynamicElectricityRecipeProvider(PackOutput output) {
+		super(output);
 		addRecipes();
 	}
 	
@@ -33,7 +33,7 @@ public class DynamicElectricityRecipeProvider extends RecipeProvider {
 	}
 
 	@Override
-	protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
+	protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
 		for(AbstractRecipeGenerator generator : GENERATORS) {
 			generator.addRecipes(consumer);
 		}
