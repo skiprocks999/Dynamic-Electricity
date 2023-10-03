@@ -18,6 +18,6 @@ Thanks to Aurilis for putting in the groundwork that this mod takes advantage of
 [[dependencies.dynamicelectricity]]
     modId="electrodynamics"
     mandatory=true
-    versionRange="[1.19.2-0.7.2,)"
+    versionRange="[1.20.1-0.9,)"
     ordering="NONE"
     side="BOTH"
