@@ -209,7 +209,7 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 	}
 	
 	@Override
-	public void onNeightborChanged(BlockPos neighbor) {
+	public void onNeightborChanged(BlockPos neighbor, boolean blockStateTrigger) {
 		hasRedstoneSignal.set(level.hasNeighborSignal(getBlockPos()));
 	}
 
