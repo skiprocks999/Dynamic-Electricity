@@ -17,7 +17,7 @@ import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluid
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
 import electrodynamics.prefab.screen.types.GenericMaterialScreen;
-import electrodynamics.prefab.tile.components.ComponentType;
+import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerSimple;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
@@ -38,7 +38,7 @@ public class ScreenMotorAC extends GenericMaterialScreen<ContainerMotorAC> {
 		addComponent(new ScreenComponentFluidGauge(() -> {
 			TileMotorAC motor = menu.getHostFromIntArray();
 			if (motor != null) {
-				return motor.<ComponentFluidHandlerSimple>getComponent(ComponentType.FluidHandler);
+				return motor.<ComponentFluidHandlerSimple>getComponent(IComponentType.FluidHandler);
 			}
 			return new FluidTank(1000);
 		}, 150, 18));
@@ -57,7 +57,7 @@ public class ScreenMotorAC extends GenericMaterialScreen<ContainerMotorAC> {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
 		TileMotorAC box = menu.getHostFromIntArray();
 		if (box != null) {
-			ComponentElectrodynamic electro = box.getComponent(ComponentType.Electrodynamic);
+			ComponentElectrodynamic electro = box.getComponent(IComponentType.Electrodynamic);
 
 			list.add(UtilsText.gui("motor.usage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(electro.getMaxJoulesStored() / 20.0, DisplayUnit.JOULES), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 			list.add(UtilsText.gui("motor.wattage", ChatFormatter.getChatDisplayShort(electro.getMaxJoulesStored(), DisplayUnit.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());

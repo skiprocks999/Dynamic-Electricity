@@ -6,6 +6,7 @@ import dynamicelectricity.registry.DynamicElectricityItems;
 import electrodynamics.prefab.inventory.container.GenericContainerBlockEntity;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotFluid;
 import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
+import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -24,7 +25,7 @@ public class ContainerMotorDC extends GenericContainerBlockEntity<TileMotorDC>{
 
 	@Override
 	public void addInventorySlots(Container inv, Inventory playerInv) {
-		addSlot(new SlotRestricted(inv, nextIndex(), 101, 33).setRestriction(DynamicElectricityItems.ITEM_CONDUCTORBRUSH.get()));
+		addSlot(new SlotRestricted(inv, nextIndex(), 101, 33).setRestriction(DynamicElectricityItems.ITEM_CONDUCTORBRUSH.get()).setIOColor(new Color(0, 240, 255, 255)));
 		addSlot(new SlotFluid(inv, nextIndex(), 129, 33));
 	}
 

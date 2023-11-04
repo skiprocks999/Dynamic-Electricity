@@ -14,8 +14,9 @@ import electrodynamics.prefab.screen.GenericScreen;
 import electrodynamics.prefab.screen.component.types.ScreenComponentMultiLabel;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
 import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
+import electrodynamics.prefab.screen.component.types.wrapper.InventoryIOWrapper;
 import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
-import electrodynamics.prefab.tile.components.ComponentType;
+import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerSimple;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
@@ -36,7 +37,7 @@ public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 		addComponent(new ScreenComponentFluidGauge(() -> {
 			TileMotorDC motor = menu.getHostFromIntArray();
 			if (motor != null) {
-				return motor.<ComponentFluidHandlerSimple>getComponent(ComponentType.FluidHandler);
+				return motor.<ComponentFluidHandlerSimple>getComponent(IComponentType.FluidHandler);
 			}
 			return new FluidTank(1000);
 		}, 150, 18));
@@ -50,6 +51,7 @@ public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 			graphics.drawString(font, UtilsText.gui("motor.lubricant").withStyle(ChatFormatting.BLACK).append(Component.literal("" + motor.lubricantRemaining.get()).withStyle(ChatFormatting.DARK_GRAY)), inventoryLabelX, 33, 0, false);
 			graphics.drawString(font, UtilsText.gui("motor.generating").withStyle(motor.running.get() ? ChatFormatting.GREEN : ChatFormatting.RED), inventoryLabelX, 43, 0, false);
 		}));
+		new InventoryIOWrapper(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE + 2, 75, 82, 8, 72);
 
 	}
 
@@ -57,7 +59,7 @@ public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
 		TileMotorDC box = menu.getHostFromIntArray();
 		if (box != null) {
-			ComponentElectrodynamic electro = box.getComponent(ComponentType.Electrodynamic);
+			ComponentElectrodynamic electro = box.getComponent(IComponentType.Electrodynamic);
 
 			list.add(UtilsText.gui("motor.usage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.maxFeConsumed.get(), DisplayUnit.FORGE_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 
