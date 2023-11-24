@@ -5,8 +5,6 @@ import com.maciej916.indreb.common.api.enums.EnergyTier;
 import com.maciej916.indreb.common.api.enums.EnergyType;
 
 import dynamicelectricity.common.tile.generic.TileMotorDC;
-import electrodynamics.prefab.tile.components.ComponentType;
-import electrodynamics.prefab.tile.components.type.ComponentDirection;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 
@@ -27,7 +25,7 @@ public class InputCap implements IEnergyStorage {
 
 	@Override
 	public boolean canReceiveEnergy(Direction face) {
-		return face == motor.<ComponentDirection>getComponent(ComponentType.Direction).getDirection().getOpposite();
+		return face == motor.getFacing().getOpposite();
 	}
 
 	@Override

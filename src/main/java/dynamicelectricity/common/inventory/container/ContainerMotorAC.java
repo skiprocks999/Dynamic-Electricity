@@ -10,12 +10,12 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 
-public class ContainerMotorAC extends GenericContainerBlockEntity<TileMotorAC>{
-	
+public class ContainerMotorAC extends GenericContainerBlockEntity<TileMotorAC> {
+
 	public ContainerMotorAC(int id, Inventory playerinv) {
 		this(id, playerinv, new SimpleContainer(1), new SimpleContainerData(3));
-    }
-	
+	}
+
 	public ContainerMotorAC(int id, Inventory playerinv, Container inventory, ContainerData inventorydata) {
 		super(DynamicElectricityContainers.CONTAINER_MOTORAC.get(), id, playerinv, inventory, inventorydata);
 	}

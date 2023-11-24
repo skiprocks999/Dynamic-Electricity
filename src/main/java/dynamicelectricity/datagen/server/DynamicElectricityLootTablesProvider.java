@@ -14,13 +14,13 @@ public class DynamicElectricityLootTablesProvider extends ElectrodynamicsLootTab
 	@Override
 	protected void addTables() {
 		
-		addMachineTable(DynamicElectricityBlocks.blockMotorAcLv, DynamicElectricityTiles.TILE_MOTORAC_LV, true, true, false, true, false);
-		addMachineTable(DynamicElectricityBlocks.blockMotorAcMv, DynamicElectricityTiles.TILE_MOTORAC_MV, true, true, false, true, false);
-		addMachineTable(DynamicElectricityBlocks.blockMotorAcHv, DynamicElectricityTiles.TILE_MOTORAC_HV, true, true, false, true, false);
+		addIEFTable(DynamicElectricityBlocks.blockMotorAcLv, DynamicElectricityTiles.TILE_MOTORAC_LV);
+		addIEFTable(DynamicElectricityBlocks.blockMotorAcMv, DynamicElectricityTiles.TILE_MOTORAC_MV);
+		addIEFTable(DynamicElectricityBlocks.blockMotorAcHv, DynamicElectricityTiles.TILE_MOTORAC_HV);
 		
-		addMachineTable(DynamicElectricityBlocks.blockMotorDcLv, DynamicElectricityTiles.TILE_MOTORDC_LV, true, true, false, true, false);
-		addMachineTable(DynamicElectricityBlocks.blockMotorDcMv, DynamicElectricityTiles.TILE_MOTORDC_MV, true, true, false, true, false);
-		addMachineTable(DynamicElectricityBlocks.blockMotorDcHv, DynamicElectricityTiles.TILE_MOTORDC_HV, true, true, false, true, false);
+		addIEFTable(DynamicElectricityBlocks.blockMotorDcLv, DynamicElectricityTiles.TILE_MOTORDC_LV);
+		addIEFTable(DynamicElectricityBlocks.blockMotorDcMv, DynamicElectricityTiles.TILE_MOTORDC_MV);
+		addIEFTable(DynamicElectricityBlocks.blockMotorDcHv, DynamicElectricityTiles.TILE_MOTORDC_HV);
 		
 	}
 	

@@ -9,15 +9,14 @@ import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
 import dynamicelectricity.registry.DynamicElectricitySounds;
 import electrodynamics.api.capability.ElectrodynamicsCapabilities;
-import electrodynamics.common.network.utils.FluidUtilities;
+import electrodynamics.common.network.FluidUtilities;
 import electrodynamics.prefab.properties.Property;
 import electrodynamics.prefab.properties.PropertyType;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.GenericTile;
-import electrodynamics.prefab.tile.components.ComponentType;
+import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
-import electrodynamics.prefab.tile.components.type.ComponentDirection;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
 import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerSimple;
 import electrodynamics.prefab.tile.components.type.ComponentInventory;
@@ -69,12 +68,11 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 
 		hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
 
-		addComponent(new ComponentDirection(this));
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this).relativeInput(Direction.NORTH).maxJoules(joulesCons * 20).voltage(Math.pow(2, energyTier) * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
+		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(Direction.NORTH).maxJoules(joulesCons * 20).voltage(Math.pow(2, energyTier) * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().bucketInputs(1)).valid(machineValidator()));
-		addComponent(new ComponentContainerProvider("container.motorac" + name, this).createMenu((id, player) -> new ContainerMotorAC(id, player, getComponent(ComponentType.Inventory), getCoordsArray())));
+		addComponent(new ComponentContainerProvider("container.motorac" + name, this).createMenu((id, player) -> new ContainerMotorAC(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 		addComponent(new ComponentFluidHandlerSimple(1000, this, "lubricant").setInputDirections(Direction.DOWN).setValidFluidTags(DynamicElectricityTags.Fluids.LUBRICANT));
 	}
 
@@ -85,12 +83,12 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 			return;
 		}
 
-		ComponentElectrodynamic electro = getComponent(ComponentType.Electrodynamic);
-		Direction facing = this.<ComponentDirection>getComponent(ComponentType.Direction).getDirection();
+		ComponentElectrodynamic electro = getComponent(IComponentType.Electrodynamic);
+		Direction facing = getFacing();
 
 		boolean canRun = false;
 
-		ComponentFluidHandlerSimple tank = getComponent(ComponentType.FluidHandler);
+		ComponentFluidHandlerSimple tank = getComponent(IComponentType.FluidHandler);
 		if (electro.getJoulesStored() >= joulesConsumed.get()) {
 			if (lubricantRemaining.get() > 0) {
 				lubricantRemaining.set(lubricantRemaining.get() - 1);
@@ -101,7 +99,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 			}
 		}
 
-		FluidUtilities.drainItem(this, this.<ComponentFluidHandlerSimple>getComponent(ComponentType.FluidHandler).asArray());
+		FluidUtilities.drainItem(this, this.<ComponentFluidHandlerSimple>getComponent(IComponentType.FluidHandler).asArray());
 
 		running.set(canRun);
 
@@ -164,7 +162,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction face) {
-		Direction facing = this.<ComponentDirection>getComponent(ComponentType.Direction).getDirection();
+		Direction facing = getFacing();
 		if (capability == ForgeCapabilities.ENERGY && face == facing) {
 			return (LazyOptional<T>) LazyOptional.of(() -> this);
 		} else if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID)) {
@@ -222,7 +220,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 	}
 
 	@Override
-	public void onNeightborChanged(BlockPos neighbor) {
+	public void onNeightborChanged(BlockPos neighbor, boolean blockStateTrigger) {
 		hasRedstoneSignal.set(level.hasNeighborSignal(getBlockPos()));
 	}
 

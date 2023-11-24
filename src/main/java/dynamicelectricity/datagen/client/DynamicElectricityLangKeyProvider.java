@@ -21,7 +21,7 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 		case EN_US:
 		default:
 
-			add("itemGroup.itemgroupdynamicelectricity", "Dynamic Electricity");
+			addCreativeTab("main", "Dynamic Electricity");
 
 			addBlock(DynamicElectricityBlocks.blockMotorAcHv, "480V AC Motor");
 			addBlock(DynamicElectricityBlocks.blockMotorAcMv, "240V AC Motor");
@@ -61,7 +61,7 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 
 			addTooltip("dustpdsm", "Polydimethylsiloxane");
 			addTooltip("condudctorbrushdurability", "%1$s / %2$s");
-			
+
 			addTooltip("indrebstandard", "Standard");
 			addTooltip("indrebadvanced", "Advanced");
 			addTooltip("indrebsuper", "Super");
@@ -75,11 +75,11 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addGuiLabel("motor.lubricant", "Lubricant: ");
 			addGuiLabel("motor.generating", "Generating");
 			addGuiLabel("motor.tier", "Tier: %s");
-			
+
 			addGuiLabel("displayunit.industrialenergyunit.name", "Industrial Energy Unit");
 			addGuiLabel("displayunit.industrialenergyunit.nameplural", "Industrial Energy Units");
 			addGuiLabel("displayunit.industrialenergyunit.symbol", "IE");
-			
+
 			addGuidebook(References.ID, "Dynamic Electricity");
 
 			addGuidebook("chapter.dynamicelectricity", "Dynamic Electricity");
@@ -94,18 +94,14 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addGuidebook("chapter.dcmotors", "DC Motors");
 			addGuidebook("chapter.dcmotors.l1", "The DC motor is capable of converting Forge Energy Units (FE) into Electrodynamics Joules (J). It accomplishes this with 95% efficiency. Unlike the AC Motor, the DC Motor requires an additional component to run called the Conductor Brush. The brush has a limited durability, but can be easily replenished "
 					+ "by hoppering more in from the top of the motor. Three tiers of motors exist offering different throughput rates to suit your requirements.");
-			
-			
+
 			addGuidebook("chapter.industrialreborn", "Industrial Reborn");
 			addGuidebook("chapter.industrialreborn.l1", "Motors are able to convert Electrodynamics Joules (and by extension FE) to Industrial Reborn IE. The conversion rate of Joules to IE is four to one, meaning that for every 4 Joules, you have 1 IE. The following motor tiers correspond to the following Energy Tiers:");
 			addGuidebook("chapter.industrialreborn.lv", "LV : Standard");
 			addGuidebook("chapter.industrialreborn.mv", "MV : Advanced");
 			addGuidebook("chapter.industrialreborn.hv", "HV : Super");
 			addGuidebook("chapter.industrialreborn.l2", "As with FE, AC motors have no conversion penalty. However, as too with FE, DC Motors have a 5% energy loss penalty to convert to Joules.");
-			
-			
-			
-			
+
 		}
 
 	}

@@ -1,14 +1,15 @@
 package dynamicelectricity.registry;
 
 import dynamicelectricity.References;
-import dynamicelectricity.common.block.motor.ac.BlockMotorAcHv;
-import dynamicelectricity.common.block.motor.ac.BlockMotorAcLv;
-import dynamicelectricity.common.block.motor.ac.BlockMotorAcMv;
-import dynamicelectricity.common.block.motor.dc.BlockHvDcMotor;
-import dynamicelectricity.common.block.motor.dc.BlockLvDcMotor;
-import dynamicelectricity.common.block.motor.dc.BlockMvDcMotor;
+import dynamicelectricity.common.tile.TileMotorAcHv;
+import dynamicelectricity.common.tile.TileMotorAcLv;
+import dynamicelectricity.common.tile.TileMotorAcMv;
+import dynamicelectricity.common.tile.TileMotorDcHv;
+import dynamicelectricity.common.tile.TileMotorDcLv;
+import dynamicelectricity.common.tile.TileMotorDcMv;
 import dynamicelectricity.core.utils.UtilsText;
 import electrodynamics.common.blockitem.BlockItemDescriptable;
+import electrodynamics.prefab.block.GenericMachineBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -17,21 +18,21 @@ public class DynamicElectricityBlocks {
 
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, References.ID);
 
-	public static BlockMotorAcHv blockMotorAcHv;
-	public static BlockMotorAcMv blockMotorAcMv;
-	public static BlockMotorAcLv blockMotorAcLv;
-	public static BlockHvDcMotor blockMotorDcHv;
-	public static BlockMvDcMotor blockMotorDcMv;
-	public static BlockLvDcMotor blockMotorDcLv;
+	public static GenericMachineBlock blockMotorAcHv;
+	public static GenericMachineBlock blockMotorAcMv;
+	public static GenericMachineBlock blockMotorAcLv;
+	public static GenericMachineBlock blockMotorDcHv;
+	public static GenericMachineBlock blockMotorDcMv;
+	public static GenericMachineBlock blockMotorDcLv;
 
 	static {
 
-		BLOCKS.register("motorachv", () -> blockMotorAcHv = new BlockMotorAcHv());
-		BLOCKS.register("motoracmv", () -> blockMotorAcMv = new BlockMotorAcMv());
-		BLOCKS.register("motoraclv", () -> blockMotorAcLv = new BlockMotorAcLv());
-		BLOCKS.register("motordchv", () -> blockMotorDcHv = new BlockHvDcMotor());
-		BLOCKS.register("motordcmv", () -> blockMotorDcMv = new BlockMvDcMotor());
-		BLOCKS.register("motordclv", () -> blockMotorDcLv = new BlockLvDcMotor());
+		BLOCKS.register("motorachv", () -> blockMotorAcHv = new GenericMachineBlock(TileMotorAcHv::new));
+		BLOCKS.register("motoracmv", () -> blockMotorAcMv = new GenericMachineBlock(TileMotorAcMv::new));
+		BLOCKS.register("motoraclv", () -> blockMotorAcLv = new GenericMachineBlock(TileMotorAcLv::new));
+		BLOCKS.register("motordchv", () -> blockMotorDcHv = new GenericMachineBlock(TileMotorDcHv::new));
+		BLOCKS.register("motordcmv", () -> blockMotorDcMv = new GenericMachineBlock(TileMotorDcMv::new));
+		BLOCKS.register("motordclv", () -> blockMotorDcLv = new GenericMachineBlock(TileMotorDcLv::new));
 
 		BlockItemDescriptable.addDescription(() -> blockMotorAcHv, UtilsText.tooltip("motorachv.conversion"));
 		

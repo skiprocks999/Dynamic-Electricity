@@ -16,6 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dynamicelectricity.client.ClientRegister;
+import dynamicelectricity.common.block.DynamicElectricityVoxelShapeRegistry;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import dynamicelectricity.registry.DynamicElectricityContainers;
@@ -45,6 +46,7 @@ public class DynamicElectricity
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
     	DynamicElectricityTags.init();
+    	DynamicElectricityVoxelShapeRegistry.init();
     }
     
     @SubscribeEvent

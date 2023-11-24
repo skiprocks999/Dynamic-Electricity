@@ -5,8 +5,6 @@ import com.maciej916.indreb.common.api.enums.EnergyTier;
 import com.maciej916.indreb.common.api.enums.EnergyType;
 
 import dynamicelectricity.common.tile.generic.TileMotorAC;
-import electrodynamics.prefab.tile.components.ComponentType;
-import electrodynamics.prefab.tile.components.type.ComponentDirection;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 
@@ -22,7 +20,7 @@ public class OutputCap implements IEnergyStorage {
 
 	@Override
 	public boolean canExtractEnergy(Direction face) {
-		return face == motor.<ComponentDirection>getComponent(ComponentType.Direction).getDirection();
+		return face == motor.getFacing();
 	}
 
 	@Override
