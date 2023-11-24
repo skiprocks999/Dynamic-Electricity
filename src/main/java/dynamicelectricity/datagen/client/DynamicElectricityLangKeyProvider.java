@@ -21,7 +21,7 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 		case EN_US:
 		default:
 
-			addCreativeTab("main", "Dynamic Electricity");
+			add("itemGroup.itemgroup" + References.ID, "Dynamic Electricity");
 
 			addBlock(DynamicElectricityBlocks.blockMotorAcHv, "480V AC Motor");
 			addBlock(DynamicElectricityBlocks.blockMotorAcMv, "240V AC Motor");
