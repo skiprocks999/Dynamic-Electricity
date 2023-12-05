@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPC",
+    "SRI",
+    "PTC"
+  ],
+  "key": {
+    "P": {
+      "tag": "forge:plates/stainlesssteel"
+    },
+    "R": {
+      "item": "dynamicelectricity:shaftstainlesssteel"
+    },
+    "S": {
+      "item": "dynamicelectricity:stator"
+    },
+    "C": {
+      "item": "dynamicelectricity:commutator"
+    },
+    "T": {
+      "item": "electrodynamics:tanksteel"
+    },
+    "I": {
+      "item": "electrodynamics:insulation"
+    }
+  },
+  "result": {
+    "item": "dynamicelectricity:motoracmv"
+  }
+}

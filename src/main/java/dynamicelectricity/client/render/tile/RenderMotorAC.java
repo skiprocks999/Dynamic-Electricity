@@ -9,8 +9,6 @@ import dynamicelectricity.common.tile.TileMotorAcHv;
 import dynamicelectricity.common.tile.TileMotorAcLv;
 import dynamicelectricity.common.tile.TileMotorAcMv;
 import dynamicelectricity.common.tile.generic.TileMotorAC;
-import electrodynamics.prefab.tile.components.ComponentType;
-import electrodynamics.prefab.tile.components.type.ComponentDirection;
 import electrodynamics.prefab.utilities.RenderingUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -30,13 +28,13 @@ public class RenderMotorAC implements BlockEntityRenderer<TileMotorAC>{
 		
 		matrix.pushPose();
 		
-		Direction facing = tile.<ComponentDirection>getComponent(ComponentType.Direction).getDirection();
+		Direction facing = tile.getFacing();
 		
 		double progress = Math.sin(0.05 * Math.PI * partialTicks);
 		
 		float progressDegrees = 0.0F;
 		
-		if (tile.CLIENT_ISPOWERED) {
+		if (tile.running.get()) {
 		    progressDegrees = 360.0f * (float) progress;
 		}
 		

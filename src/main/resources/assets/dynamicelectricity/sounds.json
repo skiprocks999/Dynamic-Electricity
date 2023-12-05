@@ -1,9 +1,0 @@
-{
-	"motor_running": {
-		"category": "blocks",
-		"subtitle": "Motor Running",
-		"sounds": [
-			"dynamicelectricity:motor_running"
-		]
-	}
-}

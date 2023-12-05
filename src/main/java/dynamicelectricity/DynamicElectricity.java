@@ -16,7 +16,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dynamicelectricity.client.ClientRegister;
+import dynamicelectricity.common.block.DynamicElectricityVoxelShapeRegistry;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
+import dynamicelectricity.registry.DynamicElectricityBlocks;
+import dynamicelectricity.registry.DynamicElectricityContainers;
+import dynamicelectricity.registry.DynamicElectricityFluids;
+import dynamicelectricity.registry.DynamicElectricityItems;
+import dynamicelectricity.registry.DynamicElectricitySounds;
+import dynamicelectricity.registry.DynamicElectricityTiles;
 
 
 @Mod(References.ID)
@@ -28,23 +35,26 @@ public class DynamicElectricity
     public DynamicElectricity() {
     	IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
     	
-    	DeferredRegisters.BLOCKS.register(bus);
-    	DeferredRegisters.ITEMS.register(bus);
-    	DeferredRegisters.TILES.register(bus);
-    	DeferredRegisters.CONTAINERS.register(bus);
-    	DeferredRegisters.FLUIDS.register(bus);
-    	SoundRegister.SOUNDS.register(bus);
+    	DynamicElectricityBlocks.BLOCKS.register(bus);
+    	DynamicElectricityContainers.CONTAINERS.register(bus);
+    	DynamicElectricityFluids.FLUIDS.register(bus);
+    	DynamicElectricityItems.ITEMS.register(bus);
+    	DynamicElectricityTiles.TILES.register(bus);
+    	DynamicElectricitySounds.SOUNDS.register(bus);
     }
     
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
     	DynamicElectricityTags.init();
+    	DynamicElectricityVoxelShapeRegistry.init();
     }
     
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public static void onClientSetup(FMLClientSetupEvent event) {
-    	ClientRegister.setup();
+    	event.enqueueWork(() -> {
+    		ClientRegister.setup();
+    	});
     }
     
     @SubscribeEvent

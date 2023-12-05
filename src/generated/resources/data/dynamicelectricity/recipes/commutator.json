@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "RRR",
+    "CCC"
+  ],
+  "key": {
+    "R": {
+      "tag": "forge:rings/iron"
+    },
+    "C": {
+      "item": "electrodynamics:coil"
+    }
+  },
+  "result": {
+    "item": "dynamicelectricity:commutator"
+  }
+}
