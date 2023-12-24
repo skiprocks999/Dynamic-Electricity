@@ -1,10 +1,13 @@
 {
 	"credit": "skip999",
 	"parent": "block/cube_all",
-	"texture_size": [64,64],
+	"texture_size": [
+		64,
+		64
+	],
 	"textures": {
 		"0": "dynamicelectricity:model/motoraclv",
-		"particle": "dynamicelectricity:model/motoraclv"
+		"particle": "electrodynamics:block/steelcasing"
 	},
 	"elements": [
 		{
@@ -1366,6 +1369,142 @@
 					"texture": "#0"
 				}
 			}
+		},
+		{
+			"from": [
+				5,
+				1,
+				6
+			],
+			"to": [
+				13,
+				2,
+				10
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						10.5,
+						15.75,
+						12.5,
+						16
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						9.5,
+						15.75,
+						10.5,
+						16
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						13.5,
+						15.75,
+						15.5,
+						16
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						12.5,
+						15.75,
+						13.5,
+						16
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						12.5,
+						15.75,
+						10.5,
+						14.75
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						14.5,
+						14.75,
+						12.5,
+						15.75
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"from": [
+				9,
+				2,
+				6
+			],
+			"to": [
+				13,
+				3,
+				10
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						10.5,
+						15.75,
+						11.5,
+						16
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						9.5,
+						15.75,
+						10.5,
+						16
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						12.5,
+						15.75,
+						13.5,
+						16
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						11.5,
+						15.75,
+						12.5,
+						16
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						11.5,
+						15.75,
+						10.5,
+						14.75
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						12.5,
+						14.75,
+						11.5,
+						15.75
+					],
+					"texture": "#0"
+				}
+			}
 		}
 	],
 	"groups": [
@@ -1463,7 +1602,9 @@
 							]
 						}
 					]
-				}
+				},
+				20,
+				21
 			]
 		}
 	]

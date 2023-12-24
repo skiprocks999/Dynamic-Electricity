@@ -1,12 +1,14 @@
 {
 	"credit": "skip999",
+	"ambientocclusion": "false",
+	"parent": "block/cube_all",
 	"texture_size": [
 		128,
 		128
 	],
 	"textures": {
 		"0": "dynamicelectricity:model/motorachv",
-		"particle": "dynamicelectricity:model/motorachv"
+		"particle": "electrodynamics:block/steelcasing"
 	},
 	"elements": [
 		{

@@ -1,6 +1,7 @@
 {
 	"credit": "skip999",
 	"ambientocclusion": "false",
+	"parent": "block/cube_all",
 	"texture_size": [64,64],
 	"textures": {
 		"1": "dynamicelectricity:model/motoraclv"

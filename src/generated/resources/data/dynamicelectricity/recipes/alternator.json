@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DCD",
+    "CRC",
+    "DCD"
+  ],
+  "key": {
+    "R": {
+      "tag": "forge:rings/iron"
+    },
+    "C": {
+      "item": "electrodynamics:coil"
+    },
+    "D": {
+      "tag": "forge:dusts/redstone"
+    }
+  },
+  "result": {
+    "item": "dynamicelectricity:alternator"
+  }
+}

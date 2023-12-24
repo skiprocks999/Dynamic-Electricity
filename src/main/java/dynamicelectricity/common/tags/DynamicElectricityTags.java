@@ -1,37 +1,48 @@
 package dynamicelectricity.common.tags;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import dynamicelectricity.common.fluid.FluidLubricant;
-import electrodynamics.common.item.gear.tools.ItemCanister;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.Item;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.Tags.IOptionalNamedTag;
 
 public class DynamicElectricityTags {
 
-	public static List<Tags.IOptionalNamedTag<Fluid>> FLUID_TAGS = new ArrayList<>();
-	
 	public static void init() {
+		Items.init();
 		Fluids.init();
 	}
-	
-	
-	public static class Fluids {
+
+	public static class Items {
 		
-		public static final Tags.IOptionalNamedTag<Fluid> LUBRICANT = forgeTag(FluidLubricant.FORGE_TAG);
+		public static final IOptionalNamedTag<Item> DUST_COAL = forgeTag("dusts/coal");
+		public static final IOptionalNamedTag<Item> DUST_PDSM = forgeTag("dusts/pdsm");
 		
+		public static final IOptionalNamedTag<Item> RING_IRON = forgeTag("rings/iron");
+		public static final IOptionalNamedTag<Item> RING_STEEL = forgeTag("rings/steel");
+
 		private static void init() {
-			FLUID_TAGS.add(LUBRICANT);
-			
-			ItemCanister.addTag(LUBRICANT);
 		}
-		
-		private static Tags.IOptionalNamedTag<Fluid> forgeTag(String name){
+
+		private static IOptionalNamedTag<Item> forgeTag(String name) {
+			return ItemTags.createOptional(new ResourceLocation("forge", name));
+		}
+
+	}
+
+	public static class Fluids {
+
+		public static final IOptionalNamedTag<Fluid> LUBRICANT = forgeTag(FluidLubricant.FORGE_TAG);
+
+		private static void init() {
+			
+		}
+
+		private static IOptionalNamedTag<Fluid> forgeTag(String name) {
 			return FluidTags.createOptional(new ResourceLocation("forge", name));
 		}
 	}
-	
+
 }

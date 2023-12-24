@@ -1,6 +1,6 @@
 package dynamicelectricity.common.tab;
 
-import dynamicelectricity.DeferredRegisters;
+import dynamicelectricity.registry.DynamicElectricityBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -11,8 +11,8 @@ public class ItemGroupDynamicElectricity extends ItemGroup{
 	}
 
 	@Override
-	public ItemStack createIcon() {
-		return new ItemStack(DeferredRegisters.blockMotorAcHv);
+	public ItemStack makeIcon() {
+		return new ItemStack(DynamicElectricityBlocks.blockMotorAcHv);
 	}
 
 }

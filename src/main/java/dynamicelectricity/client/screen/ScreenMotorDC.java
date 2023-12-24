@@ -3,77 +3,63 @@ package dynamicelectricity.client.screen;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-
-import dynamicelectricity.client.screen.components.ScreenComponentMotor;
+import dynamicelectricity.client.ClientRegister.DynamicElectricityTextures;
 import dynamicelectricity.common.inventory.container.ContainerMotorDC;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
+import dynamicelectricity.core.utils.UtilsText;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
-import electrodynamics.api.electricity.formatting.ElectricUnit;
+import electrodynamics.api.electricity.formatting.DisplayUnit;
 import electrodynamics.prefab.screen.GenericScreen;
-import electrodynamics.prefab.screen.component.ScreenComponentElectricInfo;
-import electrodynamics.prefab.screen.component.ScreenComponentInfo;
-import electrodynamics.prefab.tile.components.ComponentType;
+import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.types.ScreenComponentMultiLabel;
+import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
+import electrodynamics.prefab.screen.component.types.wrapper.InventoryIOWrapper;
+import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
+import electrodynamics.prefab.tile.components.IComponentType;
 import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
+import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.ITextProperties;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public class ScreenMotorDC extends GenericScreen<ContainerMotorDC>{
 
 	public ScreenMotorDC(ContainerMotorDC screenContainer, PlayerInventory inv, ITextComponent titleIn) {
 		super(screenContainer, inv, titleIn);
 		
-		components.add(new ScreenComponentElectricInfo(this::getEnergyInformation, this, -ScreenComponentInfo.SIZE + 1, 2));
+		addComponent(new ScreenComponentElectricInfo(this::getEnergyInformation, -AbstractScreenComponentInfo.SIZE + 1, 2));
 		
-		components.add(new ScreenComponentMotor(this, 69, 4));
-	
-	}
-	
-	@Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int mouseX, int mouseY) {
-		super.drawGuiContainerForegroundLayer(matrixStack, mouseX, mouseY);
+		addComponent(new ScreenComponentGeneric(DynamicElectricityTextures.MOTOR, 69, 4));
 		
-		List<? extends ITextComponent> screenOverlays = getMotorInfo();
-		
-		if (screenOverlays.size() > 0) {
-		    font.func_243248_b(matrixStack, screenOverlays.get(0), playerInventoryTitleX, 28f, 0);
-		    font.func_243248_b(matrixStack, screenOverlays.get(1), playerInventoryTitleX, 38f, 0);
-		    font.func_243248_b(matrixStack, screenOverlays.get(2), playerInventoryTitleX, 48f, 0);
-		} else {
-		    closeScreen();
-		}
-	}
-	
-	private List<? extends ITextComponent> getMotorInfo() {
-		ArrayList<ITextComponent> list = new ArrayList<>();
-	
-		TileMotorDC motor = container.getHostFromIntArray();
-		
-		int lubeCount = motor.CLIENT_LUBRICANT;
-		
-		list.add(new TranslationTextComponent("gui.motor.lubricant").mergeStyle(TextFormatting.BLACK));
-		list.add(new StringTextComponent("" + lubeCount).mergeStyle(TextFormatting.DARK_GRAY));
-		list.add(new TranslationTextComponent("gui.motor.generating").mergeStyle(motor.CLIENT_ISPOWERED ? TextFormatting.GREEN : TextFormatting.RED));
-		
-		return list;
-	}
-	
-	private List<? extends ITextProperties> getEnergyInformation() {
-		ArrayList<ITextProperties> list = new ArrayList<>();
-		TileMotorDC box = container.getHostFromIntArray();
-		if (box != null) {
-		    ComponentElectrodynamic electro = box.getComponent(ComponentType.Electrodynamic);
+		addComponent(new ScreenComponentMultiLabel(0, 0, stack -> {
+			TileMotorDC motor = menu.getHostFromIntArray();
 
-		    list.add(new TranslationTextComponent("gui.motor.usage",
-			    new StringTextComponent(ChatFormatter.getElectricDisplayShort(box.getMaxJoules() * 20, ElectricUnit.WATT))
-				    .mergeStyle(TextFormatting.GRAY)).mergeStyle(TextFormatting.DARK_GRAY));
-		    list.add(new TranslationTextComponent("gui.motor.voltage",
-			    new StringTextComponent(ChatFormatter.getElectricDisplayShort(electro.getVoltage(), ElectricUnit.VOLTAGE))
-				    .mergeStyle(TextFormatting.GRAY)).mergeStyle(TextFormatting.DARK_GRAY));
+			if (motor == null) {
+				return;
+			}
+
+			font.draw(stack, UtilsText.gui("motor.lubricant").withStyle(TextFormatting.BLACK), inventoryLabelX, 28, 0);
+			font.draw(stack, new StringTextComponent("" + motor.lubricantRemaining.get()).withStyle(TextFormatting.DARK_GRAY), inventoryLabelX + 5, 38, 0);
+			font.draw(stack, UtilsText.gui("motor.generating").withStyle(motor.running.get() ? TextFormatting.GREEN : TextFormatting.RED), inventoryLabelX, 48, 0);
+		}));
+		new InventoryIOWrapper(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE + 2, 75, 82, 8, 72);
+	
+	}
+	
+	private List<? extends IReorderingProcessor> getEnergyInformation() {
+		ArrayList<IReorderingProcessor> list = new ArrayList<>();
+		TileMotorDC box = menu.getHostFromIntArray();
+		if (box != null) {
+			ComponentElectrodynamic electro = box.getComponent(IComponentType.Electrodynamic);
+
+			list.add(UtilsText.gui("motor.usage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.maxFeConsumed.get(), DisplayUnit.FORGE_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(TextFormatting.GRAY)).withStyle(TextFormatting.DARK_GRAY).getVisualOrderText());
+
+			list.add(UtilsText.gui("motor.voltage", ChatFormatter.getChatDisplayShort(electro.getVoltage(), DisplayUnit.VOLTAGE).withStyle(TextFormatting.GRAY)).withStyle(TextFormatting.DARK_GRAY).getVisualOrderText());
+			list.add(UtilsText.gui("motor.output", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.joulesProduced.get(), DisplayUnit.JOULES), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(TextFormatting.GRAY)).withStyle(TextFormatting.DARK_GRAY).getVisualOrderText());
+			list.add(UtilsText.gui("motor.wattage", ChatFormatter.getChatDisplayShort(box.joulesProduced.get() * 20, DisplayUnit.WATT).withStyle(TextFormatting.GRAY)).withStyle(TextFormatting.DARK_GRAY).getVisualOrderText());
+
 		}
 		return list;
 	}

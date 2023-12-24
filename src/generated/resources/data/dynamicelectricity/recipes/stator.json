@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CRC",
+    "CCC"
+  ],
+  "key": {
+    "R": {
+      "tag": "forge:rings/steel"
+    },
+    "C": {
+      "item": "electrodynamics:coil"
+    }
+  },
+  "result": {
+    "item": "dynamicelectricity:stator"
+  }
+}

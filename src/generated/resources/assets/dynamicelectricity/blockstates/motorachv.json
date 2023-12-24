@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "dynamicelectricity:block/motorachv",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "dynamicelectricity:block/motorachv",
+      "y": 270
+    },
+    "facing=west": {
+      "model": "dynamicelectricity:block/motorachv"
+    },
+    "facing=east": {
+      "model": "dynamicelectricity:block/motorachv",
+      "y": 180
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPA",
+    "SRA",
+    "PTA"
+  ],
+  "key": {
+    "P": {
+      "tag": "forge:plates/steel"
+    },
+    "A": {
+      "item": "dynamicelectricity:alternator"
+    },
+    "R": {
+      "item": "dynamicelectricity:shaftsteel"
+    },
+    "S": {
+      "item": "dynamicelectricity:stator"
+    },
+    "T": {
+      "item": "electrodynamics:tanksteel"
+    }
+  },
+  "result": {
+    "item": "dynamicelectricity:motordchv"
+  }
+}
