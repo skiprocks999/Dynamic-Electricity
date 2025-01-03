@@ -11,45 +11,47 @@ import dynamicelectricity.registry.DynamicElectricityTiles;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.client.guidebook.ScreenGuidebook;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ModelEvent.RegisterAdditional;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = References.ID, bus = Bus.MOD, value = { Dist.CLIENT })
+@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD, value = { Dist.CLIENT })
 public class ClientRegister {
 
 	public static final String BLOCK_LOC = References.ID + ":block/";
 
+	public static final ModelResourceLocation MODEL_MOTORAC_HV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motorachv"));
+	public static final ModelResourceLocation MODEL_MOTORAC_HVSHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motorachvshaft"));
+	public static final ModelResourceLocation MODEL_MOTORAC_MV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motoracmv"));
+	public static final ModelResourceLocation MODEL_MOTORAC_MVSHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motoracmvshaft"));
+	public static final ModelResourceLocation MODEL_MOTORAC_LV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motoraclv"));
+	public static final ModelResourceLocation MODEL_MOTORAC_LVSHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motoraclvshaft"));
+
+	public static final ModelResourceLocation MODEL_MOTORDC_HV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motordchv"));
+	public static final ModelResourceLocation MODEL_MOTORDC_MV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motordcmv"));
+	public static final ModelResourceLocation MODEL_MOTORDC_LV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motordclv"));
+
+	public static void setup() {
+		ScreenGuidebook.addGuidebookModule(new ModuleDynamicElectricity());
+	}
+
 	@SubscribeEvent
-	public static void onModelEvent(RegisterAdditional event) {
+	public static void onModelEvent(ModelEvent.RegisterAdditional event) {
 		event.register(MODEL_MOTORAC_HVSHAFT);
 		event.register(MODEL_MOTORAC_MVSHAFT);
 		event.register(MODEL_MOTORAC_LVSHAFT);
 	}
-
-	public static final ResourceLocation MODEL_MOTORAC_HV = new ResourceLocation(BLOCK_LOC + "motorachv");
-	public static final ResourceLocation MODEL_MOTORAC_HVSHAFT = new ResourceLocation(BLOCK_LOC + "motorachvshaft");
-	public static final ResourceLocation MODEL_MOTORAC_MV = new ResourceLocation(BLOCK_LOC + "motoracmv");
-	public static final ResourceLocation MODEL_MOTORAC_MVSHAFT = new ResourceLocation(BLOCK_LOC + "motoracmvshaft");
-	public static final ResourceLocation MODEL_MOTORAC_LV = new ResourceLocation(BLOCK_LOC + "motoraclv");
-	public static final ResourceLocation MODEL_MOTORAC_LVSHAFT = new ResourceLocation(BLOCK_LOC + "motoraclvshaft");
-
-	public static final ResourceLocation MODEL_MOTORDC_HV = new ResourceLocation(BLOCK_LOC + "motordchv");
-	public static final ResourceLocation MODEL_MOTORDC_MV = new ResourceLocation(BLOCK_LOC + "motordcmv");
-	public static final ResourceLocation MODEL_MOTORDC_LV = new ResourceLocation(BLOCK_LOC + "motordclv");
-
-	public static void setup() {
-		MenuScreens.register(DynamicElectricityContainers.CONTAINER_MOTORAC.get(), ScreenMotorAC::new);
-		MenuScreens.register(DynamicElectricityContainers.CONTAINER_MOTORDC.get(), ScreenMotorDC::new);
-
-		ScreenGuidebook.addGuidebookModule(new ModuleDynamicElectricity());
+	
+	public static void registerScreens(RegisterMenuScreensEvent event) {
+		event.register(DynamicElectricityContainers.CONTAINER_MOTORAC.get(), ScreenMotorAC::new);
+		event.register(DynamicElectricityContainers.CONTAINER_MOTORDC.get(), ScreenMotorDC::new);
 	}
 
 	@SubscribeEvent
@@ -65,13 +67,9 @@ public class ClientRegister {
 		event.registerBlockEntityRenderer(DynamicElectricityTiles.TILE_MOTORDC_LV.get(), RenderMotorDC::new);
 	}
 
-	public static boolean shouldMultilayerRender(RenderType type) {
-		return type == RenderType.translucent() || type == RenderType.solid();
-	}
-
 	public static enum DynamicElectricityTextures implements ITexture {
 
-		MOTOR(102, 70, 0, 0, 256, 256, new ResourceLocation(References.ID + ":textures/screen/component/motor.png"));
+		MOTOR(102, 70, 0, 0, 256, 256, ModelResourceLocation.standalone(ResourceLocation.parse(References.ID + ":textures/screen/component/motor.png"));
 
 		private final int textureWidth;
 		private final int textureHeight;

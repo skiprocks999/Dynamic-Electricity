@@ -10,11 +10,11 @@ import electrodynamics.client.guidebook.utils.components.Module;
 import electrodynamics.client.guidebook.utils.pagedata.graphics.ImageWrapperObject;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 
 public class ModuleDynamicElectricity extends Module {
 
-	private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32, new ResourceLocation(References.ID, "textures/screen/guidebook/dynamicelectricitylogo.png"));
+	private static final ImageWrapperObject LOGO = new ImageWrapperObject(0, 0, 0, 0, 32, 32, 32, 32,ResourceLocation.fromNamespaceAndPath(References.ID, "textures/screen/guidebook/dynamicelectricitylogo.png"));
 
 	@Override
 	public ImageWrapperObject getLogo() {

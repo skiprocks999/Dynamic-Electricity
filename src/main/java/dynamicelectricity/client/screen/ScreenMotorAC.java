@@ -10,7 +10,7 @@ import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler
 import dynamicelectricity.core.utils.UtilsText;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
-import electrodynamics.prefab.screen.component.types.ScreenComponentGeneric;
+import electrodynamics.prefab.screen.component.ScreenComponentGeneric;
 import electrodynamics.prefab.screen.component.types.ScreenComponentMultiLabel;
 import electrodynamics.prefab.screen.component.types.ScreenComponentProgress.ProgressTextures;
 import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
@@ -26,8 +26,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 public class ScreenMotorAC extends GenericMaterialScreen<ContainerMotorAC> {
 
@@ -36,7 +36,7 @@ public class ScreenMotorAC extends GenericMaterialScreen<ContainerMotorAC> {
 		addComponent(new ScreenComponentElectricInfo(this::getEnergyInformation, -AbstractScreenComponentInfo.SIZE + 1, 2));
 		addComponent(new ScreenComponentGeneric(ProgressTextures.ARROW_RIGHT_OFF, 123, 33));
 		addComponent(new ScreenComponentFluidGauge(() -> {
-			TileMotorAC motor = menu.getHostFromIntArray();
+			TileMotorAC motor = menu.getSafeHost();
 			if (motor != null) {
 				return motor.<ComponentFluidHandlerSimple>getComponent(IComponentType.FluidHandler);
 			}
@@ -44,7 +44,7 @@ public class ScreenMotorAC extends GenericMaterialScreen<ContainerMotorAC> {
 		}, 150, 18));
 
 		addComponent(new ScreenComponentMultiLabel(0, 0, graphics -> {
-			TileMotorAC motor = menu.getHostFromIntArray();
+			TileMotorAC motor = menu.getSafeHost();
 			if (motor == null) {
 				return;
 			}
@@ -55,7 +55,7 @@ public class ScreenMotorAC extends GenericMaterialScreen<ContainerMotorAC> {
 
 	private List<? extends FormattedCharSequence> getEnergyInformation() {
 		ArrayList<FormattedCharSequence> list = new ArrayList<>();
-		TileMotorAC box = menu.getHostFromIntArray();
+		TileMotorAC box = menu.getSafeHost();
 		if (box != null) {
 			ComponentElectrodynamic electro = box.getComponent(IComponentType.Electrodynamic);
 

@@ -8,10 +8,9 @@ import dynamicelectricity.common.inventory.container.ContainerMotorDC;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
 import dynamicelectricity.registry.DynamicElectricitySounds;
-import electrodynamics.api.capability.ElectrodynamicsCapabilities;
 import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyType;
+import electrodynamics.prefab.properties.PropertyTypes;
 import electrodynamics.prefab.sound.SoundBarrierMethods;
 import electrodynamics.prefab.sound.utils.ITickableSound;
 import electrodynamics.prefab.tile.GenericTile;
@@ -23,20 +22,19 @@ import electrodynamics.prefab.tile.components.type.ComponentInventory;
 import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
 import electrodynamics.prefab.tile.components.type.ComponentTickable;
 import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
+import electrodynamics.prefab.utilities.BlockEntityUtils;
 import electrodynamics.prefab.utilities.ElectricityUtils;
 import electrodynamics.prefab.utilities.object.CachedTileOutput;
 import electrodynamics.prefab.utilities.object.TransferPack;
+import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fluids.capability.IFluidHandler.FluidAction;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.neoforge.energy.IEnergyStorage;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import org.jetbrains.annotations.Nullable;
 
 public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickableSound {
 
@@ -64,21 +62,21 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 		
 		this.energyTier = energyTier;
 		
-		maxFeConsumed = property(new Property<>(PropertyType.Integer, "feconsumed", feConsumed));
-		feStored = property(new Property<>(PropertyType.Integer, "festored", 0));
-		joulesProduced = property(new Property<>(PropertyType.Double, "joulesproduced", feConsumed * CONVERSION_EFFICIENCY));
+		maxFeConsumed = property(new Property<>(PropertyTypes.INTEGER, "feconsumed", feConsumed));
+		feStored = property(new Property<>(PropertyTypes.INTEGER, "festored", 0));
+		joulesProduced = property(new Property<>(PropertyTypes.DOUBLE, "joulesproduced", feConsumed * CONVERSION_EFFICIENCY));
 		
-		lubricantRemaining = property(new Property<>(PropertyType.Integer, "lubricantremaining", 0));
-		running = property(new Property<>(PropertyType.Boolean, "running", false));
+		lubricantRemaining = property(new Property<>(PropertyTypes.INTEGER, "lubricantremaining", 0));
+		running = property(new Property<>(PropertyTypes.BOOLEAN, "running", false));
 		
-		hasRedstoneSignal = property(new Property<>(PropertyType.Boolean, "redstonesignal", false));
+		hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 		
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(Direction.SOUTH).voltage(Math.pow(2, energyTier) * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
-		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1).bucketInputs(1)).valid(machineValidator()).setDirectionsBySlot(0, Direction.EAST, Direction.WEST, Direction.UP));
+		addComponent(new ComponentElectrodynamic(this, true, false).setOutputDirections(BlockEntityUtils.MachineDirection.BACK).voltage(Math.pow(2, energyTier) * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
+		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().inputs(1).bucketInputs(1)).valid(machineValidator()).setDirectionsBySlot(0, BlockEntityUtils.MachineDirection.LEFT, BlockEntityUtils.MachineDirection.RIGHT, BlockEntityUtils.MachineDirection.TOP));
 		addComponent(new ComponentContainerProvider("container.motordc" + name, this).createMenu((id, player) -> new ContainerMotorDC(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
-		addComponent(new ComponentFluidHandlerSimple(1000, this, "lubricant").setValidFluidTags(DynamicElectricityTags.Fluids.LUBRICANT).setInputDirections(Direction.DOWN));
+		addComponent(new ComponentFluidHandlerSimple(1000, this, "lubricant").setValidFluidTags(DynamicElectricityTags.Fluids.LUBRICANT).setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM));
 	}
 
 	public void tickServer(ComponentTickable tickable) {
@@ -110,7 +108,7 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 				lubricantRemaining.set(lubricantRemaining.get() - 1);
 				canRun = true;
 			} else if (lubricantRemaining.get() == 0 && tank.getFluidAmount() > 0) {
-				tank.drain(1, FluidAction.EXECUTE);
+				tank.drain(1, IFluidHandler.FluidAction.EXECUTE);
 				lubricantRemaining.set(LUBRICANT_PER_MB);
 			}
 			
@@ -145,6 +143,7 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 		
 	}
 
+	/*
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction face) {
 		Direction facing = getFacing();
@@ -159,6 +158,21 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 			
 		}
 		return super.getCapability(capability, face);
+	}
+
+	 */
+
+	public @Nullable IEnergyStorage getFECapability(@Nullable Direction side) {
+		if (side == null) {
+			return null;
+		} else {
+			Direction facing = this.getFacing().getOpposite();
+			if (side == facing) {
+				return this;
+			} else {
+				return null;
+			}
+		}
 	}
 
 	@Override

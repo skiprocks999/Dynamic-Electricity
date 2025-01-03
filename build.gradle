@@ -1,172 +1,176 @@
 plugins {
-	id 'eclipse'
-	id 'maven-publish'
-	id 'net.minecraftforge.gradle' version "${forge_gradle_version}"
-	id 'org.parchmentmc.librarian.forgegradle' version "${parchent_librarian_version}.+"
-    id 'com.matthewprenger.cursegradle' version "${cursegradle_version}"
+    id 'java-library'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.0.165'
 }
-//apply plugin: 'net.minecraftforge.gradle'
-//apply plugin: 'org.parchmentmc.librarian.forgegradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-//apply plugin: 'eclipse'
-//apply plugin: 'maven-publish'
-//apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
+
+tasks.named('wrapper', Wrapper).configure {
+    // Define wrapper values here so as to not have to always do so when updating gradlew.properties.
+    // Switching this to Wrapper.DistributionType.ALL will download the full gradle sources that comes with
+    // documentation attached on cursor hover of gradle classes and methods. However, this comes with increased
+    // file size for Gradle. If you do switch this to ALL, run the Gradle wrapper task twice afterwards.
+    // (Verify by checking gradle/wrapper/gradle-wrapper.properties to see if distributionUrl now points to `-all`)
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+group = mod_group_id
+version = "${minecraft_version}-" + mod_version
 
 libsDirName = "../output"
 distsDirName = "../output"
 
-group = dynamicelectricity_group
-version = "${minecraft_version}-" + dynamicelectricity_version
-
-base {
-
-	archivesName = dynamicelectricity_name
-
+repositories {
+    mavenLocal()
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-minecraft {
-    mappings channel: 'parchment', version: "${parchment_version}-${minecraft_version}"
-    runs {
-        client {
-            workingDirectory project.file('run')
 
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+runs {
 
-            property 'forge.logging.console.level', 'debug'
+    configureEach {
 
-            mods {
-                dynamicelectricity {
-                    source sourceSets.main
-                }
-            }
-        }
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
 
-        server {
-            workingDirectory project.file('run')
+        systemProperty 'forge.logging.console.level', 'debug'
 
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+        modSource project.sourceSets.main
+    }
 
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+    client {
 
-            mods {
-                dynamicelectricity {
-                    source sourceSets.main
-                }
-            }
-        }
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
 
-        data {
-            workingDirectory project.file('run')
+    }
 
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+    server {
 
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+        programArgument '--nogui'
 
-            args '--mod', 'dynamicelectricity', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+    }
 
-            mods {
-                dynamicelectricity {
-                    source sourceSets.main
-                }
-            }
-        }
+    gameTestServer {
+
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+
+    }
+
+    data {
+
+        programArguments.addAll(
+                '--mod', project.mod_id,
+                '--all',
+                '--output', file('src/generated/resources/').getAbsolutePath(),
+                '--existing', file('src/main/resources/').getAbsolutePath(),
+                '--existing-mod', 'electrodynamics'
+        )
+
     }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-dependencies {
-    def Folder2 = new File("libs")
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
 
+dependencies {
+    def Folder = new File("C:/AmpzLibz")
+    if(Folder.exists()) {
+        implementation fileTree(Folder)
+    }
+    def Folder2 = new File("libs")
     if(Folder2.exists()) {
         implementation fileTree(Folder2)
     }
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
-    //runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}")
-    //implementation fg.deobf("curse.maven:industrialreborn-358877:4651636")
-}
-
-
-repositories {
-	mavenCentral()
-	maven {
-	    // location of the maven that hosts JEI files since January 2023
-	    name = "Jared's maven"
-	    url = "https://maven.blamejared.com/"
-	}
-	maven {
-   		// location of a maven mirror for JEI files, as a fallback
-    	name = "ModMaven"
-    	url = "https://modmaven.dev"
-  	}
-  	maven {
-        name = "Mekanism"
-        url = "https://modmaven.dev/"
-    }
-    maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-    	}
-	}
-
-}
-
-// Example for how to get properties into the manifest for reading by the runtime..
-tasks.named('jar', Jar).configure {
-    manifest {
-        attributes([
-            "Specification-Title": "dynamicelectricity",
-            "Specification-Vendor": "skip999",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": project.jar.archiveVersion,
-            "Implementation-Vendor" :"skip999",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-	finalizedBy('reobfJar') 
-    
+    implementation "net.neoforged:neoforge:${neo_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
+    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 }
 
 tasks.register('sourcesJar', Jar).configure {
-	dependsOn classes
-	from sourceSets.main.allSource
-	archiveClassifier = 'sources'
+    dependsOn classes
+    from sourceSets.main.allSource
+    archiveClassifier = 'sources'
 }
 
 tasks.register('deobfJar', Jar).configure {
-	from sourceSets.main.output
-	archiveClassifier = 'deobf'
+    from sourceSets.main.output
+    archiveClassifier = 'deobf'
 }
 
 tasks.named('publish').configure {
-	dependsOn 'reobfJar'
+    dependsOn 'reobfJar'
+}
+
+
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
 }
 
 artifacts {
-	archives sourcesJar
-	archives deobfJar
+    archives sourcesJar
+    archives deobfJar
 }
+
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifact jar
+        register('mavenJava', MavenPublication) {
+            from components.java
         }
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url "file://${project.projectDir}/repo"
         }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+repositories {
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
     }
 }
