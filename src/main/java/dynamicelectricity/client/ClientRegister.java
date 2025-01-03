@@ -10,7 +10,6 @@ import dynamicelectricity.registry.DynamicElectricityContainers;
 import dynamicelectricity.registry.DynamicElectricityTiles;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.client.guidebook.ScreenGuidebook;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -69,7 +68,7 @@ public class ClientRegister {
 
 	public static enum DynamicElectricityTextures implements ITexture {
 
-		MOTOR(102, 70, 0, 0, 256, 256, ModelResourceLocation.standalone(ResourceLocation.parse(References.ID + ":textures/screen/component/motor.png"));
+		MOTOR(102, 70, 0, 0, 256, 256, ResourceLocation.parse(References.ID + ":textures/screen/component/motor.png"));
 
 		private final int textureWidth;
 		private final int textureHeight;

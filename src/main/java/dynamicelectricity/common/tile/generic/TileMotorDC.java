@@ -3,10 +3,8 @@
  */
 package dynamicelectricity.common.tile.generic;
 
-import dynamicelectricity.References;
 import dynamicelectricity.common.inventory.container.ContainerMotorDC;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
-import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
 import dynamicelectricity.registry.DynamicElectricitySounds;
 import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.prefab.properties.Property;
@@ -142,25 +140,6 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 		}
 		
 	}
-
-	/*
-	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction face) {
-		Direction facing = getFacing();
-
-		if (capability == ForgeCapabilities.ENERGY && face == facing.getOpposite()) {
-			return (LazyOptional<T>) LazyOptional.of(() -> this);
-		} else if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID)) {
-			
-			if (IndustrialRebornHandler.isCapability(capability) && face == facing) {
-				//return (LazyOptional<T>) IndustrialRebornHandler.getDCMotorCap(this, energyTier);
-			}
-			
-		}
-		return super.getCapability(capability, face);
-	}
-
-	 */
 
 	public @Nullable IEnergyStorage getFECapability(@Nullable Direction side) {
 		if (side == null) {

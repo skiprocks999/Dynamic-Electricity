@@ -1,11 +1,12 @@
 package dynamicelectricity.datagen.client;
 
 import dynamicelectricity.References;
+import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import electrodynamics.datagen.client.ElectrodynamicsItemModelsProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class DynamicElectricityItemModelsProvider extends ElectrodynamicsItemModelsProvider {
 
@@ -17,13 +18,13 @@ public class DynamicElectricityItemModelsProvider extends ElectrodynamicsItemMod
 	@Override
 	protected void registerModels() {
 
-		simpleBlockItem(DynamicElectricityBlocks.blockMotorAcLv, existingBlock(blockLoc("motoraclvitem")));
-		simpleBlockItem(DynamicElectricityBlocks.blockMotorAcMv, existingBlock(blockLoc("motoracmvitem")));
-		simpleBlockItem(DynamicElectricityBlocks.blockMotorAcHv, existingBlock(blockLoc("motorachvitem")));
+		simpleBlockItem(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motoraclv), existingBlock(blockLoc("motoraclvitem")));
+		simpleBlockItem(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motoracmv), existingBlock(blockLoc("motoracmvitem")));
+		simpleBlockItem(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motorachv), existingBlock(blockLoc("motorachvitem")));
 		
-		simpleBlockItem(DynamicElectricityBlocks.blockMotorDcLv, existingBlock(blockLoc("motordclvitem")));
-		simpleBlockItem(DynamicElectricityBlocks.blockMotorDcMv, existingBlock(blockLoc("motordcmvitem")));
-		simpleBlockItem(DynamicElectricityBlocks.blockMotorDcHv, existingBlock(blockLoc("motordchvitem")));
+		simpleBlockItem(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordclv), existingBlock(blockLoc("motordclvitem")));
+		simpleBlockItem(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordcmv), existingBlock(blockLoc("motordcmvitem")));
+		simpleBlockItem(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordchv), existingBlock(blockLoc("motordchvitem")));
 
 		layeredItem(DynamicElectricityItems.ITEM_ALTERNATOR, Parent.GENERATED, itemLoc(name(DynamicElectricityItems.ITEM_ALTERNATOR)));
 		layeredItem(DynamicElectricityItems.ITEM_COMMUTATOR, Parent.GENERATED, itemLoc(name(DynamicElectricityItems.ITEM_COMMUTATOR)));

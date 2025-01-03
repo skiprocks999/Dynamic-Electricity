@@ -1,6 +1,7 @@
 package dynamicelectricity.datagen.client;
 
 import dynamicelectricity.References;
+import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import dynamicelectricity.registry.DynamicElectricityFluids;
 import dynamicelectricity.registry.DynamicElectricityItems;
@@ -23,12 +24,12 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 
 			addCreativeTab("main", "Dynamic Electricity");
 
-			addBlock(DynamicElectricityBlocks.blockMotorAcHv, "480V AC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorAcMv, "240V AC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorAcLv, "120V AC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorDcHv, "480V DC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorDcMv, "240V DC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorDcLv, "120V DC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motorachv), "480V AC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motoracmv), "240V AC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motoraclv), "120V AC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordchv), "480V DC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordcmv), "240V DC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordclv), "120V DC Motor");
 
 			addItem(DynamicElectricityItems.ITEM_STATOR, "Industrial Stator");
 			addItem(DynamicElectricityItems.ITEM_COMMUTATOR, "Commutator");
@@ -50,7 +51,7 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addContainer("motordcmv", "240V DC Motor");
 			addContainer("motordclv", "120V DC Motor");
 
-			addFluid(DynamicElectricityFluids.fluidLubricant, "Industrial Lubricant");
+			addFluid(DynamicElectricityFluids.FLUID_LUBRICANT, "Industrial Lubricant");
 
 			addTooltip("motorachv.conversion", "100 kJ @ 480V -> 100 kFE");
 			addTooltip("motoracmv.conversion", "10 kJ @ 240V -> 10 kFE");

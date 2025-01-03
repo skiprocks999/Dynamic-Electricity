@@ -6,7 +6,7 @@ import java.util.List;
 import dynamicelectricity.References;
 import dynamicelectricity.common.inventory.container.ContainerMotorAC;
 import dynamicelectricity.common.tile.generic.TileMotorAC;
-import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
+import dynamicelectricity.compatability.industrialreforged.IndustrialReforgedHandler;
 import dynamicelectricity.core.utils.UtilsText;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
@@ -65,9 +65,9 @@ public class ScreenMotorAC extends GenericMaterialScreen<ContainerMotorAC> {
 
 			list.add(UtilsText.gui("motor.output", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.feProduced.get(), DisplayUnit.FORGE_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 
-			if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID) && Screen.hasShiftDown()) {
+			if (ModList.get().isLoaded(References.INDUSTRIAL_REFORGED_ID) && Screen.hasShiftDown()) {
 
-				IndustrialRebornHandler.addACConversionTooltip(box, list);
+				IndustrialReforgedHandler.addACConversionTooltip(box, list);
 
 			}
 

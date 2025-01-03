@@ -6,7 +6,7 @@ import java.util.List;
 import dynamicelectricity.References;
 import dynamicelectricity.common.inventory.container.ContainerMotorDC;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
-import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
+import dynamicelectricity.compatability.industrialreforged.IndustrialReforgedHandler;
 import dynamicelectricity.core.utils.UtilsText;
 import electrodynamics.api.electricity.formatting.ChatFormatter;
 import electrodynamics.api.electricity.formatting.DisplayUnit;
@@ -63,8 +63,8 @@ public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 
 			list.add(UtilsText.gui("motor.usage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.maxFeConsumed.get(), DisplayUnit.FORGE_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 
-			if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID) && Screen.hasShiftDown()) {
-				IndustrialRebornHandler.addDCConversionTooltip(box, list);
+			if (ModList.get().isLoaded(References.INDUSTRIAL_REFORGED_ID) && Screen.hasShiftDown()) {
+				IndustrialReforgedHandler.addDCConversionTooltip(box, list);
 			}
 			list.add(UtilsText.gui("motor.voltage", ChatFormatter.getChatDisplayShort(electro.getVoltage(), DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 			list.add(UtilsText.gui("motor.output", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.joulesProduced.get(), DisplayUnit.JOULES), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());

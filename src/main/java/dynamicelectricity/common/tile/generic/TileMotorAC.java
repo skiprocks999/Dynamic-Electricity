@@ -6,7 +6,7 @@ package dynamicelectricity.common.tile.generic;
 import dynamicelectricity.References;
 import dynamicelectricity.common.inventory.container.ContainerMotorAC;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
-import dynamicelectricity.compatability.industrialreborn.IndustrialRebornHandler;
+import dynamicelectricity.compatability.industrialreforged.IndustrialReforgedHandler;
 import dynamicelectricity.registry.DynamicElectricitySounds;
 import electrodynamics.common.network.utils.FluidUtilities;
 import electrodynamics.prefab.properties.Property;
@@ -152,31 +152,13 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 
 	private void handleIndustrialReborn(BlockEntity tile, Direction motorFacing) {
 
-		if(!ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID)) {
+		if(!ModList.get().isLoaded(References.INDUSTRIAL_REFORGED_ID)) {
 			return;
 		}
-		
-		IndustrialRebornHandler.handleEnergyOutput(this, tile, motorFacing);
-		
+
+		IndustrialReforgedHandler.handleEnergyOutput(this, tile, motorFacing);
+
 	}
-
-	/*
-	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> capability, Direction face) {
-		Direction facing = getFacing();
-		if (capability == ForgeCapabilities.ENERGY && face == facing) {
-			return (LazyOptional<T>) LazyOptional.of(() -> this);
-		} else if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID)) {
-
-			if (IndustrialRebornHandler.isCapability(capability) && face == facing.getOpposite()) {
-				//return (LazyOptional<T>) IndustrialRebornHandler.getACMotorCap(this, energyTier);
-			}
-
-		}
-		return super.getCapability(capability, face);
-	}
-
-	 */
 
 	public @Nullable IEnergyStorage getFECapability(@Nullable Direction side) {
 		if (side == null) {

@@ -8,7 +8,7 @@ import dynamicelectricity.datagen.server.tags.types.DynamicElectricityItemTagsPr
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class DynamicElectricityTagsProvider {
 	

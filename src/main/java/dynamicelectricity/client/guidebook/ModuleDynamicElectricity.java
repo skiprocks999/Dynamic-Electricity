@@ -31,7 +31,7 @@ public class ModuleDynamicElectricity extends Module {
 		chapters.add(new ChapterDyanmicElectricity(this));
 		chapters.add(new ChapterACMotors(this));
 		chapters.add(new ChapterDCMotors(this));
-		if (ModList.get().isLoaded(References.INDUSTRIAL_REBORN_ID)) {
+		if (ModList.get().isLoaded(References.INDUSTRIAL_REFORGED_ID)) {
 			chapters.add(new ChapterIndustrialReborn(this));
 		}
 	}

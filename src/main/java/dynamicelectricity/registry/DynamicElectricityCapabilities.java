@@ -1,11 +1,12 @@
 package dynamicelectricity.registry;
 
 import dynamicelectricity.References;
+import dynamicelectricity.compatability.industrialreforged.IndustrialReforgedHandler;
 import electrodynamics.prefab.tile.GenericTile;
 import electrodynamics.registers.ElectrodynamicsCapabilities;
-import electrodynamics.registers.ElectrodynamicsTiles;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -29,5 +30,9 @@ public class DynamicElectricityCapabilities {
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, DynamicElectricityTiles.TILE_MOTORDC_HV.get(), (tile, context) -> tile.getFECapability(context));
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, DynamicElectricityTiles.TILE_MOTORDC_MV.get(), (tile, context) -> tile.getFECapability(context));
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, DynamicElectricityTiles.TILE_MOTORDC_LV.get(), (tile, context) -> tile.getFECapability(context));
+
+        if(ModList.get().isLoaded(References.INDUSTRIAL_REFORGED_ID)) {
+            IndustrialReforgedHandler.registerCapabilities(event);
+        }
     }
 }

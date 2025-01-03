@@ -1,12 +1,10 @@
 package dynamicelectricity.datagen.server.recipe.custom.item2item;
 
-import java.util.function.Consumer;
-
 import dynamicelectricity.References;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import electrodynamics.common.tags.ElectrodynamicsTags;
 import electrodynamics.datagen.server.recipe.types.custom.item2item.ElectrodynamicsLatheRecipes;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.ItemStack;
 
 public class DynamicElectricityLatheRecipes extends ElectrodynamicsLatheRecipes {
@@ -16,37 +14,37 @@ public class DynamicElectricityLatheRecipes extends ElectrodynamicsLatheRecipes 
 	}
 
 	@Override
-	public void addRecipes(Consumer<FinishedRecipe> consumer) {
+	public void addRecipes(RecipeOutput output) {
 
-		newRecipe(new ItemStack(DynamicElectricityItems.ITEM_RINGIRON.get()), 0, LATHE_REQUIRED_TICKS, LATHE_USAGE_PER_TICK, "ring_iron")
+		newRecipe(new ItemStack(DynamicElectricityItems.ITEM_RINGIRON.get()), 0, LATHE_REQUIRED_TICKS, LATHE_USAGE_PER_TICK, "ring_iron", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.PLATE_IRON, 1)
 				//
-				.complete(consumer);
+				.save(output);
 
-		newRecipe(new ItemStack(DynamicElectricityItems.ITEM_RINGSTEEL.get()), 0, LATHE_REQUIRED_TICKS, LATHE_USAGE_PER_TICK, "ring_steel")
+		newRecipe(new ItemStack(DynamicElectricityItems.ITEM_RINGSTEEL.get()), 0, LATHE_REQUIRED_TICKS, LATHE_USAGE_PER_TICK, "ring_steel", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.PLATE_STEEL, 1)
 				//
-				.complete(consumer);
+				.save(output);
 
-		newRecipe(new ItemStack(DynamicElectricityItems.ITEM_SHAFTSTEEL.get()), 0, LATHE_REQUIRED_TICKS, LATHE_USAGE_PER_TICK, "shaft_steel")
+		newRecipe(new ItemStack(DynamicElectricityItems.ITEM_SHAFTSTEEL.get()), 0, LATHE_REQUIRED_TICKS, LATHE_USAGE_PER_TICK, "shaft_steel", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.STORAGE_BLOCK_STEEL, 1)
 				//
-				.complete(consumer);
+				.save(output);
 
-		newRecipe(new ItemStack(DynamicElectricityItems.ITEM_SHAFTSTAINLESSSTEEL.get()), 0, LATHE_REQUIRED_TICKS, LATHE_USAGE_PER_TICK, "shaft_stainlesssteel")
+		newRecipe(new ItemStack(DynamicElectricityItems.ITEM_SHAFTSTAINLESSSTEEL.get()), 0, LATHE_REQUIRED_TICKS, LATHE_USAGE_PER_TICK, "shaft_stainlesssteel", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.STORAGE_BLOCK_STAINLESSSTEEL, 1)
 				//
-				.complete(consumer);
+				.save(output);
 
-		newRecipe(new ItemStack(DynamicElectricityItems.ITEM_SHAFTHSLASTEEL.get()), 0, LATHE_REQUIRED_TICKS, LATHE_USAGE_PER_TICK, "shaft_hslasteel")
+		newRecipe(new ItemStack(DynamicElectricityItems.ITEM_SHAFTHSLASTEEL.get()), 0, LATHE_REQUIRED_TICKS, LATHE_USAGE_PER_TICK, "shaft_hslasteel", modID)
 				//
 				.addItemTagInput(ElectrodynamicsTags.Items.STORAGE_BLOCK_HSLASTEEL, 1)
 				//
-				.complete(consumer);
+				.save(output);
 
 	}
 
