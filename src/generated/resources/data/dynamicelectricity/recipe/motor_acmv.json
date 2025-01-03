@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "dynamicelectricity:commutator"
+    },
+    "I": {
+      "item": "electrodynamics:insulation"
+    },
+    "P": {
+      "tag": "c:plates/stainlesssteel"
+    },
+    "R": {
+      "item": "dynamicelectricity:shaftstainlesssteel"
+    },
+    "S": {
+      "item": "dynamicelectricity:stator"
+    },
+    "T": {
+      "item": "electrodynamics:tanksteel"
+    }
+  },
+  "pattern": [
+    "PPC",
+    "SRI",
+    "PTC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "dynamicelectricity:motoracmv"
+  }
+}

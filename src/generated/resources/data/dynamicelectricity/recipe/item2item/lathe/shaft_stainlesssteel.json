@@ -1,0 +1,18 @@
+{
+  "type": "electrodynamics:lathe_recipe",
+  "group": "dynamicelectricity",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:storage_blocks/stainlesssteel"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "dynamicelectricity:shaftstainlesssteel"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}

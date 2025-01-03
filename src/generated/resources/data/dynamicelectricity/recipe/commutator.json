@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "electrodynamics:coil"
+    },
+    "R": {
+      "tag": "c:rings/iron"
+    }
+  },
+  "pattern": [
+    "CCC",
+    "RRR",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "dynamicelectricity:commutator"
+  }
+}

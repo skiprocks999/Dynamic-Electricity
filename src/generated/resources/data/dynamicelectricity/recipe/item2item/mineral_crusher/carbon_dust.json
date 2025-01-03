@@ -1,0 +1,18 @@
+{
+  "type": "electrodynamics:mineral_crusher_recipe",
+  "group": "dynamicelectricity",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "minecraft:coals"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "dynamicelectricity:dustcarbon"
+  },
+  "ticks": 200,
+  "usagepertick": 450.0
+}

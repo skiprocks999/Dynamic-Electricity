@@ -1,0 +1,18 @@
+{
+  "type": "electrodynamics:lathe_recipe",
+  "group": "dynamicelectricity",
+  "iteminputs": [
+    {
+      "count": 1,
+      "ingredient": {
+        "tag": "c:plates/iron"
+      }
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "dynamicelectricity:ringiron"
+  },
+  "ticks": 200,
+  "usagepertick": 350.0
+}
