@@ -8,8 +8,10 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
@@ -19,10 +21,11 @@ import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 @EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
 public class DynamicElectricity {
 
-    public DynamicElectricity(IEventBus bus) {
+    public DynamicElectricity(IEventBus bus, ModContainer modContainer) {
         UnifiedDynamicElectricityRegistry.init(bus);
         DynamicElectricityTags.init();
         DynamicElectricityVoxelShapes.init();
+        modContainer.registerConfig(ModConfig.Type.SERVER, Config.SPEC);
     }
 
     @SubscribeEvent

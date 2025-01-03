@@ -3,6 +3,7 @@
  */
 package dynamicelectricity.common.tile.generic;
 
+import dynamicelectricity.Config;
 import dynamicelectricity.common.inventory.container.ContainerMotorDC;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.registry.DynamicElectricitySounds;
@@ -101,7 +102,9 @@ public class TileMotorDC extends GenericTile implements IEnergyStorage, ITickabl
 		ItemStack brush = inventory.getItem(0);
 		ComponentFluidHandlerSimple tank = getComponent(IComponentType.FluidHandler);
 		if (!brush.isEmpty() && feStored.get() >= maxFeConsumed.get()) {
-			brush.setDamageValue(brush.getDamageValue() + 1);
+			if(Config.useConductorBrushDurability) {
+				brush.setDamageValue(brush.getDamageValue() + 1);
+			}
 			if (lubricantRemaining.get() > 0) {
 				lubricantRemaining.set(lubricantRemaining.get() - 1);
 				canRun = true;

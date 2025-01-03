@@ -104,9 +104,6 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addGuidebook("chapter.industrialreforged.hv", "HV : High");
 			addGuidebook("chapter.industrialreforged.l2", "As with FE, AC motors have no conversion penalty. However, as too with FE, DC Motors have a 5% energy loss penalty to convert to Joules.");
 			
-			
-			
-			
 		}
 
 	}
