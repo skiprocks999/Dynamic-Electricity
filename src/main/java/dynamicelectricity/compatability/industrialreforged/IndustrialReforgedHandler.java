@@ -89,13 +89,13 @@ public class IndustrialReforgedHandler {
         });
     }
 
-    public static void handleEnergyOutput(TileMotorAC motor, BlockEntity tile, Direction motorFacing) {
+    public static void handleEnergyOutput(TileMotorAC motor, BlockEntity tile) {
 
         if (tile == null) {
             return;
         }
 
-        IEnergyStorage modCap = motor.getLevel().getCapability(IRCapabilities.EnergyStorage.BLOCK, tile.getBlockPos(), tile.getBlockState(), tile, motorFacing.getOpposite());
+        IEnergyStorage modCap = motor.getLevel().getCapability(IRCapabilities.EnergyStorage.BLOCK, tile.getBlockPos(), tile.getBlockState(), tile, motor.getFacing().getOpposite());
 
         if (modCap == null) {
             return;
@@ -138,11 +138,11 @@ public class IndustrialReforgedHandler {
     private static MutableComponent getTranslatedTier(Holder<EnergyTier> tier) {
 
         if (tier == EnergyTiers.MEDIUM) {
-            return UtilsText.tooltip("indrebmedium");
+            return UtilsText.tooltip("indreforgedmedium");
         } else if (tier == EnergyTiers.HIGH) {
-            return UtilsText.tooltip("indrebhigh");
+            return UtilsText.tooltip("indreforgedhigh");
         } else {
-            return UtilsText.tooltip("indreblow");
+            return UtilsText.tooltip("indreforgedlow");
         }
     }
 

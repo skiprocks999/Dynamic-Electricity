@@ -16,6 +16,7 @@ public class DynamicElectricityCapabilities {
 
     @SubscribeEvent
     public static void register(RegisterCapabilitiesEvent event) {
+
         DynamicElectricityTiles.TILES.getEntries().forEach(entry -> {
             event.registerBlockEntity(ElectrodynamicsCapabilities.CAPABILITY_ELECTRODYNAMIC_BLOCK, (BlockEntityType<? extends GenericTile>) entry.get(), (tile, context) -> tile.getElectrodynamicCapability(context));
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, (BlockEntityType<? extends GenericTile>) entry.get(), (tile, context) -> tile.getFluidHandlerCapability(context));
@@ -23,6 +24,7 @@ public class DynamicElectricityCapabilities {
             event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, (BlockEntityType<? extends GenericTile>) entry.get(), (tile, context) -> tile.getItemHandlerCapability(context));
 
         });
+
 
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, DynamicElectricityTiles.TILE_MOTORAC_HV.get(), (tile, context) -> tile.getFECapability(context));
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, DynamicElectricityTiles.TILE_MOTORAC_MV.get(), (tile, context) -> tile.getFECapability(context));

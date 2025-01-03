@@ -7,9 +7,12 @@ import dynamicelectricity.client.render.tile.RenderMotorDC;
 import dynamicelectricity.client.screen.ScreenMotorAC;
 import dynamicelectricity.client.screen.ScreenMotorDC;
 import dynamicelectricity.registry.DynamicElectricityContainers;
+import dynamicelectricity.registry.DynamicElectricityFluids;
 import dynamicelectricity.registry.DynamicElectricityTiles;
 import electrodynamics.api.screen.ITexture;
 import electrodynamics.client.guidebook.ScreenGuidebook;
+import electrodynamics.client.misc.SWBFClientExtensions;
+import electrodynamics.common.fluid.SimpleWaterBasedFluidType;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -19,6 +22,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD, value = { Dist.CLIENT })
@@ -26,16 +30,9 @@ public class ClientRegister {
 
 	public static final String BLOCK_LOC = References.ID + ":block/";
 
-	public static final ModelResourceLocation MODEL_MOTORAC_HV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motorachv"));
 	public static final ModelResourceLocation MODEL_MOTORAC_HVSHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motorachvshaft"));
-	public static final ModelResourceLocation MODEL_MOTORAC_MV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motoracmv"));
 	public static final ModelResourceLocation MODEL_MOTORAC_MVSHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motoracmvshaft"));
-	public static final ModelResourceLocation MODEL_MOTORAC_LV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motoraclv"));
 	public static final ModelResourceLocation MODEL_MOTORAC_LVSHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motoraclvshaft"));
-
-	public static final ModelResourceLocation MODEL_MOTORDC_HV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motordchv"));
-	public static final ModelResourceLocation MODEL_MOTORDC_MV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motordcmv"));
-	public static final ModelResourceLocation MODEL_MOTORDC_LV = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motordclv"));
 
 	public static void setup() {
 		ScreenGuidebook.addGuidebookModule(new ModuleDynamicElectricity());
@@ -47,7 +44,8 @@ public class ClientRegister {
 		event.register(MODEL_MOTORAC_MVSHAFT);
 		event.register(MODEL_MOTORAC_LVSHAFT);
 	}
-	
+
+	@SubscribeEvent
 	public static void registerScreens(RegisterMenuScreensEvent event) {
 		event.register(DynamicElectricityContainers.CONTAINER_MOTORAC.get(), ScreenMotorAC::new);
 		event.register(DynamicElectricityContainers.CONTAINER_MOTORDC.get(), ScreenMotorDC::new);
@@ -55,8 +53,6 @@ public class ClientRegister {
 
 	@SubscribeEvent
 	public static void registerEntities(EntityRenderersEvent.RegisterRenderers event) {
-		// The render classes for the AC and DC are fairly similar right now, but I have them seperate on
-		// purpose, as I might change up the models in the future
 		event.registerBlockEntityRenderer(DynamicElectricityTiles.TILE_MOTORAC_HV.get(), RenderMotorAC::new);
 		event.registerBlockEntityRenderer(DynamicElectricityTiles.TILE_MOTORAC_MV.get(), RenderMotorAC::new);
 		event.registerBlockEntityRenderer(DynamicElectricityTiles.TILE_MOTORAC_LV.get(), RenderMotorAC::new);
@@ -64,6 +60,15 @@ public class ClientRegister {
 		event.registerBlockEntityRenderer(DynamicElectricityTiles.TILE_MOTORDC_HV.get(), RenderMotorDC::new);
 		event.registerBlockEntityRenderer(DynamicElectricityTiles.TILE_MOTORDC_MV.get(), RenderMotorDC::new);
 		event.registerBlockEntityRenderer(DynamicElectricityTiles.TILE_MOTORDC_LV.get(), RenderMotorDC::new);
+	}
+
+	@SubscribeEvent
+	public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+
+		DynamicElectricityFluids.FLUIDS.getEntries().forEach((fluid) -> {
+			event.registerFluidType(new SWBFClientExtensions((SimpleWaterBasedFluidType) fluid.get().getFluidType()), fluid.get().getFluidType());
+		});
+
 	}
 
 	public static enum DynamicElectricityTextures implements ITexture {

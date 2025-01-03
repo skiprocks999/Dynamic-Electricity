@@ -14,11 +14,11 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 public enum SubtypeDynamicMachine implements ISubtype, IMachine {
 
     motoraclv(true, TileMotorAcLv::new, MachineProperties.builder().setShapeProvider(DynamicElectricityVoxelShapes.LV_ACMOTOR)),
-    motordchv(true, TileMotorDcHv::new, MachineProperties.builder().setShapeProvider(DynamicElectricityVoxelShapes.LV_ACMOTOR)),
-    motordcmv(true, TileMotorDcMv::new, MachineProperties.builder().setShapeProvider(DynamicElectricityVoxelShapes.MV_ACMOTOR)),
-    motordclv(true, TileMotorDcLv::new, MachineProperties.builder().setShapeProvider(DynamicElectricityVoxelShapes.MV_DCMOTOR)),
+    motoracmv(true, TileMotorAcMv::new, MachineProperties.builder().setShapeProvider(DynamicElectricityVoxelShapes.MV_ACMOTOR)),
     motorachv(true, TileMotorAcHv::new, MachineProperties.builder().setShapeProvider(DynamicElectricityVoxelShapes.HV_ACMOTOR)),
-    motoracmv(true, TileMotorAcMv::new, MachineProperties.builder().setShapeProvider(DynamicElectricityVoxelShapes.HV_DCMOTOR)),
+    motordclv(true, TileMotorDcLv::new, MachineProperties.builder().setShapeProvider(DynamicElectricityVoxelShapes.LV_DCMOTOR)),
+    motordcmv(true, TileMotorDcMv::new, MachineProperties.builder().setShapeProvider(DynamicElectricityVoxelShapes.MV_DCMOTOR)),
+    motordchv(true, TileMotorDcHv::new, MachineProperties.builder().setShapeProvider(DynamicElectricityVoxelShapes.HV_DCMOTOR)),
     ;
 
     private final BlockEntityType.BlockEntitySupplier<BlockEntity> blockEntitySupplier;

@@ -63,9 +63,9 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addTooltip("dustpdsm", "Polydimethylsiloxane");
 			addTooltip("condudctorbrushdurability", "%1$s / %2$s");
 			
-			addTooltip("indrebstandard", "Standard");
-			addTooltip("indrebadvanced", "Advanced");
-			addTooltip("indrebsuper", "Super");
+			addTooltip("indreforgedlow", "Low");
+			addTooltip("indreforgedmedium", "Medium");
+			addTooltip("indreforgedhigh", "High");
 
 			addSubtitle(DynamicElectricitySounds.SOUND_MOTORRUNNING, "Motor runs");
 
@@ -97,12 +97,12 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 					+ "by hoppering more in from the top of the motor. Three tiers of motors exist offering different throughput rates to suit your requirements.");
 			
 			
-			addGuidebook("chapter.industrialreborn", "Industrial Reborn");
-			addGuidebook("chapter.industrialreborn.l1", "Motors are able to convert Electrodynamics Joules (and by extension FE) to Industrial Reborn IE. The conversion rate of Joules to IE is four to one, meaning that for every 4 Joules, you have 1 IE. The following motor tiers correspond to the following Energy Tiers:");
-			addGuidebook("chapter.industrialreborn.lv", "LV : Standard");
-			addGuidebook("chapter.industrialreborn.mv", "MV : Advanced");
-			addGuidebook("chapter.industrialreborn.hv", "HV : Super");
-			addGuidebook("chapter.industrialreborn.l2", "As with FE, AC motors have no conversion penalty. However, as too with FE, DC Motors have a 5% energy loss penalty to convert to Joules.");
+			addGuidebook("chapter.industrialreforged", "Industrial Reforged");
+			addGuidebook("chapter.industrialreforged.l1", "Motors are able to convert Electrodynamics Joules (and by extension FE) to Industrial Reforged IE. The conversion rate of Joules to IE is four to one, meaning that for every 4 Joules, you have 1 IE. The following motor tiers correspond to the following Energy Tiers:");
+			addGuidebook("chapter.industrialreforged.lv", "LV : Low");
+			addGuidebook("chapter.industrialreforged.mv", "MV : Medium");
+			addGuidebook("chapter.industrialreforged.hv", "HV : High");
+			addGuidebook("chapter.industrialreforged.l2", "As with FE, AC motors have no conversion penalty. However, as too with FE, DC Motors have a 5% energy loss penalty to convert to Joules.");
 			
 			
 			

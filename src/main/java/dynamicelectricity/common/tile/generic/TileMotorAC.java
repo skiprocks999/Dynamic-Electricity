@@ -70,7 +70,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.FRONT).maxJoules(joulesCons * 20).voltage(Math.pow(2, energyTier) * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
+		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BACK).maxJoules(joulesCons * 20).voltage(Math.pow(2, energyTier) * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
 		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().bucketInputs(1)).valid(machineValidator()));
 		addComponent(new ComponentContainerProvider("container.motorac" + name, this).createMenu((id, player) -> new ContainerMotorAC(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 		addComponent(new ComponentFluidHandlerSimple(1000, this, "lubricant").setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).setValidFluidTags(DynamicElectricityTags.Fluids.LUBRICANT));
@@ -156,7 +156,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 			return;
 		}
 
-		IndustrialReforgedHandler.handleEnergyOutput(this, tile, motorFacing);
+		IndustrialReforgedHandler.handleEnergyOutput(this, tile);
 
 	}
 
@@ -164,8 +164,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 		if (side == null) {
 			return null;
 		} else {
-			Direction facing = this.getFacing();
-			if (side == facing) {
+			if (side == getFacing()) {
 				return this;
 			} else {
 				return null;
