@@ -18,7 +18,7 @@ displayURL="https://github.com/skiprocks999/Dynamic-Electricity" #optional
 
 logoFile="dynamicelectricity.png" #optional
 
-credits="Thanks to all contributors" #optional
+credits="Thanks to all contributors. Thanks to goshante with JEI fluid help." #optional
 
 authors="${mod_authors}" #optional
 
