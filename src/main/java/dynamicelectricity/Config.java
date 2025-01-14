@@ -16,7 +16,7 @@ public class Config {
     public static boolean useConductorBrushDurability;
 
     @SubscribeEvent
-    static void onLoad(final ModConfigEvent event) {
+    static void onLoad(final ModConfigEvent.Loading event) {
         useConductorBrushDurability = USE_CONDUCTOR_BRUSH_DURABILITY.get();
     }
 }
