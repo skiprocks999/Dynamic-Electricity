@@ -1,5 +1,6 @@
 package dynamicelectricity.client;
 
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.References;
 import dynamicelectricity.client.guidebook.ModuleDynamicElectricity;
 import dynamicelectricity.client.render.tile.RenderMotorAC;
@@ -28,11 +29,9 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 @EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD, value = { Dist.CLIENT })
 public class ClientRegister {
 
-	public static final String BLOCK_LOC = References.ID + ":block/";
-
-	public static final ModelResourceLocation MODEL_MOTORAC_HVSHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motorachvshaft"));
-	public static final ModelResourceLocation MODEL_MOTORAC_MVSHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motoracmvshaft"));
-	public static final ModelResourceLocation MODEL_MOTORAC_LVSHAFT = ModelResourceLocation.standalone(ResourceLocation.parse(BLOCK_LOC + "motoraclvshaft"));
+	public static final ModelResourceLocation MODEL_MOTORAC_HVSHAFT = ModelResourceLocation.standalone(DynamicElectricity.rl("block/motorachvshaft"));
+	public static final ModelResourceLocation MODEL_MOTORAC_MVSHAFT = ModelResourceLocation.standalone(DynamicElectricity.rl("block/motoracmvshaft"));
+	public static final ModelResourceLocation MODEL_MOTORAC_LVSHAFT = ModelResourceLocation.standalone(DynamicElectricity.rl("block/motoraclvshaft"));
 
 	public static void setup() {
 		ScreenGuidebook.addGuidebookModule(new ModuleDynamicElectricity());
@@ -73,7 +72,7 @@ public class ClientRegister {
 
 	public static enum DynamicElectricityTextures implements ITexture {
 
-		MOTOR(102, 70, 0, 0, 256, 256, ResourceLocation.parse(References.ID + ":textures/screen/component/motor.png"));
+		MOTOR(102, 70, 0, 0, 256, 256, DynamicElectricity.rl("textures/screen/component/motor.png"));
 
 		private final int textureWidth;
 		private final int textureHeight;

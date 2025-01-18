@@ -3,7 +3,7 @@ package dynamicelectricity.common.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.resources.ResourceLocation;
+import electrodynamics.Electrodynamics;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -31,7 +31,7 @@ public class DynamicElectricityTags {
 		}
 
 		private static TagKey<Item> forgeTag(String name) {
-			return ItemTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
+			return ItemTags.create(Electrodynamics.commonrl(name));
 		}
 
 	}
@@ -45,7 +45,7 @@ public class DynamicElectricityTags {
 		}
 
 		private static TagKey<Fluid> forgeTag(String name) {
-			return FluidTags.create(ResourceLocation.fromNamespaceAndPath("c", name));
+			return FluidTags.create(Electrodynamics.commonrl(name));
 		}
 	}
 

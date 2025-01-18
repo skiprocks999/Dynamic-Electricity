@@ -1,6 +1,6 @@
 package dynamicelectricity.compatability.jei;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.registry.DynamicElectricityFluids;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -17,9 +17,11 @@ import java.util.List;
 @JeiPlugin
 public class DynamicElectricityJEIPlugin implements IModPlugin {
 
+	public static final ResourceLocation ID = DynamicElectricity.rl("jei");
+
 	@Override
 	public ResourceLocation getPluginUid() {
-		return ResourceLocation.fromNamespaceAndPath(References.ID, "jei");
+		return ID;
 	}
 
 	@Override

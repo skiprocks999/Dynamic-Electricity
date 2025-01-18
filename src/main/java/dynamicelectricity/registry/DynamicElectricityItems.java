@@ -37,7 +37,7 @@ public class DynamicElectricityItems {
 	public static final DeferredHolder<Item, Item> ITEM_SHAFTHSLASTEEL = ITEMS.register("shafthslasteel", () -> new ItemElectrodynamics(new Item.Properties().stacksTo(1), DynamicElectricityCreativeTabs.MAIN));
 	public static final DeferredHolder<Item, Item> ITEM_RINGIRON = ITEMS.register("ringiron", () -> new ItemElectrodynamics(new Item.Properties(), DynamicElectricityCreativeTabs.MAIN));
 	public static final DeferredHolder<Item, Item> ITEM_RINGSTEEL = ITEMS.register("ringsteel", () -> new ItemElectrodynamics(new Item.Properties(), DynamicElectricityCreativeTabs.MAIN));
-	public static final DeferredHolder<Item, Item> ITEM_CONDUCTORBRUSH = ITEMS.register("conductorbrush", () -> new ItemConductorBrush());
+	public static final DeferredHolder<Item, Item> ITEM_CONDUCTORBRUSH = ITEMS.register("conductorbrush", ItemConductorBrush::new);
 
 	public static final DeferredHolder<Item, Item> ITEM_DUSTCARBON = ITEMS.register("dustcarbon", () -> new ItemElectrodynamics(new Item.Properties(), DynamicElectricityCreativeTabs.MAIN));
 	public static final DeferredHolder<Item, Item> ITEM_DUSTPDSM = ITEMS.register("dustpdsm", () -> new ItemDescriptable(new Item.Properties(), DynamicElectricityCreativeTabs.MAIN, UtilsText.tooltip("dustpdsm").withStyle(ChatFormatting.DARK_GRAY)));
