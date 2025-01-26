@@ -3,7 +3,7 @@ package dynamicelectricity.common.block.subtype;
 import dynamicelectricity.common.block.DynamicElectricityVoxelShapes;
 import dynamicelectricity.common.tile.*;
 import electrodynamics.api.ISubtype;
-import electrodynamics.api.multiblock.subnodebased.Subnode;
+import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentBlock;
 import electrodynamics.api.tile.IMachine;
 import electrodynamics.api.tile.MachineProperties;
 import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
@@ -80,8 +80,8 @@ public enum SubtypeDynamicMachine implements ISubtype, IMachine {
     }
 
     @Override
-    public Subnode[] getSubnodes() {
-        return properties.subnodes;
+    public IMultiblockParentBlock.SubnodeWrapper getSubnodes() {
+        return properties.wrapper;
     }
 
     @Override

@@ -3,8 +3,8 @@
     "dynamicelectricity:motoraclv",
     "dynamicelectricity:motordchv",
     "dynamicelectricity:motordcmv",
-    "dynamicelectricity:motoracmv",
     "dynamicelectricity:motordclv",
+    "dynamicelectricity:motoracmv",
     "dynamicelectricity:motorachv"
   ]
 }
