@@ -2,7 +2,7 @@ package dynamicelectricity.datagen.server.tags.types;
 
 import java.util.concurrent.CompletableFuture;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.registry.DynamicElectricityFluids;
 import net.minecraft.core.HolderLookup;
@@ -14,7 +14,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 public class DynamicElectricityFluidTagsProvider extends FluidTagsProvider {
 
 	public DynamicElectricityFluidTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-		super(output, lookupProvider, References.ID, existingFileHelper);
+		super(output, lookupProvider, DynamicElectricity.ID, existingFileHelper);
 	}
 	
 	@Override

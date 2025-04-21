@@ -1,18 +1,18 @@
 package dynamicelectricity.datagen.client;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import dynamicelectricity.registry.DynamicElectricityFluids;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import dynamicelectricity.registry.DynamicElectricitySounds;
-import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider;
 import net.minecraft.data.PackOutput;
+import voltaic.datagen.utils.client.BaseLangKeyProvider;
 
-public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyProvider {
+public class DynamicElectricityLangKeyProvider extends BaseLangKeyProvider {
 
 	public DynamicElectricityLangKeyProvider(PackOutput output, Locale locale) {
-		super(output, locale, References.ID);
+		super(output, locale, DynamicElectricity.ID);
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addGuiLabel("displayunit.industrialenergyunit.nameplural", "Industrial Energy Units");
 			addGuiLabel("displayunit.industrialenergyunit.symbol", "IE");
 			
-			addGuidebook(References.ID, "Dynamic Electricity");
+			addGuidebook(DynamicElectricity.ID, "Dynamic Electricity");
 
 			addGuidebook("chapter.dynamicelectricity", "Dynamic Electricity");
 			addGuidebook("chapter.dynamicelectricity.l1",

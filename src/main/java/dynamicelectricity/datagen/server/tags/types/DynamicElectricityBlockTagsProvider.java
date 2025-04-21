@@ -2,20 +2,20 @@ package dynamicelectricity.datagen.server.tags.types;
 
 import java.util.concurrent.CompletableFuture;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
-import electrodynamics.common.block.BlockMachine;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import voltaic.common.block.BlockMachine;
 
 public class DynamicElectricityBlockTagsProvider extends BlockTagsProvider {
 
 	public DynamicElectricityBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
-		super(output, lookupProvider, References.ID, existingFileHelper);
+		super(output, lookupProvider, DynamicElectricity.ID, existingFileHelper);
 	}
 
 	@Override

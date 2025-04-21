@@ -3,15 +3,15 @@ package dynamicelectricity.common.inventory.container;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
 import dynamicelectricity.registry.DynamicElectricityContainers;
 import dynamicelectricity.registry.DynamicElectricityItems;
-import electrodynamics.prefab.inventory.container.slot.item.type.SlotFluid;
-import electrodynamics.prefab.inventory.container.slot.item.type.SlotRestricted;
-import electrodynamics.prefab.inventory.container.types.GenericContainerBlockEntity;
-import electrodynamics.prefab.utilities.math.Color;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
+import voltaic.prefab.inventory.container.slot.item.type.SlotFluid;
+import voltaic.prefab.inventory.container.slot.item.type.SlotRestricted;
+import voltaic.prefab.inventory.container.types.GenericContainerBlockEntity;
+import voltaic.prefab.utilities.math.Color;
 
 public class ContainerMotorDC extends GenericContainerBlockEntity<TileMotorDC> {
 

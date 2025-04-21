@@ -1,16 +1,16 @@
 package dynamicelectricity.datagen.client;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
-import electrodynamics.datagen.client.ElectrodynamicsBlockStateProvider;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import voltaic.datagen.utils.client.BaseBlockstateProvider;
 
-public class DynamicElectricityBlockStateProvider extends ElectrodynamicsBlockStateProvider {
+public class DynamicElectricityBlockStateProvider extends BaseBlockstateProvider {
 
 	public DynamicElectricityBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-		super(output, exFileHelper, References.ID);
+		super(output, exFileHelper, DynamicElectricity.ID);
 	}
 
 	@Override

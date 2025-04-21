@@ -28,17 +28,17 @@ public class OutputCap implements IEnergyStorage {
 
     @Override
     public int getEnergyStored() {
-        return motor.feStored.get() * IndustrialReforgedHandler.ENERGY_PER_JOULE;
+        return motor.feStored.getValue() * IndustrialReforgedHandler.ENERGY_PER_JOULE;
     }
 
     @Override
     public void setEnergyStored(int energy) {
-        motor.feStored.set((int) Mth.clamp((double) energy / IndustrialReforgedHandler.ENERGY_PER_JOULE, 0, motor.feProduced.get()));
+        motor.feStored.setValue((int) Mth.clamp((double) energy / IndustrialReforgedHandler.ENERGY_PER_JOULE, 0, motor.feProduced.getValue()));
     }
 
     @Override
     public int getEnergyCapacity() {
-        return motor.feProduced.get() * IndustrialReforgedHandler.ENERGY_PER_JOULE;
+        return motor.feProduced.getValue() * IndustrialReforgedHandler.ENERGY_PER_JOULE;
     }
 
     @Override

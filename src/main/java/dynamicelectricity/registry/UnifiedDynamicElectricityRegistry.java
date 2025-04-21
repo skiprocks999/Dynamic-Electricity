@@ -2,9 +2,9 @@ package dynamicelectricity.registry;
 
 import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.core.utils.UtilsText;
-import electrodynamics.common.blockitem.types.BlockItemDescriptable;
 import net.minecraft.ChatFormatting;
 import net.neoforged.bus.api.IEventBus;
+import voltaic.common.blockitem.BlockItemDescriptable;
 
 public class UnifiedDynamicElectricityRegistry {
 

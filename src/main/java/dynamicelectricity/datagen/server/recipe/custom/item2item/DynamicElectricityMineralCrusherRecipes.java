@@ -1,6 +1,6 @@
 package dynamicelectricity.datagen.server.recipe.custom.item2item;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import electrodynamics.datagen.server.recipe.types.custom.item2item.ElectrodynamicsMineralCrusherRecipes;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 public class DynamicElectricityMineralCrusherRecipes extends ElectrodynamicsMineralCrusherRecipes {
 
 	public DynamicElectricityMineralCrusherRecipes() {
-		super(References.ID);
+		super(DynamicElectricity.ID);
 	}
 
 	@Override

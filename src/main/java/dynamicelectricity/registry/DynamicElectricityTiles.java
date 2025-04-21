@@ -2,7 +2,7 @@ package dynamicelectricity.registry;
 
 import com.google.common.collect.Sets;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.common.tile.TileMotorAcHv;
 import dynamicelectricity.common.tile.TileMotorAcLv;
@@ -17,7 +17,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class DynamicElectricityTiles {
 
-	public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, References.ID);
+	public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, DynamicElectricity.ID);
 	
 	
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TileMotorAcHv>> TILE_MOTORAC_HV = TILES.register("motorachv", () -> new BlockEntityType<>(TileMotorAcHv::new, Sets.newHashSet(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motorachv)), null));

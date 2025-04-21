@@ -3,23 +3,11 @@ package dynamicelectricity.client.screen;
 import java.util.ArrayList;
 import java.util.List;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.inventory.container.ContainerMotorDC;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
 import dynamicelectricity.compatability.industrialreforged.IndustrialReforgedHandler;
 import dynamicelectricity.core.utils.UtilsText;
-import electrodynamics.api.electricity.formatting.ChatFormatter;
-import electrodynamics.api.electricity.formatting.DisplayUnit;
-import electrodynamics.prefab.screen.GenericScreen;
-import electrodynamics.prefab.screen.component.types.ScreenComponentMultiLabel;
-import electrodynamics.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
-import electrodynamics.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
-import electrodynamics.prefab.screen.component.types.wrapper.WrapperInventoryIO;
-import electrodynamics.prefab.screen.component.utils.AbstractScreenComponentInfo;
-import electrodynamics.prefab.tile.components.IComponentType;
-import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
-import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerSimple;
-import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -27,6 +15,18 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import voltaic.api.electricity.formatting.ChatFormatter;
+import voltaic.api.electricity.formatting.DisplayUnits;
+import voltaic.prefab.screen.GenericScreen;
+import voltaic.prefab.screen.component.types.ScreenComponentMultiLabel;
+import voltaic.prefab.screen.component.types.gauges.ScreenComponentFluidGauge;
+import voltaic.prefab.screen.component.types.guitab.ScreenComponentElectricInfo;
+import voltaic.prefab.screen.component.types.wrapper.WrapperInventoryIO;
+import voltaic.prefab.screen.component.utils.AbstractScreenComponentInfo;
+import voltaic.prefab.tile.components.IComponentType;
+import voltaic.prefab.tile.components.type.ComponentElectrodynamic;
+import voltaic.prefab.tile.components.type.ComponentFluidHandlerSimple;
+import voltaic.prefab.utilities.VoltaicTextUtils;
 
 public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 
@@ -48,8 +48,8 @@ public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 				return;
 			}
 
-			graphics.drawString(font, UtilsText.gui("motor.lubricant").withStyle(ChatFormatting.BLACK).append(Component.literal("" + motor.lubricantRemaining.get()).withStyle(ChatFormatting.DARK_GRAY)), inventoryLabelX, 33, 0, false);
-			graphics.drawString(font, UtilsText.gui("motor.generating").withStyle(motor.running.get() ? ChatFormatting.GREEN : ChatFormatting.RED), inventoryLabelX, 43, 0, false);
+			graphics.drawString(font, UtilsText.gui("motor.lubricant").withStyle(ChatFormatting.BLACK).append(Component.literal("" + motor.lubricantRemaining.getValue()).withStyle(ChatFormatting.DARK_GRAY)), inventoryLabelX, 33, 0, false);
+			graphics.drawString(font, UtilsText.gui("motor.generating").withStyle(motor.running.getValue() ? ChatFormatting.GREEN : ChatFormatting.RED), inventoryLabelX, 43, 0, false);
 		}));
 		new WrapperInventoryIO(this, -AbstractScreenComponentInfo.SIZE + 1, AbstractScreenComponentInfo.SIZE + 2, 75, 82, 8, 72);
 
@@ -61,14 +61,14 @@ public class ScreenMotorDC extends GenericScreen<ContainerMotorDC> {
 		if (box != null) {
 			ComponentElectrodynamic electro = box.getComponent(IComponentType.Electrodynamic);
 
-			list.add(UtilsText.gui("motor.usage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.maxFeConsumed.get(), DisplayUnit.FORGE_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+			list.add(UtilsText.gui("motor.usage", VoltaicTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.maxFeConsumed.getValue(), DisplayUnits.FORGE_ENERGY_UNIT), DisplayUnits.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 
-			if (ModList.get().isLoaded(References.INDUSTRIAL_REFORGED_ID) && Screen.hasShiftDown()) {
+			if (ModList.get().isLoaded(DynamicElectricity.INDUSTRIAL_REFORGED_ID) && Screen.hasShiftDown()) {
 				IndustrialReforgedHandler.addDCConversionTooltip(box, list);
 			}
-			list.add(UtilsText.gui("motor.voltage", ChatFormatter.getChatDisplayShort(electro.getVoltage(), DisplayUnit.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
-			list.add(UtilsText.gui("motor.output", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.joulesProduced.get(), DisplayUnit.JOULES), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
-			list.add(UtilsText.gui("motor.wattage", ChatFormatter.getChatDisplayShort(box.joulesProduced.get() * 20, DisplayUnit.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+			list.add(UtilsText.gui("motor.voltage", ChatFormatter.getChatDisplayShort(electro.getVoltage(), DisplayUnits.VOLTAGE).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+			list.add(UtilsText.gui("motor.output", VoltaicTextUtils.ratio(ChatFormatter.getChatDisplayShort(box.joulesProduced.getValue(), DisplayUnits.JOULES), DisplayUnits.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+			list.add(UtilsText.gui("motor.wattage", ChatFormatter.getChatDisplayShort(box.joulesProduced.getValue() * 20, DisplayUnits.WATT).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 
 		}
 		return list;

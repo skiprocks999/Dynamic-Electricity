@@ -1,16 +1,15 @@
 package dynamicelectricity.client.guidebook;
 
 import dynamicelectricity.DynamicElectricity;
-import dynamicelectricity.References;
 import dynamicelectricity.client.guidebook.chapters.ChapterACMotors;
 import dynamicelectricity.client.guidebook.chapters.ChapterDCMotors;
 import dynamicelectricity.client.guidebook.chapters.ChapterDyanmicElectricity;
 import dynamicelectricity.client.guidebook.chapters.ChapterIndustrialReborn;
 import dynamicelectricity.core.utils.UtilsText;
-import electrodynamics.client.guidebook.utils.components.Module;
-import electrodynamics.client.guidebook.utils.pagedata.graphics.ImageWrapperObject;
 import net.minecraft.network.chat.MutableComponent;
 import net.neoforged.fml.ModList;
+import voltaic.client.guidebook.utils.components.Module;
+import voltaic.client.guidebook.utils.pagedata.graphics.ImageWrapperObject;
 
 public class ModuleDynamicElectricity extends Module {
 
@@ -23,7 +22,7 @@ public class ModuleDynamicElectricity extends Module {
 
     @Override
     public MutableComponent getTitle() {
-        return UtilsText.guidebook(References.ID);
+        return UtilsText.guidebook(DynamicElectricity.ID);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class ModuleDynamicElectricity extends Module {
         chapters.add(new ChapterDyanmicElectricity(this));
         chapters.add(new ChapterACMotors(this));
         chapters.add(new ChapterDCMotors(this));
-        if (ModList.get().isLoaded(References.INDUSTRIAL_REFORGED_ID)) {
+        if (ModList.get().isLoaded(DynamicElectricity.INDUSTRIAL_REFORGED_ID)) {
             chapters.add(new ChapterIndustrialReborn(this));
         }
     }

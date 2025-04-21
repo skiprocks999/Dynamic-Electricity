@@ -2,10 +2,10 @@ package dynamicelectricity.common.block;
 
 import java.util.stream.Stream;
 
-import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.shapes.Shapes;
+import voltaic.common.block.voxelshapes.VoxelShapeProvider;
 
 public class DynamicElectricityVoxelShapes {
 

@@ -7,15 +7,12 @@ import com.indref.industrial_reforged.api.capabilities.energy.IEnergyStorage;
 import com.indref.industrial_reforged.api.tiers.EnergyTier;
 import com.indref.industrial_reforged.registries.IRBlocks;
 import com.indref.industrial_reforged.tiers.EnergyTiers;
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.tile.generic.TileMotorAC;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
 import dynamicelectricity.core.utils.DynamicDisplayUnits;
 import dynamicelectricity.core.utils.UtilsText;
 import dynamicelectricity.registry.DynamicElectricityTiles;
-import electrodynamics.api.electricity.formatting.ChatFormatter;
-import electrodynamics.api.electricity.formatting.DisplayUnit;
-import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -26,6 +23,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import voltaic.api.electricity.formatting.ChatFormatter;
+import voltaic.api.electricity.formatting.DisplayUnits;
+import voltaic.prefab.utilities.VoltaicTextUtils;
 
 //Buffer class to prevent stuff loading that shouldn't
 public class IndustrialReforgedHandler {
@@ -101,13 +101,13 @@ public class IndustrialReforgedHandler {
             return;
         }
 
-        int amtAccepted = modCap.tryFillEnergy(motor.feStored.get(), true);
+        int amtAccepted = modCap.tryFillEnergy(motor.feStored.getValue(), true);
 
         if (amtAccepted <= 0) {
             return;
         }
         modCap.tryFillEnergy(amtAccepted, false);
-        motor.feStored.set(motor.feStored.get() - amtAccepted);
+        motor.feStored.setValue(motor.feStored.getValue() - amtAccepted);
 
     }
 
@@ -122,14 +122,14 @@ public class IndustrialReforgedHandler {
 
     public static void addACConversionTooltip(TileMotorAC motor, List<FormattedCharSequence> list) {
 
-        list.add(UtilsText.gui("motor.output", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(motor.feProduced.get() / ENERGY_PER_JOULE, DynamicDisplayUnits.INDUSTRIAL_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+        list.add(UtilsText.gui("motor.output", VoltaicTextUtils.ratio(ChatFormatter.getChatDisplayShort(motor.feProduced.getValue() / ENERGY_PER_JOULE, DynamicDisplayUnits.INDUSTRIAL_ENERGY_UNIT), DisplayUnits.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
         list.add(UtilsText.gui("motor.tier", getTranslatedTier(getTier(motor.energyTier)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 
     }
 
     public static void addDCConversionTooltip(TileMotorDC motor, List<FormattedCharSequence> list) {
 
-        list.add(UtilsText.gui("motor.usage", ElectroTextUtils.ratio(ChatFormatter.getChatDisplayShort(motor.maxFeConsumed.get() / ENERGY_PER_JOULE, DynamicDisplayUnits.INDUSTRIAL_ENERGY_UNIT), DisplayUnit.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
+        list.add(UtilsText.gui("motor.usage", VoltaicTextUtils.ratio(ChatFormatter.getChatDisplayShort(motor.maxFeConsumed.getValue() / ENERGY_PER_JOULE, DynamicDisplayUnits.INDUSTRIAL_ENERGY_UNIT), DisplayUnits.TIME_TICKS.getSymbol()).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
         list.add(UtilsText.gui("motor.tier", getTranslatedTier(getTier(motor.energyTier)).withStyle(ChatFormatting.GRAY)).withStyle(ChatFormatting.DARK_GRAY).getVisualOrderText());
 
     }
@@ -149,7 +149,7 @@ public class IndustrialReforgedHandler {
 
     public static Item getGuidebookLogo() {
 
-        if (ModList.get().isLoaded(References.INDUSTRIAL_REFORGED_ID)) {
+        if (ModList.get().isLoaded(DynamicElectricity.INDUSTRIAL_REFORGED_ID)) {
             return IRBlocks.BASIC_GENERATOR.get().asItem();
         } else {
             return Items.AIR;

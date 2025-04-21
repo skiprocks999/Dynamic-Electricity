@@ -2,18 +2,18 @@ package dynamicelectricity.datagen.server;
 
 import java.util.List;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import dynamicelectricity.registry.DynamicElectricityTiles;
-import electrodynamics.datagen.server.ElectrodynamicsLootTablesProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.level.block.Block;
+import voltaic.datagen.utils.server.loottable.BaseLootTablesProvider;
 
-public class DynamicElectricityLootTablesProvider extends ElectrodynamicsLootTablesProvider {
+public class DynamicElectricityLootTablesProvider extends BaseLootTablesProvider {
 
 	public DynamicElectricityLootTablesProvider(HolderLookup.Provider provider) {
-		super(References.ID, provider);
+		super(DynamicElectricity.ID, provider);
 	}
 
 	@Override

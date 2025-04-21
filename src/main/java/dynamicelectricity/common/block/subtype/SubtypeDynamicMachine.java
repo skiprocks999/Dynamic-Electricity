@@ -2,14 +2,14 @@ package dynamicelectricity.common.block.subtype;
 
 import dynamicelectricity.common.block.DynamicElectricityVoxelShapes;
 import dynamicelectricity.common.tile.*;
-import electrodynamics.api.ISubtype;
-import electrodynamics.api.multiblock.subnodebased.parent.IMultiblockParentBlock;
-import electrodynamics.api.tile.IMachine;
-import electrodynamics.api.tile.MachineProperties;
-import electrodynamics.common.block.voxelshapes.VoxelShapeProvider;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import voltaic.api.ISubtype;
+import voltaic.api.multiblock.subnodebased.parent.IMultiblockParentBlock;
+import voltaic.api.tile.IMachine;
+import voltaic.api.tile.MachineProperties;
+import voltaic.common.block.voxelshapes.VoxelShapeProvider;
 
 public enum SubtypeDynamicMachine implements ISubtype, IMachine {
 

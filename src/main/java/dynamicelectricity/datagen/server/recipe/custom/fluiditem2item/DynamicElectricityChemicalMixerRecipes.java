@@ -1,6 +1,6 @@
 package dynamicelectricity.datagen.server.recipe.custom.fluiditem2item;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.registry.DynamicElectricityFluids;
 import electrodynamics.datagen.server.recipe.types.custom.fluiditem2fluid.ElectrodynamicsChemicalMixerRecipes;
@@ -11,7 +11,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 public class DynamicElectricityChemicalMixerRecipes extends ElectrodynamicsChemicalMixerRecipes {
 
 	public DynamicElectricityChemicalMixerRecipes() {
-		super(References.ID);
+		super(DynamicElectricity.ID);
 	}
 
 	@Override

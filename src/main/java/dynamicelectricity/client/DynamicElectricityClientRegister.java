@@ -1,7 +1,6 @@
 package dynamicelectricity.client;
 
 import dynamicelectricity.DynamicElectricity;
-import dynamicelectricity.References;
 import dynamicelectricity.client.guidebook.ModuleDynamicElectricity;
 import dynamicelectricity.client.render.tile.RenderMotorAC;
 import dynamicelectricity.client.render.tile.RenderMotorDC;
@@ -10,10 +9,6 @@ import dynamicelectricity.client.screen.ScreenMotorDC;
 import dynamicelectricity.registry.DynamicElectricityContainers;
 import dynamicelectricity.registry.DynamicElectricityFluids;
 import dynamicelectricity.registry.DynamicElectricityTiles;
-import electrodynamics.api.screen.ITexture;
-import electrodynamics.client.guidebook.ScreenGuidebook;
-import electrodynamics.client.misc.SWBFClientExtensions;
-import electrodynamics.common.fluid.SimpleWaterBasedFluidType;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
@@ -24,10 +19,14 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import voltaic.api.screen.ITexture;
+import voltaic.client.guidebook.ScreenGuidebook;
+import voltaic.client.misc.SWBFClientExtensions;
+import voltaic.common.fluid.SimpleWaterBasedFluidType;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD, value = { Dist.CLIENT })
-public class ClientRegister {
+@EventBusSubscriber(modid = DynamicElectricity.ID, bus = EventBusSubscriber.Bus.MOD, value = { Dist.CLIENT })
+public class DynamicElectricityClientRegister {
 
 	public static final ModelResourceLocation MODEL_MOTORAC_HVSHAFT = ModelResourceLocation.standalone(DynamicElectricity.rl("block/motorachvshaft"));
 	public static final ModelResourceLocation MODEL_MOTORAC_MVSHAFT = ModelResourceLocation.standalone(DynamicElectricity.rl("block/motoracmvshaft"));

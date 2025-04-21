@@ -1,6 +1,6 @@
 package dynamicelectricity;
 
-import dynamicelectricity.client.ClientRegister;
+import dynamicelectricity.client.DynamicElectricityClientRegister;
 import dynamicelectricity.common.block.DynamicElectricityVoxelShapes;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.registry.*;
@@ -17,10 +17,14 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 
-
-@Mod(References.ID)
-@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
+@Mod(DynamicElectricity.ID)
+@EventBusSubscriber(modid = DynamicElectricity.ID, bus = EventBusSubscriber.Bus.MOD)
 public class DynamicElectricity {
+
+    public static final String ID = "dynamicelectricity";
+    public static final String NAME = "Dynamic Electricity";
+
+    public static final String INDUSTRIAL_REFORGED_ID = "indref";
 
     public DynamicElectricity(IEventBus bus, ModContainer modContainer) {
         UnifiedDynamicElectricityRegistry.init(bus);
@@ -38,7 +42,7 @@ public class DynamicElectricity {
     @OnlyIn(Dist.CLIENT)
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ClientRegister.setup();
+            DynamicElectricityClientRegister.setup();
         });
     }
 
@@ -47,7 +51,7 @@ public class DynamicElectricity {
     }
 
     public static final ResourceLocation rl(String path) {
-        return ResourceLocation.fromNamespaceAndPath(References.ID, path);
+        return ResourceLocation.fromNamespaceAndPath(DynamicElectricity.ID, path);
     }
 
 }

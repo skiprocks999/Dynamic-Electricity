@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.datagen.client.DynamicElectricityBlockStateProvider;
 import dynamicelectricity.datagen.client.DynamicElectricityItemModelsProvider;
 import dynamicelectricity.datagen.client.DynamicElectricityLangKeyProvider;
@@ -12,7 +12,6 @@ import dynamicelectricity.datagen.client.DynamicElectricitySoundProvider;
 import dynamicelectricity.datagen.server.DynamicElectricityLootTablesProvider;
 import dynamicelectricity.datagen.server.recipe.DynamicElectricityRecipeProvider;
 import dynamicelectricity.datagen.server.tags.DynamicElectricityTagsProvider;
-import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider.Locale;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -22,8 +21,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import voltaic.datagen.utils.client.BaseLangKeyProvider;
 
-@EventBusSubscriber(modid = References.ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = DynamicElectricity.ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
 	@SubscribeEvent
@@ -47,7 +47,7 @@ public class DataGenerators {
 		if (event.includeClient()) {
 			generator.addProvider(true, new DynamicElectricityBlockStateProvider(output, helper));
 			generator.addProvider(true, new DynamicElectricityItemModelsProvider(output, helper));
-			generator.addProvider(true, new DynamicElectricityLangKeyProvider(output, Locale.EN_US));
+			generator.addProvider(true, new DynamicElectricityLangKeyProvider(output, BaseLangKeyProvider.Locale.EN_US));
 			generator.addProvider(true, new DynamicElectricitySoundProvider(output, helper));
 		}
 	}

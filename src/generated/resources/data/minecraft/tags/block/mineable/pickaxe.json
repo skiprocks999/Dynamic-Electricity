@@ -1,10 +1,10 @@
 {
   "values": [
-    "dynamicelectricity:motoraclv",
     "dynamicelectricity:motordchv",
-    "dynamicelectricity:motordcmv",
-    "dynamicelectricity:motordclv",
     "dynamicelectricity:motoracmv",
-    "dynamicelectricity:motorachv"
+    "dynamicelectricity:motordclv",
+    "dynamicelectricity:motordcmv",
+    "dynamicelectricity:motorachv",
+    "dynamicelectricity:motoraclv"
   ]
 }

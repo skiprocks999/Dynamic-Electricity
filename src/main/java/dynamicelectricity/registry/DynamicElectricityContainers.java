@@ -1,6 +1,6 @@
 package dynamicelectricity.registry;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.inventory.container.ContainerMotorAC;
 import dynamicelectricity.common.inventory.container.ContainerMotorDC;
 import net.minecraft.core.registries.Registries;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class DynamicElectricityContainers {
 
-	public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(Registries.MENU, References.ID);
+	public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(Registries.MENU, DynamicElectricity.ID);
 	
 	public static final DeferredHolder<MenuType<?>, MenuType<ContainerMotorAC>> CONTAINER_MOTORAC = register("motorac", ContainerMotorAC::new);
 	public static final DeferredHolder<MenuType<?>, MenuType<ContainerMotorDC>> CONTAINER_MOTORDC = register("motordc", ContainerMotorDC::new);

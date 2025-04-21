@@ -3,27 +3,11 @@
  */
 package dynamicelectricity.common.tile.generic;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.inventory.container.ContainerMotorAC;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.compatability.industrialreforged.IndustrialReforgedHandler;
 import dynamicelectricity.registry.DynamicElectricitySounds;
-import electrodynamics.common.network.utils.FluidUtilities;
-import electrodynamics.prefab.properties.Property;
-import electrodynamics.prefab.properties.PropertyTypes;
-import electrodynamics.prefab.sound.SoundBarrierMethods;
-import electrodynamics.prefab.sound.utils.ITickableSound;
-import electrodynamics.prefab.tile.GenericTile;
-import electrodynamics.prefab.tile.components.IComponentType;
-import electrodynamics.prefab.tile.components.type.ComponentContainerProvider;
-import electrodynamics.prefab.tile.components.type.ComponentElectrodynamic;
-import electrodynamics.prefab.tile.components.type.ComponentFluidHandlerSimple;
-import electrodynamics.prefab.tile.components.type.ComponentInventory;
-import electrodynamics.prefab.tile.components.type.ComponentInventory.InventoryBuilder;
-import electrodynamics.prefab.tile.components.type.ComponentPacketHandler;
-import electrodynamics.prefab.tile.components.type.ComponentTickable;
-import electrodynamics.prefab.utilities.BlockEntityUtils;
-import electrodynamics.registers.ElectrodynamicsCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -34,6 +18,16 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
+import voltaic.common.network.utils.FluidUtilities;
+import voltaic.prefab.properties.types.PropertyTypes;
+import voltaic.prefab.properties.variant.SingleProperty;
+import voltaic.prefab.sound.ITickableSound;
+import voltaic.prefab.sound.SoundBarrierMethods;
+import voltaic.prefab.tile.GenericTile;
+import voltaic.prefab.tile.components.IComponentType;
+import voltaic.prefab.tile.components.type.*;
+import voltaic.prefab.utilities.BlockEntityUtils;
+import voltaic.registers.VoltaicCapabilities;
 
 public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickableSound {
 
@@ -41,14 +35,14 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 
 	public static final int LUBRICANT_PER_MB = 20000;
 
-	public final Property<Integer> feProduced;
-	public final Property<Integer> feStored;
-	public final Property<Double> joulesConsumed;
+	public final SingleProperty<Integer> feProduced;
+	public final SingleProperty<Integer> feStored;
+	public final SingleProperty<Double> joulesConsumed;
 
-	public final Property<Integer> lubricantRemaining;
-	public final Property<Boolean> running;
+	public final SingleProperty<Integer> lubricantRemaining;
+	public final SingleProperty<Boolean> running;
 
-	public final Property<Boolean> hasRedstoneSignal;
+	public final SingleProperty<Boolean> hasRedstoneSignal;
 
 	private boolean isPlaying = false;
 	
@@ -59,27 +53,27 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 
 		this.energyTier = energyTier;
 		
-		joulesConsumed = property(new Property<>(PropertyTypes.DOUBLE, "joulesconsumed", joulesCons));
-		feProduced = property(new Property<>(PropertyTypes.INTEGER, "feproduced", (int) (joulesCons * CONVERSION_EFFICIENCY)));
-		feStored = property(new Property<>(PropertyTypes.INTEGER, "festored", 0));
+		joulesConsumed = property(new SingleProperty<>(PropertyTypes.DOUBLE, "joulesconsumed", joulesCons));
+		feProduced = property(new SingleProperty<>(PropertyTypes.INTEGER, "feproduced", (int) (joulesCons * CONVERSION_EFFICIENCY)));
+		feStored = property(new SingleProperty<>(PropertyTypes.INTEGER, "festored", 0));
 
-		lubricantRemaining = property(new Property<>(PropertyTypes.INTEGER, "lubricantremaining", 0));
-		running = property(new Property<>(PropertyTypes.BOOLEAN, "running", false));
+		lubricantRemaining = property(new SingleProperty<>(PropertyTypes.INTEGER, "lubricantremaining", 0));
+		running = property(new SingleProperty<>(PropertyTypes.BOOLEAN, "running", false));
 
-		hasRedstoneSignal = property(new Property<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
+		hasRedstoneSignal = property(new SingleProperty<>(PropertyTypes.BOOLEAN, "redstonesignal", false));
 
 		addComponent(new ComponentTickable(this).tickServer(this::tickServer).tickClient(this::tickClient));
 		addComponent(new ComponentPacketHandler(this));
-		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BACK).maxJoules(joulesCons * 20).voltage(Math.pow(2, energyTier) * ElectrodynamicsCapabilities.DEFAULT_VOLTAGE));
-		addComponent(new ComponentInventory(this, InventoryBuilder.newInv().bucketInputs(1)).valid(machineValidator()));
-		addComponent(new ComponentContainerProvider("container.motorac" + name, this).createMenu((id, player) -> new ContainerMotorAC(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
+		addComponent(new ComponentElectrodynamic(this, false, true).setInputDirections(BlockEntityUtils.MachineDirection.BACK).maxJoules(joulesCons * 20).voltage(Math.pow(2, energyTier) * VoltaicCapabilities.DEFAULT_VOLTAGE));
+		addComponent(new ComponentInventory(this, ComponentInventory.InventoryBuilder.newInv().bucketInputs(1)).valid(machineValidator()));
+		addComponent(new ComponentContainerProvider("motorac" + name, this).createMenu((id, player) -> new ContainerMotorAC(id, player, getComponent(IComponentType.Inventory), getCoordsArray())));
 		addComponent(new ComponentFluidHandlerSimple(1000, this, "lubricant").setInputDirections(BlockEntityUtils.MachineDirection.BOTTOM).setValidFluidTags(DynamicElectricityTags.Fluids.LUBRICANT));
 	}
 
 	public void tickServer(ComponentTickable tickable) {
 
-		if (hasRedstoneSignal.get()) {
-			running.set(false);
+		if (hasRedstoneSignal.getValue()) {
+			running.setValue(false);
 			return;
 		}
 
@@ -89,26 +83,26 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 		boolean canRun = false;
 
 		ComponentFluidHandlerSimple tank = getComponent(IComponentType.FluidHandler);
-		if (electro.getJoulesStored() >= joulesConsumed.get()) {
-			if (lubricantRemaining.get() > 0) {
-				lubricantRemaining.set(lubricantRemaining.get() - 1);
+		if (electro.getJoulesStored() >= joulesConsumed.getValue()) {
+			if (lubricantRemaining.getValue() > 0) {
+				lubricantRemaining.setValue(lubricantRemaining.getValue() - 1);
 				canRun = true;
-			} else if (tank.getFluidAmount() > 0 && lubricantRemaining.get() == 0) {
+			} else if (tank.getFluidAmount() > 0 && lubricantRemaining.getValue() == 0) {
 				tank.drain(1, IFluidHandler.FluidAction.EXECUTE);
-				lubricantRemaining.set(LUBRICANT_PER_MB);
+				lubricantRemaining.setValue(LUBRICANT_PER_MB);
 			}
 		}
 
 		FluidUtilities.drainItem(this, this.<ComponentFluidHandlerSimple>getComponent(IComponentType.FluidHandler).asArray());
 
-		running.set(canRun);
+		running.setValue(canRun);
 
 		if (!canRun) {
 			return;
 		}
 
-		electro.joules(electro.getJoulesStored() - joulesConsumed.get());
-		feStored.set(feProduced.get());
+		electro.joules(electro.getJoulesStored() - joulesConsumed.getValue());
+		feStored.setValue(feProduced.getValue());
 
 		BlockPos pos = this.getBlockPos().relative(facing);
 
@@ -142,17 +136,17 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 			return;
 		}
 
-		int amtAccepted = feCap.receiveEnergy(feStored.get(), true);
+		int amtAccepted = feCap.receiveEnergy(feStored.getValue(), true);
 
 		if (amtAccepted > 0) {
 			feCap.receiveEnergy(amtAccepted, true);
-			feStored.set(feStored.get() - amtAccepted);
+			feStored.setValue(feStored.getValue() - amtAccepted);
 		}
 	}
 
 	private void handleIndustrialReborn(BlockEntity tile, Direction motorFacing) {
 
-		if(!ModList.get().isLoaded(References.INDUSTRIAL_REFORGED_ID)) {
+		if(!ModList.get().isLoaded(DynamicElectricity.INDUSTRIAL_REFORGED_ID)) {
 			return;
 		}
 
@@ -179,21 +173,21 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 
 	@Override
 	public int extractEnergy(int maxExtract, boolean simulate) {
-		int amtExtracted = maxExtract >= feStored.get() ? feStored.get() : maxExtract;
+		int amtExtracted = maxExtract >= feStored.getValue() ? feStored.getValue() : maxExtract;
 		if (!simulate) {
-			feStored.set(feStored.get() - amtExtracted);
+			feStored.setValue(feStored.getValue() - amtExtracted);
 		}
 		return amtExtracted;
 	}
 
 	@Override
 	public int getEnergyStored() {
-		return feStored.get();
+		return feStored.getValue();
 	}
 
 	@Override
 	public int getMaxEnergyStored() {
-		return feProduced.get();
+		return feProduced.getValue();
 	}
 
 	@Override
@@ -213,12 +207,12 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 
 	@Override
 	public boolean shouldPlaySound() {
-		return running.get();
+		return running.getValue();
 	}
 
 	@Override
 	public void onNeightborChanged(BlockPos neighbor, boolean blockStateTrigger) {
-		hasRedstoneSignal.set(level.hasNeighborSignal(getBlockPos()));
+		hasRedstoneSignal.setValue(level.hasNeighborSignal(getBlockPos()));
 	}
 
 }
