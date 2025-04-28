@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.datagen.client.DynamicElectricityBlockStateProvider;
 import dynamicelectricity.datagen.client.DynamicElectricityItemModelsProvider;
 import dynamicelectricity.datagen.client.DynamicElectricityLangKeyProvider;
@@ -12,7 +12,6 @@ import dynamicelectricity.datagen.client.DynamicElectricitySoundProvider;
 import dynamicelectricity.datagen.server.DynamicElectricityLootTablesProvider;
 import dynamicelectricity.datagen.server.recipe.DynamicElectricityRecipeProvider;
 import dynamicelectricity.datagen.server.tags.DynamicElectricityTagsProvider;
-import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider.Locale;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -20,10 +19,11 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import voltaic.datagen.utils.client.BaseLangKeyProvider.Locale;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 
-@Mod.EventBusSubscriber(modid = References.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = DynamicElectricity.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
 	@SubscribeEvent

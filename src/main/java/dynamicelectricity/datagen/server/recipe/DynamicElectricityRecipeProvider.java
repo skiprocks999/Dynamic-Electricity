@@ -9,10 +9,10 @@ import dynamicelectricity.datagen.server.recipe.custom.item2item.DynamicElectric
 import dynamicelectricity.datagen.server.recipe.custom.item2item.DynamicElectricityMineralCrusherRecipes;
 import dynamicelectricity.datagen.server.recipe.custom.item2item.DynamicElectricityOxidationFurnaceRecipes;
 import dynamicelectricity.datagen.server.recipe.vanilla.DynamicElectricityCraftingTableRecipes;
-import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
+import voltaic.datagen.utils.server.recipe.AbstractRecipeGenerator;
 
 public class DynamicElectricityRecipeProvider extends RecipeProvider {
 
