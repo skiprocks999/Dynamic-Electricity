@@ -1,5 +1,6 @@
 package dynamicelectricity.common.tab;
 
+import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +13,7 @@ public class ItemGroupDynamicElectricity extends CreativeModeTab {
 
 	@Override
 	public ItemStack makeIcon() {
-		return new ItemStack(DynamicElectricityBlocks.blockMotorAcHv);
+		return new ItemStack(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motorachv));
 	}
 
 }

@@ -1,6 +1,6 @@
 package dynamicelectricity.client;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.client.guidebook.ModuleDynamicElectricity;
 import dynamicelectricity.client.render.tile.RenderMotorAC;
 import dynamicelectricity.client.render.tile.RenderMotorDC;
@@ -8,8 +8,6 @@ import dynamicelectricity.client.screen.ScreenMotorAC;
 import dynamicelectricity.client.screen.ScreenMotorDC;
 import dynamicelectricity.registry.DynamicElectricityContainers;
 import dynamicelectricity.registry.DynamicElectricityTiles;
-import electrodynamics.api.screen.ITexture;
-import electrodynamics.client.guidebook.ScreenGuidebook;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
@@ -20,37 +18,30 @@ import net.minecraftforge.client.event.ModelEvent.RegisterAdditional;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import voltaic.api.screen.ITexture;
+import voltaic.client.guidebook.ScreenGuidebook;
 
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = References.ID, bus = Bus.MOD, value = { Dist.CLIENT })
+@EventBusSubscriber(modid = DynamicElectricity.ID, bus = Bus.MOD, value = { Dist.CLIENT })
 public class ClientRegister {
 	
-	public static final String BLOCK_LOC = References.ID + ":block/";
-	
-	@SubscribeEvent
-    public static void onModelEvent(RegisterAdditional event) {
-		event.register(MODEL_MOTORAC_HVSHAFT);
-		event.register(MODEL_MOTORAC_MVSHAFT);
-		event.register(MODEL_MOTORAC_LVSHAFT);
-	}
-	
-	public static final ResourceLocation MODEL_MOTORAC_HV = new ResourceLocation(BLOCK_LOC + "motorachv");
-	public static final ResourceLocation MODEL_MOTORAC_HVSHAFT = new ResourceLocation(BLOCK_LOC + "motorachvshaft");
-	public static final ResourceLocation MODEL_MOTORAC_MV = new ResourceLocation(BLOCK_LOC + "motoracmv");
-	public static final ResourceLocation MODEL_MOTORAC_MVSHAFT = new ResourceLocation(BLOCK_LOC + "motoracmvshaft");
-	public static final ResourceLocation MODEL_MOTORAC_LV = new ResourceLocation(BLOCK_LOC + "motoraclv");
-	public static final ResourceLocation MODEL_MOTORAC_LVSHAFT = new ResourceLocation(BLOCK_LOC + "motoraclvshaft");
-	
-	public static final ResourceLocation MODEL_MOTORDC_HV = new ResourceLocation(BLOCK_LOC + "motordchv");
-	public static final ResourceLocation MODEL_MOTORDC_MV = new ResourceLocation(BLOCK_LOC + "motordcmv");
-	public static final ResourceLocation MODEL_MOTORDC_LV = new ResourceLocation(BLOCK_LOC + "motordclv");
+	public static final ResourceLocation MODEL_MOTORAC_HVSHAFT = DynamicElectricity.rl("block/motorachvshaft");
+	public static final ResourceLocation MODEL_MOTORAC_MVSHAFT = DynamicElectricity.rl("block/motoracmvshaft");
+	public static final ResourceLocation MODEL_MOTORAC_LVSHAFT = DynamicElectricity.rl("block/motoraclvshaft");
 	
 	public static void setup() {
 		MenuScreens.register(DynamicElectricityContainers.CONTAINER_MOTORAC.get(), ScreenMotorAC::new);
 		MenuScreens.register(DynamicElectricityContainers.CONTAINER_MOTORDC.get(), ScreenMotorDC::new);
 		
 		ScreenGuidebook.addGuidebookModule(new ModuleDynamicElectricity());
+	}
+	
+	@SubscribeEvent
+    public static void onModelEvent(RegisterAdditional event) {
+		event.register(MODEL_MOTORAC_HVSHAFT);
+		event.register(MODEL_MOTORAC_MVSHAFT);
+		event.register(MODEL_MOTORAC_LVSHAFT);
 	}
 	
 	@SubscribeEvent
@@ -72,7 +63,7 @@ public class ClientRegister {
     
     public static enum DynamicElectricityTextures implements ITexture {
     	
-    	MOTOR(102, 70, 0, 0, 256, 256, new ResourceLocation(References.ID + ":textures/screen/component/motor.png"));
+    	MOTOR(102, 70, 0, 0, 256, 256, new ResourceLocation(DynamicElectricity.ID + ":textures/screen/component/motor.png"));
     	
     	private final int textureWidth;
 		private final int textureHeight;

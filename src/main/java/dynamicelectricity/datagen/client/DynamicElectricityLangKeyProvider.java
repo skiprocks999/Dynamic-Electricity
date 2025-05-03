@@ -1,17 +1,18 @@
 package dynamicelectricity.datagen.client;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
+import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import dynamicelectricity.registry.DynamicElectricityFluids;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import dynamicelectricity.registry.DynamicElectricitySounds;
-import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider;
 import net.minecraft.data.DataGenerator;
+import voltaic.datagen.utils.client.BaseLangKeyProvider;
 
-public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyProvider {
+public class DynamicElectricityLangKeyProvider extends BaseLangKeyProvider {
 
 	public DynamicElectricityLangKeyProvider(DataGenerator gen, Locale locale) {
-		super(gen, locale, References.ID);
+		super(gen, locale, DynamicElectricity.ID);
 	}
 
 	@Override
@@ -21,14 +22,14 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 		case EN_US:
 		default:
 
-			add("itemGroup.itemgroup" + References.ID, "Dynamic Electricity");
+			add("itemGroup.itemgroup" + DynamicElectricity.ID + "main", "Dynamic Electricity");
 
-			addBlock(DynamicElectricityBlocks.blockMotorAcHv, "480V AC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorAcMv, "240V AC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorAcLv, "120V AC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorDcHv, "480V DC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorDcMv, "240V DC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorDcLv, "120V DC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motorachv), "480V AC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motoracmv), "240V AC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motoraclv), "120V AC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordchv), "480V DC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordcmv), "240V DC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordclv), "120V DC Motor");
 
 			addItem(DynamicElectricityItems.ITEM_STATOR, "Industrial Stator");
 			addItem(DynamicElectricityItems.ITEM_COMMUTATOR, "Commutator");
@@ -50,7 +51,7 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addContainer("motordcmv", "240V DC Motor");
 			addContainer("motordclv", "120V DC Motor");
 
-			addFluid(DynamicElectricityFluids.fluidLubricant, "Industrial Lubricant");
+			addFluid(DynamicElectricityFluids.FLUID_LUBRICANT.get(), "Industrial Lubricant");
 
 			addTooltip("motorachv.conversion", "100 kJ @ 480V -> 100 kFE");
 			addTooltip("motoracmv.conversion", "10 kJ @ 240V -> 10 kFE");
@@ -80,7 +81,7 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addGuiLabel("displayunit.industrialenergyunit.nameplural", "Industrial Energy Units");
 			addGuiLabel("displayunit.industrialenergyunit.symbol", "IE");
 
-			addGuidebook(References.ID, "Dynamic Electricity");
+			addGuidebook(DynamicElectricity.ID, "Dynamic Electricity");
 
 			addGuidebook("chapter.dynamicelectricity", "Dynamic Electricity");
 			addGuidebook("chapter.dynamicelectricity.l1",

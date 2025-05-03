@@ -1,6 +1,6 @@
 package dynamicelectricity.core.utils;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import electrodynamics.prefab.utilities.ElectroTextUtils;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
@@ -45,7 +45,7 @@ public class UtilsText {
 	}
 
 	public static MutableComponent translated(String base, String key, Object... additional) {
-		return Component.translatable(base + "." + References.ID + "." + key, additional);
+		return Component.translatable(base + "." + DynamicElectricity.ID + "." + key, additional);
 	}
 
 	public static boolean guiExists(String key) {
@@ -57,7 +57,7 @@ public class UtilsText {
 	}
 
 	public static boolean translationExists(String base, String key) {
-		return I18n.exists(base + "." + References.ID + "." + key);
+		return I18n.exists(base + "." + DynamicElectricity.ID + "." + key);
 	}
 
 }

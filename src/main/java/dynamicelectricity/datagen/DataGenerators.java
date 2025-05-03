@@ -1,6 +1,6 @@
 package dynamicelectricity.datagen;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.datagen.client.DynamicElectricityBlockStateProvider;
 import dynamicelectricity.datagen.client.DynamicElectricityItemModelsProvider;
 import dynamicelectricity.datagen.client.DynamicElectricityLangKeyProvider;
@@ -10,13 +10,13 @@ import dynamicelectricity.datagen.server.DynamicElectricityFluidTagsProvider;
 import dynamicelectricity.datagen.server.DynamicElectricityItemTagsProvider;
 import dynamicelectricity.datagen.server.DynamicElectricityLootTablesProvider;
 import dynamicelectricity.datagen.server.recipe.DynamicElectricityRecipeProvider;
-import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider.Locale;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import voltaic.datagen.utils.client.BaseLangKeyProvider.Locale;
 import net.minecraftforge.data.event.GatherDataEvent;
 
-@Mod.EventBusSubscriber(modid = References.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = DynamicElectricity.ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
 	@SubscribeEvent

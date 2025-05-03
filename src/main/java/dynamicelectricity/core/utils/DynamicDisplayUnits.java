@@ -1,7 +1,7 @@
 package dynamicelectricity.core.utils;
 
-import electrodynamics.api.electricity.formatting.IDisplayUnit;
 import net.minecraft.network.chat.Component;
+import voltaic.api.electricity.formatting.IDisplayUnit;
 
 public enum DynamicDisplayUnits implements IDisplayUnit {
 

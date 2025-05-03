@@ -9,7 +9,6 @@ import dynamicelectricity.common.tile.TileMotorAcHv;
 import dynamicelectricity.common.tile.TileMotorAcLv;
 import dynamicelectricity.common.tile.TileMotorAcMv;
 import dynamicelectricity.common.tile.generic.TileMotorAC;
-import electrodynamics.prefab.utilities.RenderingUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -17,6 +16,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
+import voltaic.prefab.utilities.RenderingUtils;
 
 public class RenderMotorAC implements BlockEntityRenderer<TileMotorAC>{
 
@@ -34,7 +34,7 @@ public class RenderMotorAC implements BlockEntityRenderer<TileMotorAC>{
 		
 		float progressDegrees = 0.0F;
 		
-		if (tile.running.get()) {
+		if (tile.running.getValue()) {
 		    progressDegrees = 360.0f * (float) progress;
 		}
 		
