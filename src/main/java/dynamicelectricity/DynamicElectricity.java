@@ -19,12 +19,7 @@ import org.apache.logging.log4j.Logger;
 import dynamicelectricity.client.ClientRegister;
 import dynamicelectricity.common.block.DynamicElectricityVoxelShapes;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
-import dynamicelectricity.registry.DynamicElectricityBlocks;
-import dynamicelectricity.registry.DynamicElectricityContainers;
-import dynamicelectricity.registry.DynamicElectricityFluids;
-import dynamicelectricity.registry.DynamicElectricityItems;
-import dynamicelectricity.registry.DynamicElectricitySounds;
-import dynamicelectricity.registry.DynamicElectricityTiles;
+import dynamicelectricity.registry.UnifiedDynamicElectricityRegistry;
 
 @Mod(DynamicElectricity.ID)
 @EventBusSubscriber(modid = DynamicElectricity.ID, bus = Bus.MOD)
@@ -39,13 +34,7 @@ public class DynamicElectricity {
 
 	public DynamicElectricity() {
     	IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-    	
-    	DynamicElectricityBlocks.BLOCKS.register(bus);
-    	DynamicElectricityContainers.CONTAINERS.register(bus);
-    	DynamicElectricityFluids.FLUIDS.register(bus);
-    	DynamicElectricityItems.ITEMS.register(bus);
-    	DynamicElectricityTiles.TILES.register(bus);
-    	DynamicElectricitySounds.SOUNDS.register(bus);
+    	UnifiedDynamicElectricityRegistry.init(bus);
     }
     
     @SubscribeEvent
