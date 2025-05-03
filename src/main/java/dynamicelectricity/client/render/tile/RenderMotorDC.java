@@ -4,12 +4,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 
-import dynamicelectricity.client.ClientRegister;
+import dynamicelectricity.client.DynamicElectricityClientRegister;
 import dynamicelectricity.common.tile.TileMotorDcHv;
 import dynamicelectricity.common.tile.TileMotorDcLv;
 import dynamicelectricity.common.tile.TileMotorDcMv;
 import dynamicelectricity.common.tile.generic.TileMotorDC;
-import electrodynamics.prefab.utilities.RenderingUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -17,6 +16,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
+import voltaic.prefab.utilities.RenderingUtils;
 
 public class RenderMotorDC implements BlockEntityRenderer<TileMotorDC>{
 
@@ -33,7 +33,7 @@ public class RenderMotorDC implements BlockEntityRenderer<TileMotorDC>{
 		
 		float progressDegrees = 0.0F;
 		
-		if (tile.running.get()) {
+		if (tile.running.getValue()) {
 		    progressDegrees = 360.0f * (float) progress;
 		}
 		
@@ -41,7 +41,7 @@ public class RenderMotorDC implements BlockEntityRenderer<TileMotorDC>{
 		
 		if(tile instanceof TileMotorDcLv) {
 			
-			shaft = Minecraft.getInstance().getModelManager().getModel(ClientRegister.MODEL_MOTORAC_LVSHAFT);
+			shaft = Minecraft.getInstance().getModelManager().getModel(DynamicElectricityClientRegister.MODEL_MOTORAC_LVSHAFT);
 			
 			switch(facing) {
 				case EAST:
@@ -66,7 +66,7 @@ public class RenderMotorDC implements BlockEntityRenderer<TileMotorDC>{
 			}
 		} else if(tile instanceof TileMotorDcMv) {
 			
-			shaft = Minecraft.getInstance().getModelManager().getModel(ClientRegister.MODEL_MOTORAC_MVSHAFT);
+			shaft = Minecraft.getInstance().getModelManager().getModel(DynamicElectricityClientRegister.MODEL_MOTORAC_MVSHAFT);
 			
 			switch(facing) {
 				case EAST:
@@ -92,7 +92,7 @@ public class RenderMotorDC implements BlockEntityRenderer<TileMotorDC>{
 			
 		} else if(tile instanceof TileMotorDcHv) {
 			
-			shaft = Minecraft.getInstance().getModelManager().getModel(ClientRegister.MODEL_MOTORAC_HVSHAFT);
+			shaft = Minecraft.getInstance().getModelManager().getModel(DynamicElectricityClientRegister.MODEL_MOTORAC_HVSHAFT);
 			
 			switch(facing) {
 				case EAST:

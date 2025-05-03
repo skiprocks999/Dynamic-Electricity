@@ -1,23 +1,23 @@
 package dynamicelectricity.core.utils;
 
-import electrodynamics.api.electricity.formatting.IDisplayUnit;
-import electrodynamics.prefab.utilities.ElectroTextUtils;
-import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import voltaic.api.electricity.formatting.IDisplayUnit;
 
 public enum DynamicDisplayUnits implements IDisplayUnit {
 
 	INDUSTRIAL_ENERGY_UNIT(UtilsText.gui("displayunit.industrialenergyunit.name"), UtilsText.gui("displayunit.industrialenergyunit.nameplural"), UtilsText.gui("displayunit.industrialenergyunit.symbol"));
 
-	private final MutableComponent symbol;
-	private final MutableComponent name;
-	private final MutableComponent namePlural;
-	private final MutableComponent distanceFromValue;
+	private final Component symbol;
+	private final Component name;
+	private final Component namePlural;
+	private final Component distanceFromValue;
 
-	private DynamicDisplayUnits(MutableComponent name, MutableComponent namePlural, MutableComponent symbol) {
-		this(name, namePlural, symbol, ElectroTextUtils.empty());
+	private DynamicDisplayUnits(Component name, Component namePlural, Component symbol) {
+		this(name, namePlural, symbol, new TextComponent(" "));
 	}
 
-	private DynamicDisplayUnits(MutableComponent name, MutableComponent namePlural, MutableComponent symbol, MutableComponent distanceFromValue) {
+	private DynamicDisplayUnits(Component name, Component namePlural, Component symbol, Component distanceFromValue) {
 		this.name = name;
 		this.namePlural = namePlural;
 		this.symbol = symbol;
@@ -25,22 +25,22 @@ public enum DynamicDisplayUnits implements IDisplayUnit {
 	}
 
 	@Override
-	public MutableComponent getSymbol() {
+	public Component getSymbol() {
 		return symbol;
 	}
 
 	@Override
-	public MutableComponent getName() {
+	public Component getName() {
 		return name;
 	}
 
 	@Override
-	public MutableComponent getNamePlural() {
+	public Component getNamePlural() {
 		return namePlural;
 	}
 
 	@Override
-	public MutableComponent getDistanceFromValue() {
+	public Component getDistanceFromValue() {
 		return distanceFromValue;
 	}
 

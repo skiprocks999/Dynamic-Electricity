@@ -1,5 +1,6 @@
 package dynamicelectricity;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -15,49 +16,46 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dynamicelectricity.client.ClientRegister;
-import dynamicelectricity.common.block.DynamicElectricityVoxelShapeRegistry;
+import dynamicelectricity.client.DynamicElectricityClientRegister;
+import dynamicelectricity.common.block.DynamicElectricityVoxelShapes;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
-import dynamicelectricity.registry.DynamicElectricityBlocks;
-import dynamicelectricity.registry.DynamicElectricityContainers;
-import dynamicelectricity.registry.DynamicElectricityFluids;
-import dynamicelectricity.registry.DynamicElectricityItems;
-import dynamicelectricity.registry.DynamicElectricitySounds;
-import dynamicelectricity.registry.DynamicElectricityTiles;
+import dynamicelectricity.registry.UnifiedDynamicElectricityRegistry;
 
+@Mod(DynamicElectricity.ID)
+@EventBusSubscriber(modid = DynamicElectricity.ID, bus = Bus.MOD)
+public class DynamicElectricity {
 
-@Mod(References.ID)
-@EventBusSubscriber(modid = References.ID, bus = Bus.MOD)
-public class DynamicElectricity
-{
-    public static final Logger LOGGER = LogManager.getLogger();
+	public static final String ID = "dynamicelectricity";
+	public static final String NAME = "Dynamic Electricity";
 
-    public DynamicElectricity() {
+	public static final String INDUSTRIAL_REBORN_ID = "indreb";
+
+	public static final Logger LOGGER = LogManager.getLogger();
+
+	public DynamicElectricity() {
     	IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-    	
-    	DynamicElectricityBlocks.BLOCKS.register(bus);
-    	DynamicElectricityContainers.CONTAINERS.register(bus);
-    	DynamicElectricityFluids.FLUIDS.register(bus);
-    	DynamicElectricityItems.ITEMS.register(bus);
-    	DynamicElectricityTiles.TILES.register(bus);
-    	DynamicElectricitySounds.SOUNDS.register(bus);
+    	UnifiedDynamicElectricityRegistry.init(bus);
     }
     
     @SubscribeEvent
     public static void onCommonSetup(FMLCommonSetupEvent event) {
     	DynamicElectricityTags.init();
-    	DynamicElectricityVoxelShapeRegistry.init();
+    	DynamicElectricityVoxelShapes.init();
     }
     
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public static void onClientSetup(FMLClientSetupEvent event) {
     	event.enqueueWork(() -> {
-    		ClientRegister.setup();
+    		DynamicElectricityClientRegister.setup();
     	});
     }
     
     @SubscribeEvent
     public static void onLoadEvent(FMLLoadCompleteEvent event) {}
+    
+    public static final ResourceLocation rl(String path) {
+        return new ResourceLocation(DynamicElectricity.ID, path);
+    }
 
 }

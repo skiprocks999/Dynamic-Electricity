@@ -1,6 +1,6 @@
 package dynamicelectricity.datagen.server;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import net.minecraft.data.DataGenerator;
@@ -12,7 +12,7 @@ public class DynamicElectricityItemTagsProvider extends ItemTagsProvider {
 
 	public DynamicElectricityItemTagsProvider(DataGenerator generator, BlockTagsProvider provider,
 			ExistingFileHelper existingFileHelper) {
-		super(generator, provider, References.ID, existingFileHelper);
+		super(generator, provider, DynamicElectricity.ID, existingFileHelper);
 	}
 
 	@Override

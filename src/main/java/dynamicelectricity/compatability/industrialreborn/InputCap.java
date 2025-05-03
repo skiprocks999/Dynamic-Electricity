@@ -30,7 +30,7 @@ public class InputCap implements IEnergy {
 
 	@Override
 	public int energyStored() {
-		return motor.feStored.get();
+		return motor.feStored.getValue();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class InputCap implements IEnergy {
 
 	@Override
 	public int maxEnergy() {
-		return motor.maxFeConsumed.get() / IndustrialRebornHandler.ENERGY_PER_JOULE;
+		return motor.maxFeConsumed.getValue() / IndustrialRebornHandler.ENERGY_PER_JOULE;
 	}
 
 	@Override
@@ -60,8 +60,8 @@ public class InputCap implements IEnergy {
 
 	@Override
 	public int setEnergy(int amt) {
-		motor.feStored.set(Mth.clamp(amt * IndustrialRebornHandler.ENERGY_PER_JOULE, 0, motor.maxFeConsumed.get()));
-		return motor.feStored.get();
+		motor.feStored.setValue(Mth.clamp(amt * IndustrialRebornHandler.ENERGY_PER_JOULE, 0, motor.maxFeConsumed.getValue()));
+		return motor.feStored.getValue();
 	}
 
 	@Override

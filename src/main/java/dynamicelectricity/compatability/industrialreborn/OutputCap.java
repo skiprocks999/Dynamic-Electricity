@@ -30,7 +30,7 @@ public class OutputCap implements IEnergy {
 
 	@Override
 	public int energyStored() {
-		return motor.feStored.get() / IndustrialRebornHandler.ENERGY_PER_JOULE;
+		return motor.feStored.getValue() / IndustrialRebornHandler.ENERGY_PER_JOULE;
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class OutputCap implements IEnergy {
 
 	@Override
 	public int maxEnergy() {
-		return motor.feProduced.get() / IndustrialRebornHandler.ENERGY_PER_JOULE;
+		return motor.feProduced.getValue() / IndustrialRebornHandler.ENERGY_PER_JOULE;
 	}
 
 	@Override
@@ -60,8 +60,8 @@ public class OutputCap implements IEnergy {
 
 	@Override
 	public int setEnergy(int amt) {
-		motor.feStored.set(Mth.clamp(amt * IndustrialRebornHandler.ENERGY_PER_JOULE, 0, motor.feProduced.get()));
-		return motor.feStored.get();
+		motor.feStored.setValue(Mth.clamp(amt * IndustrialRebornHandler.ENERGY_PER_JOULE, 0, motor.feProduced.getValue()));
+		return motor.feStored.getValue();
 	}
 
 	@Override

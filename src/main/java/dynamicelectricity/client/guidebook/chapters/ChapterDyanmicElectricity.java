@@ -2,11 +2,11 @@ package dynamicelectricity.client.guidebook.chapters;
 
 import dynamicelectricity.core.utils.UtilsText;
 import dynamicelectricity.registry.DynamicElectricityItems;
-import electrodynamics.client.guidebook.utils.components.Chapter;
-import electrodynamics.client.guidebook.utils.components.Module;
-import electrodynamics.client.guidebook.utils.pagedata.graphics.ItemWrapperObject;
-import electrodynamics.client.guidebook.utils.pagedata.text.TextWrapperObject;
 import net.minecraft.network.chat.MutableComponent;
+import voltaic.client.guidebook.utils.components.Chapter;
+import voltaic.client.guidebook.utils.components.Module;
+import voltaic.client.guidebook.utils.pagedata.graphics.ItemWrapperObject;
+import voltaic.client.guidebook.utils.pagedata.text.TextWrapperObject;
 
 public class ChapterDyanmicElectricity extends Chapter {
 

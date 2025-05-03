@@ -46,7 +46,7 @@
   "item.dynamicelectricity.shaftstainlesssteel": "Stainless Rotor Shaft",
   "item.dynamicelectricity.shaftsteel": "Steel Rotor Shaft",
   "item.dynamicelectricity.stator": "Industrial Stator",
-  "itemGroup.itemgroupdynamicelectricity": "Dynamic Electricity",
+  "itemGroup.itemgroupdynamicelectricitymain": "Dynamic Electricity",
   "subtitles.dynamicelectricity.motor_running": "Motor runs",
   "tooltip.dynamicelectricity.condudctorbrushdurability": "%1$s / %2$s",
   "tooltip.dynamicelectricity.dustpdsm": "Polydimethylsiloxane",
