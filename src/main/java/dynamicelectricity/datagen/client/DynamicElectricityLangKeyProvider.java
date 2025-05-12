@@ -1,17 +1,18 @@
 package dynamicelectricity.datagen.client;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
+import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.registry.DynamicElectricityBlocks;
 import dynamicelectricity.registry.DynamicElectricityFluids;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import dynamicelectricity.registry.DynamicElectricitySounds;
-import electrodynamics.datagen.client.ElectrodynamicsLangKeyProvider;
 import net.minecraft.data.DataGenerator;
+import voltaic.datagen.utils.client.BaseLangKeyProvider;
 
-public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyProvider {
+public class DynamicElectricityLangKeyProvider extends BaseLangKeyProvider {
 
 	public DynamicElectricityLangKeyProvider(DataGenerator gen, Locale locale) {
-		super(gen, locale, References.ID);
+		super(gen, locale, DynamicElectricity.ID);
 	}
 
 	@Override
@@ -21,14 +22,14 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 		case EN_US:
 		default:
 
-			add("itemGroup.itemgroup" + References.ID, "Dynamic Electricity");
+			add("itemGroup.itemgroup" + DynamicElectricity.ID + "main", "Dynamic Electricity");
 
-			addBlock(DynamicElectricityBlocks.blockMotorAcHv, "480V AC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorAcMv, "240V AC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorAcLv, "120V AC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorDcHv, "480V DC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorDcMv, "240V DC Motor");
-			addBlock(DynamicElectricityBlocks.blockMotorDcLv, "120V DC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motorachv), "480V AC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motoracmv), "240V AC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motoraclv), "120V AC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordchv), "480V DC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordcmv), "240V DC Motor");
+			addBlock(DynamicElectricityBlocks.BLOCKS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordclv), "120V DC Motor");
 
 			addItem(DynamicElectricityItems.ITEM_STATOR, "Industrial Stator");
 			addItem(DynamicElectricityItems.ITEM_COMMUTATOR, "Commutator");
@@ -39,11 +40,9 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addItem(DynamicElectricityItems.ITEM_RINGIRON, "Iron Ring");
 			addItem(DynamicElectricityItems.ITEM_RINGSTEEL, "Steel Ring");
 			addItem(DynamicElectricityItems.ITEM_CONDUCTORBRUSH, "Conductor Brush");
-			addItem(DynamicElectricityItems.ITEM_LUBRICANTGEL, "Industrial Lubricant Gel");
 
 			addItem(DynamicElectricityItems.ITEM_DUSTCARBON, "Carbon Dust");
 			addItem(DynamicElectricityItems.ITEM_DUSTPDSM, "PDSM Dust");
-			addItem(DynamicElectricityItems.ITEM_OXIDE_TITANIUMCHLORIDE, "Titanium Tetrachloride");
 
 			addContainer("motorachv", "480V AC Motor");
 			addContainer("motoracmv", "240V AC Motor");
@@ -52,7 +51,7 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addContainer("motordcmv", "240V DC Motor");
 			addContainer("motordclv", "120V DC Motor");
 
-			addFluid(DynamicElectricityFluids.fluidLubricant, "Industrial Lubricant");
+			addFluid(DynamicElectricityFluids.FLUID_LUBRICANT.get(), "Industrial Lubricant");
 
 			addTooltip("motorachv.conversion", "100 kJ @ 480V -> 100 kFE");
 			addTooltip("motoracmv.conversion", "10 kJ @ 240V -> 10 kFE");
@@ -78,11 +77,7 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addGuiLabel("motor.generating", "Generating");
 			addGuiLabel("motor.tier", "Tier: %s");
 
-			addGuiLabel("displayunit.industrialenergyunit.name", "Industrial Energy Unit");
-			addGuiLabel("displayunit.industrialenergyunit.nameplural", "Industrial Energy Units");
-			addGuiLabel("displayunit.industrialenergyunit.symbol", "IE");
-
-			addGuidebook(References.ID, "Dynamic Electricity");
+			addGuidebook(DynamicElectricity.ID, "Dynamic Electricity");
 
 			addGuidebook("chapter.dynamicelectricity", "Dynamic Electricity");
 			addGuidebook("chapter.dynamicelectricity.l1",
@@ -96,13 +91,6 @@ public class DynamicElectricityLangKeyProvider extends ElectrodynamicsLangKeyPro
 			addGuidebook("chapter.dcmotors", "DC Motors");
 			addGuidebook("chapter.dcmotors.l1", "The DC motor is capable of converting Forge Energy Units (FE) into Electrodynamics Joules (J). It accomplishes this with 95% efficiency. Unlike the AC Motor, the DC Motor requires an additional component to run called the Conductor Brush. The brush has a limited durability, but can be easily replenished "
 					+ "by hoppering more in from the top of the motor. Three tiers of motors exist offering different throughput rates to suit your requirements.");
-
-			addGuidebook("chapter.industrialreborn", "Industrial Reborn");
-			addGuidebook("chapter.industrialreborn.l1", "Motors are able to convert Electrodynamics Joules (and by extension FE) to Industrial Reborn IE. The conversion rate of Joules to IE is four to one, meaning that for every 4 Joules, you have 1 IE. The following motor tiers correspond to the following Energy Tiers:");
-			addGuidebook("chapter.industrialreborn.lv", "LV : Standard");
-			addGuidebook("chapter.industrialreborn.mv", "MV : Advanced");
-			addGuidebook("chapter.industrialreborn.hv", "HV : Super");
-			addGuidebook("chapter.industrialreborn.l2", "As with FE, AC motors have no conversion penalty. However, as too with FE, DC Motors have a 5% energy loss penalty to convert to Joules.");
 
 		}
 

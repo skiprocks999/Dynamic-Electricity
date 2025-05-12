@@ -964,7 +964,7 @@ Build: 1.16.4-35.0.14 - Tue Nov 10 20:24:33 GMT 2020
 =========
 Build: 1.16.4-35.0.13 - Tue Nov 10 20:13:34 GMT 2020
 	bward7864:
-		Add Player context to AnvilUpdateEvent (#7442)
+		Add PlayerEntity context to AnvilUpdateEvent (#7442)
 
 =========
 Build: 1.16.4-35.0.12 - Tue Nov 10 20:02:33 GMT 2020
@@ -1260,7 +1260,7 @@ Build: 1.16.3-34.1.14 - Thu Oct 08 21:08:45 GMT 2020
 =========
 Build: 1.16.3-34.1.13 - Thu Oct 08 21:02:59 GMT 2020
 	daemonumbra:
-		Added Basic Class-Level SAS Capability to checkSAS, added Vector4f to SAS (#7385)
+		Added Basic Class-World SAS Capability to checkSAS, added Vector4f to SAS (#7385)
 
 =========
 Build: 1.16.3-34.1.12 - Wed Oct 07 20:04:11 GMT 2020

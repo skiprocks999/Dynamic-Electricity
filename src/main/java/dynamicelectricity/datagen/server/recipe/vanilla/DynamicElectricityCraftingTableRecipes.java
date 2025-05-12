@@ -2,25 +2,25 @@ package dynamicelectricity.datagen.server.recipe.vanilla;
 
 import java.util.function.Consumer;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
+import dynamicelectricity.common.block.subtype.SubtypeDynamicMachine;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
-import dynamicelectricity.registry.DynamicElectricityBlocks;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import electrodynamics.common.block.subtype.SubtypeMachine;
 import electrodynamics.common.block.subtype.SubtypeWire;
-import electrodynamics.common.tags.ElectrodynamicsTags;
-import electrodynamics.datagen.utils.recipe.AbstractRecipeGenerator;
-import electrodynamics.datagen.utils.recipe.ElectrodynamicsShapedCraftingRecipe;
 import electrodynamics.registers.ElectrodynamicsItems;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraftforge.common.Tags;
+import voltaic.common.tags.VoltaicTags;
+import voltaic.datagen.utils.server.recipe.AbstractRecipeGenerator;
+import voltaic.datagen.utils.server.recipe.CustomShapedCraftingRecipe;
 
 public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenerator {
 
 	@Override
 	public void addRecipes(Consumer<IFinishedRecipe> consumer) {
 
-		ElectrodynamicsShapedCraftingRecipe.start(DynamicElectricityItems.ITEM_ALTERNATOR.get(), 1)
+		CustomShapedCraftingRecipe.start(DynamicElectricityItems.ITEM_ALTERNATOR.get(), 1)
 				//
 				.addPattern("DCD")
 				//
@@ -34,9 +34,9 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addKey('R', DynamicElectricityTags.Items.RING_IRON)
 				//
-				.complete(References.ID, "alternator", consumer);
+				.complete(DynamicElectricity.ID, "alternator", consumer);
 
-		ElectrodynamicsShapedCraftingRecipe.start(DynamicElectricityItems.ITEM_COMMUTATOR.get(), 1)
+		CustomShapedCraftingRecipe.start(DynamicElectricityItems.ITEM_COMMUTATOR.get(), 1)
 				//
 				.addPattern("CCC")
 				//
@@ -48,19 +48,19 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addKey('R', DynamicElectricityTags.Items.RING_IRON)
 				//
-				.complete(References.ID, "commutator", consumer);
+				.complete(DynamicElectricity.ID, "commutator", consumer);
 
-		ElectrodynamicsShapedCraftingRecipe.start(DynamicElectricityItems.ITEM_CONDUCTORBRUSH.get(), 1)
+		CustomShapedCraftingRecipe.start(DynamicElectricityItems.ITEM_CONDUCTORBRUSH.get(), 1)
 				//
 				.addPattern("WWW")
 				//
 				.addPattern("WWW")
 				//
-				.addKey('W', WIRES[SubtypeWire.copper.ordinal()])
+				.addKey('W', ElectrodynamicsItems.ITEMS_WIRE.getValue(SubtypeWire.copper))
 				//
-				.complete(References.ID, "conductorbrush", consumer);
+				.complete(DynamicElectricity.ID, "conductorbrush", consumer);
 
-		ElectrodynamicsShapedCraftingRecipe.start(DynamicElectricityItems.ITEM_STATOR.get(), 1)
+		CustomShapedCraftingRecipe.start(DynamicElectricityItems.ITEM_STATOR.get(), 1)
 				//
 				.addPattern("CCC")
 				//
@@ -72,7 +72,7 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addKey('R', DynamicElectricityTags.Items.RING_STEEL)
 				//
-				.complete(References.ID, "stator", consumer);
+				.complete(DynamicElectricity.ID, "stator", consumer);
 
 		addMotors(consumer);
 
@@ -80,9 +80,9 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 
 	private void addMotors(Consumer<IFinishedRecipe> consumer) {
 
-		// AC Motors
+// AC Motors
 
-		ElectrodynamicsShapedCraftingRecipe.start(DynamicElectricityBlocks.blockMotorAcLv.asItem(), 1)
+		CustomShapedCraftingRecipe.start(DynamicElectricityItems.ITEMS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motoraclv), 1)
 				//
 				.addPattern("PPI")
 				//
@@ -90,7 +90,7 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addPattern("PTI")
 				//
-				.addKey('P', ElectrodynamicsTags.Items.PLATE_STEEL)
+				.addKey('P', VoltaicTags.Items.PLATE_STEEL)
 				//
 				.addKey('I', ElectrodynamicsItems.ITEM_INSULATION.get())
 				//
@@ -100,11 +100,11 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addKey('C', DynamicElectricityItems.ITEM_COMMUTATOR.get())
 				//
-				.addKey('T', MACHINES[SubtypeMachine.tanksteel.ordinal()])
+				.addKey('T', ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.tanksteel))
 				//
-				.complete(References.ID, "motor_aclv", consumer);
+				.complete(DynamicElectricity.ID, "motor_aclv", consumer);
 
-		ElectrodynamicsShapedCraftingRecipe.start(DynamicElectricityBlocks.blockMotorAcMv.asItem(), 1)
+		CustomShapedCraftingRecipe.start(DynamicElectricityItems.ITEMS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motoracmv), 1)
 				//
 				.addPattern("PPC")
 				//
@@ -112,7 +112,7 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addPattern("PTC")
 				//
-				.addKey('P', ElectrodynamicsTags.Items.PLATE_STAINLESSSTEEL)
+				.addKey('P', VoltaicTags.Items.PLATE_STAINLESSSTEEL)
 				//
 				.addKey('I', ElectrodynamicsItems.ITEM_INSULATION.get())
 				//
@@ -122,11 +122,11 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addKey('C', DynamicElectricityItems.ITEM_COMMUTATOR.get())
 				//
-				.addKey('T', MACHINES[SubtypeMachine.tanksteel.ordinal()])
+				.addKey('T', ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.tanksteel))
 				//
-				.complete(References.ID, "motor_acmv", consumer);
+				.complete(DynamicElectricity.ID, "motor_acmv", consumer);
 
-		ElectrodynamicsShapedCraftingRecipe.start(DynamicElectricityBlocks.blockMotorAcHv.asItem(), 1)
+		CustomShapedCraftingRecipe.start(DynamicElectricityItems.ITEMS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motorachv), 1)
 				//
 				.addPattern("PPC")
 				//
@@ -134,7 +134,7 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addPattern("PTC")
 				//
-				.addKey('P', ElectrodynamicsTags.Items.PLATE_HSLASTEEL)
+				.addKey('P', VoltaicTags.Items.PLATE_HSLASTEEL)
 				//
 				.addKey('S', DynamicElectricityItems.ITEM_STATOR.get())
 				//
@@ -142,13 +142,13 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addKey('C', DynamicElectricityItems.ITEM_COMMUTATOR.get())
 				//
-				.addKey('T', MACHINES[SubtypeMachine.tanksteel.ordinal()])
+				.addKey('T', ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.tanksteel))
 				//
-				.complete(References.ID, "motor_achv", consumer);
+				.complete(DynamicElectricity.ID, "motor_achv", consumer);
 
-		// DC Motors
+// DC Motors
 
-		ElectrodynamicsShapedCraftingRecipe.start(DynamicElectricityBlocks.blockMotorDcLv.asItem(), 1)
+		CustomShapedCraftingRecipe.start(DynamicElectricityItems.ITEMS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordclv), 1)
 				//
 				.addPattern("PPI")
 				//
@@ -156,7 +156,7 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addPattern("PTI")
 				//
-				.addKey('P', ElectrodynamicsTags.Items.PLATE_STEEL)
+				.addKey('P', VoltaicTags.Items.PLATE_STEEL)
 				//
 				.addKey('I', ElectrodynamicsItems.ITEM_INSULATION.get())
 				//
@@ -166,11 +166,11 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addKey('A', DynamicElectricityItems.ITEM_ALTERNATOR.get())
 				//
-				.addKey('T', MACHINES[SubtypeMachine.tanksteel.ordinal()])
+				.addKey('T', ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.tanksteel))
 				//
-				.complete(References.ID, "motor_dclv", consumer);
+				.complete(DynamicElectricity.ID, "motor_dclv", consumer);
 
-		ElectrodynamicsShapedCraftingRecipe.start(DynamicElectricityBlocks.blockMotorDcMv.asItem(), 1)
+		CustomShapedCraftingRecipe.start(DynamicElectricityItems.ITEMS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordcmv), 1)
 				//
 				.addPattern("PPA")
 				//
@@ -178,7 +178,7 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addPattern("PTA")
 				//
-				.addKey('P', ElectrodynamicsTags.Items.PLATE_STAINLESSSTEEL)
+				.addKey('P', VoltaicTags.Items.PLATE_STAINLESSSTEEL)
 				//
 				.addKey('I', ElectrodynamicsItems.ITEM_INSULATION.get())
 				//
@@ -188,11 +188,11 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addKey('A', DynamicElectricityItems.ITEM_ALTERNATOR.get())
 				//
-				.addKey('T', MACHINES[SubtypeMachine.tanksteel.ordinal()])
+				.addKey('T', ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.tanksteel))
 				//
-				.complete(References.ID, "motor_dcmv", consumer);
+				.complete(DynamicElectricity.ID, "motor_dcmv", consumer);
 
-		ElectrodynamicsShapedCraftingRecipe.start(DynamicElectricityBlocks.blockMotorDcHv.asItem(), 1)
+		CustomShapedCraftingRecipe.start(DynamicElectricityItems.ITEMS_DYNAMICMACHINE.getValue(SubtypeDynamicMachine.motordchv), 1)
 				//
 				.addPattern("PPA")
 				//
@@ -200,7 +200,7 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addPattern("PTA")
 				//
-				.addKey('P', ElectrodynamicsTags.Items.PLATE_STEEL)
+				.addKey('P', VoltaicTags.Items.PLATE_STEEL)
 				//
 				.addKey('S', DynamicElectricityItems.ITEM_STATOR.get())
 				//
@@ -208,9 +208,9 @@ public class DynamicElectricityCraftingTableRecipes extends AbstractRecipeGenera
 				//
 				.addKey('A', DynamicElectricityItems.ITEM_ALTERNATOR.get())
 				//
-				.addKey('T', MACHINES[SubtypeMachine.tanksteel.ordinal()])
+				.addKey('T', ElectrodynamicsItems.ITEMS_MACHINE.getValue(SubtypeMachine.tanksteel))
 				//
-				.complete(References.ID, "motor_dchv", consumer);
+				.complete(DynamicElectricity.ID, "motor_dchv", consumer);
 
 	}
 

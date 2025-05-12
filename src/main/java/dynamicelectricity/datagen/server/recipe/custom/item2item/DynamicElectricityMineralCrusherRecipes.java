@@ -2,7 +2,7 @@ package dynamicelectricity.datagen.server.recipe.custom.item2item;
 
 import java.util.function.Consumer;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.registry.DynamicElectricityItems;
 import electrodynamics.datagen.server.recipe.types.custom.item2item.ElectrodynamicsMineralCrusherRecipes;
 import net.minecraft.data.IFinishedRecipe;
@@ -12,7 +12,7 @@ import net.minecraft.tags.ItemTags;
 public class DynamicElectricityMineralCrusherRecipes extends ElectrodynamicsMineralCrusherRecipes {
 
 	public DynamicElectricityMineralCrusherRecipes() {
-		super(References.ID);
+		super(DynamicElectricity.ID);
 	}
 
 	@Override

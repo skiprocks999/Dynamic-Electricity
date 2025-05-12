@@ -1,6 +1,6 @@
 package dynamicelectricity.datagen.server;
 
-import dynamicelectricity.References;
+import dynamicelectricity.DynamicElectricity;
 import dynamicelectricity.common.tags.DynamicElectricityTags;
 import dynamicelectricity.registry.DynamicElectricityFluids;
 import net.minecraft.data.DataGenerator;
@@ -10,13 +10,13 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 public class DynamicElectricityFluidTagsProvider extends FluidTagsProvider {
 
 	public DynamicElectricityFluidTagsProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, References.ID, existingFileHelper);
+		super(generator, DynamicElectricity.ID, existingFileHelper);
 	}
 	
 	@Override
 	protected void addTags() {
 		
-		tag(DynamicElectricityTags.Fluids.LUBRICANT).add(DynamicElectricityFluids.fluidLubricant);
+		tag(DynamicElectricityTags.Fluids.LUBRICANT).add(DynamicElectricityFluids.FLUID_LUBRICANT.get());
 		
 	}
 

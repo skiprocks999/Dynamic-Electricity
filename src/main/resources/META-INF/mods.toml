@@ -21,3 +21,9 @@ Thanks to Aurilis for putting in the groundwork that this mod takes advantage of
     versionRange="[1.16.5,)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.dynamicelectricity]]
+    modId="voltaic"
+    mandatory=true
+    versionRange="[1.0,)"
+    ordering="NONE"
+    side="BOTH"

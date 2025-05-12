@@ -6,7 +6,7 @@
 		128
 	],
 	"textures": {
-		"0": "dynamicelectricity:model/motordchv",
+		"0": "dynamicelectricity:block/model/motordchv",
 		"particle": "electrodynamics:block/steelcasing"
 	},
 	"elements": [
