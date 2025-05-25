@@ -83,17 +83,18 @@ configurations {
 
 dependencies {
     def Folder = new File("C:/AmpzLibz")
-    if(Folder.exists()) {
+    if (Folder.exists()) {
         implementation fileTree(Folder)
     }
     def Folder2 = new File("libs")
-    if(Folder2.exists()) {
+    if (Folder2.exists()) {
         implementation fileTree(Folder2)
     }
     implementation "net.neoforged:neoforge:${neo_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    //localRuntime "curse.maven:immersive-engineering-231951:6538942"
 }
 
 tasks.register('sourcesJar', Jar).configure {
@@ -172,5 +173,8 @@ repositories {
         // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
         url = "https://modmaven.dev"
+    }
+    maven {
+        url "https://cursemaven.com"
     }
 }

@@ -24,9 +24,16 @@ authors="${mod_authors}" #optional
 
 description='''${mod_description}'''
 
-[[dependencies.nuclearscience]]
+[[dependencies.dynamicelectricity]]
 modId="electrodynamics"
 mandatory=true
 versionRange="[0.10,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.dynamicelectricity]]
+modId="voltaic"
+mandatory=true
+versionRange="[1.0,)"
 ordering="NONE"
 side="BOTH"
