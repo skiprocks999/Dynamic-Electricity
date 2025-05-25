@@ -136,7 +136,7 @@ public class TileMotorAC extends GenericTile implements IEnergyStorage, ITickabl
 		int amtAccepted = feCap.receiveEnergy(feStored.getValue(), true);
 
 		if (amtAccepted > 0) {
-			feCap.receiveEnergy(amtAccepted, true);
+			feCap.receiveEnergy(amtAccepted, false);
 			feStored.setValue(feStored.getValue() - amtAccepted);
 		}
 	}
