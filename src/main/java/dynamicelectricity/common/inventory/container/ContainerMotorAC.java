@@ -13,7 +13,7 @@ import voltaic.prefab.inventory.container.types.GenericContainerBlockEntity;
 public class ContainerMotorAC extends GenericContainerBlockEntity<TileMotorAC> {
 	
 	public ContainerMotorAC(int id, Inventory playerinv) {
-		this(id, playerinv, new SimpleContainer(1), new SimpleContainerData(3));
+		this(id, playerinv, new SimpleContainer(1), new SimpleContainerData(5));
     }
 	
 	public ContainerMotorAC(int id, Inventory playerinv, Container inventory, ContainerData inventorydata) {
